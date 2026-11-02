@@ -10,7 +10,8 @@ be a Hebrew letter. Code blocks are skipped. Table rows are checked cell by cell
 
 Usage:
     python3 check_rtl.py FILE [FILE ...]      # or:  cat reply.md | python3 check_rtl.py -
-Exit code: 0 = clean, 1 = violations found. Use --json for machine-readable output.
+    python3 check_rtl.py FILE --fix           # print a suggested rewrite for every failing line (file untouched)
+Exit code: 0 = clean, 1 = violations found, 2 = usage. Use --json for machine-readable output.
 """
 import json
 import re
@@ -54,6 +55,77 @@ def first_issue(text: str):
     if ch in "/~.\\":
         return "starts with a path"
     return f"starts with symbol {ch!r} (U+{ord(ch):04X})"
+
+
+# --- suggestions (--fix) ----------------------------------------------------------------------------------
+HEBREW_NUMBERS = {"1": "אחד", "2": "שני", "3": "שלושה", "4": "ארבעה", "5": "חמישה", "6": "שישה", "7": "שבעה",
+                  "8": "שמונה", "9": "תשעה", "10": "עשרה"}
+LABEL_WORDS = {"note": "הערה", "notes": "הערות", "input": "הקלט", "output": "הפלט", "pros": "יתרונות", "cons": "חסרונות",
+               "example": "דוגמה", "examples": "דוגמאות", "result": "התוצאה", "results": "התוצאות", "summary": "סיכום",
+               "warning": "אזהרה", "tip": "טיפ", "answer": "התשובה", "question": "השאלה", "step": "שלב", "goal": "המטרה",
+               "setup": "ההתקנה", "usage": "השימוש", "before": "לפני", "after": "אחרי", "tl;dr": "בקצרה"}
+TOKEN_RX = re.compile(r"^(?P<tok>`[^`]+`|https?://\S+|[~./\\][\w./~\\-]*|v?\d[\w.]*|[A-Za-z][\w.+#-]*)")
+
+
+def _opener_for(token: str, rest: str) -> str | None:
+    """Pick the Hebrew noun that naturally precedes an English token."""
+    if token.startswith("`"):
+        inner = token.strip("`")
+        if "(" in inner or inner.endswith("()"):
+            return "הפונקציה " + token
+        if inner.startswith(("~", "/", "./", ".")) or "/" in inner or inner.startswith("."):
+            return "הקובץ " + token
+        return "הפקודה " + token
+    if token.startswith("http"):
+        return "הקישור " + token
+    if token[0] in "~./\\":
+        return "הקובץ `" + token + "`"
+    m = re.match(r"^v?(\d+(?:\.\d+)+)$", token)
+    if m:
+        return "גרסה " + m.group(1)
+    if token.isdigit():
+        word = HEBREW_NUMBERS.get(token)
+        return word if word else "יש " + token
+    if re.match(r"^[A-Za-z]", token):
+        if re.match(r"^\w+\(", rest) or rest.startswith("("):
+            return "הפונקציה " + token
+        return "ה-" + token
+    return None
+
+
+def suggest_fix(line: str) -> str | None:
+    """Return a rewritten line that opens with Hebrew, or None when the line is already fine or has no safe fix.
+    Never applied automatically: the writer chooses the wording; this is the first candidate."""
+    if first_issue(line) is None:
+        return None
+    m = PREFIX.match(line)
+    prefix = ""
+    body = line
+    while m and m.group(0):
+        prefix += m.group(0)
+        body = body[m.end():]
+        m = PREFIX.match(body)
+    # bold label at the start: **Note:** / **Train (10):**
+    lab = re.match(r"^([^*\n]+?)(:?)\*\*(.*)$", body) if prefix.endswith(("**", "__")) else None
+    if lab:
+        label, colon, tail = lab.group(1), lab.group(2), lab.group(3)
+        key = label.strip().lower().rstrip(":")
+        heb = LABEL_WORDS.get(key)
+        new_label = heb if heb else ("ה-" + label.strip())
+        return f"{prefix}{new_label}{colon}**{tail}"
+    t = TOKEN_RX.match(body)
+    if not t:
+        return None
+    token = t.group("tok")
+    rest = body[t.end():]
+    # heading made of English words: suggest a Hebrew noun then the original words
+    if prefix.lstrip().startswith("#") and re.match(r"^[A-Za-z][A-Za-z ]+$", body.strip()):
+        return f"{prefix}עבודה עם {body.strip()}"
+    opener = _opener_for(token, rest)
+    if opener is None:
+        return None
+    rest = re.sub(r"^\s+(?:is|are|has|have|adds?|returns?|maps?|runs?|shows?|steps?)\b", "", rest)
+    return f"{prefix}{opener}{rest}"
 
 
 def ending_issue(text: str):
@@ -106,6 +178,7 @@ def check(text: str):
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     as_json = "--json" in sys.argv
+    fix = "--fix" in sys.argv
     if not args:
         print(__doc__)
         sys.exit(2)
@@ -115,11 +188,17 @@ def main():
         text = sys.stdin.read() if a == "-" else open(a, encoding="utf-8").read()
         errs, warns = check(text)
         total += len(errs)
+        if fix:
+            src_lines = text.split("\n")
+            for e in errs:
+                e["suggestion"] = suggest_fix(src_lines[e["line"] - 1]) if e["where"] == "line start" else None
         out[a] = {"errors": errs, "warnings": warns}
         if not as_json:
             print(f"== {a}: {len(errs)} errors, {len(warns)} warnings")
             for e in errs:
                 print(f"  ERROR line {e['line']} ({e['where']}): {e['issue']}  ::  {e['text'][:90]}")
+                if fix and e.get("suggestion"):
+                    print(f"     → {e['suggestion'][:120]}")
             for w in warns:
                 print(f"  warn  line {w['line']}: {w['issue']}  ::  {w['text'][:90]}")
     if as_json:
