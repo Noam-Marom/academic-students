@@ -207,3 +207,25 @@ def test_download_transport_error_never_contains_the_token(tmp_path):
     with pytest.raises(TransportError) as ei:
         make_client().download(url, tmp_path / "slides.pdf")
     assert TOKEN not in str(ei.value)
+
+
+# --- extras used by the server -----------------------------------------------------------------------
+
+def test_client_remembers_userid_from_credentials():
+    assert mc.MoodleClient(SITE, TOKEN, userid=42).userid == 42
+    assert make_client().userid is None
+
+
+@respx.mock
+def test_fetch_text_returns_body_and_maps_http_errors():
+    url = f"{SITE}/calendar/export_execute.php?userid=42&authtoken=cal123&preset_what=all&preset_time=recentupcoming"
+    respx.get(url).mock(return_value=httpx.Response(200, text="BEGIN:VCALENDAR\nEND:VCALENDAR\n"))
+    assert make_client().fetch_text(url).startswith("BEGIN:VCALENDAR")
+    respx.get(url).mock(return_value=httpx.Response(404, text="gone"))
+    with pytest.raises(TransportError):
+        make_client().fetch_text(url)
+
+
+def test_fetch_text_refuses_urls_outside_the_site():
+    with pytest.raises(PermissionError):
+        make_client().fetch_text("https://evil.example/calendar/export_execute.php")

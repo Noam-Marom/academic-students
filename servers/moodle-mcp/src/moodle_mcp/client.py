@@ -71,9 +71,10 @@ def strip_token(text: str, token: str) -> str:
 
 
 class MoodleClient:
-    def __init__(self, site: str, token: str, http: httpx.Client | None = None):
+    def __init__(self, site: str, token: str, http: httpx.Client | None = None, userid: int | None = None):
         self.site = site.rstrip("/")
         self.token = token
+        self.userid = userid
         self.http = http or httpx.Client(timeout=60.0, follow_redirects=True)
 
     # -- helpers ---------------------------------------------------------------------------------------
@@ -111,6 +112,22 @@ class MoodleClient:
             raise TransportError(self._strip(f"non-JSON response from {wsfunction}: {resp.text[:200]}")) from None
         self._raise_for_moodle_error(payload)
         return payload
+
+    def is_site_url(self, url: str) -> bool:
+        """True when `url` belongs to this Moodle site (same scheme, host and path prefix)."""
+        return url == self.site or url.startswith(self.site + "/")
+
+    def fetch_text(self, url: str) -> str:
+        """GET a page of this site (e.g. the calendar export) and return its body as text."""
+        if not self.is_site_url(url):
+            raise PermissionError("moodle-mcp only fetches URLs on the logged-in Moodle site")
+        try:
+            resp = self.http.get(url)
+        except httpx.HTTPError as exc:
+            raise TransportError(self._strip(f"GET failed: {type(exc).__name__}: {exc}")) from None
+        if resp.status_code >= 400:
+            raise TransportError(self._strip(f"HTTP {resp.status_code} fetching {url}"))
+        return resp.text
 
     def file_url(self, fileurl: str) -> str:
         """A `webservice/pluginfile.php` URL with the token appended the way Moodle expects."""
