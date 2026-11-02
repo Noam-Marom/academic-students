@@ -176,3 +176,7 @@ files appear during the work (downloaded, generated, unpacked), scan them the sa
 - `references/techniques.md` — catalogue of hiding techniques per file type and how to check each one manually.
   Read it when a file type isn't covered by the scanner, when you need to verify a finding by hand, or when a
   finding's technique is unfamiliar.
+- `benchmark/` — seeded synthetic corpus + runner that reports recall per technique and false positives
+  (`benchmark/README.md` has the current table and the manual attack-success-rate procedure). Run it after any
+  change to `scan.py`.
+- `tests/` — fixture generator (every hiding technique written in code), detection/clean/safety/CLI suites.

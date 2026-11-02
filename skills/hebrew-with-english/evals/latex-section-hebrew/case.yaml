@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: latex-section-hebrew
+expected_outcome: |
+  A section2.tex written for polyglossia/bidi: Hebrew prose, English terms wrapped for LTR, one display formula.
+  The reply either shows a successful XeLaTeX/LuaLaTeX compile or states the exact preamble needed, without
+  claiming a compile that did not happen.

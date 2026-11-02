@@ -1,0 +1,5 @@
+schema_version: "1.1"
+name: docx-summary-bidi
+expected_outcome: |
+  A .docx is produced whose Hebrew paragraphs are right-to-left (w:bidi set directly or through the style),
+  English terms stay in English, and check_docx_rtl.py reports no Hebrew paragraph without RTL.

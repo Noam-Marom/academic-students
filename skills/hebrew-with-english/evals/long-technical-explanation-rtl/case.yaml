@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: long-technical-explanation-rtl
+expected_outcome: |
+  A long Hebrew answer with English terms: every heading, bullet, bold label and table cell starts with a
+  Hebrew word; the code block is C; the line after the code block starts in Hebrew; the reply was checked with
+  check_rtl.py before it was sent.

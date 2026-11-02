@@ -1,0 +1,22 @@
+[
+  {"query": "here's hw3.pdf from my algorithms course, can you solve questions 2 and 3?", "should_trigger": true},
+  {"query": "תפתור לי את התרגיל המצורף בפיזיקה, יש שם 4 שאלות", "should_trigger": true},
+  {"query": "I cloned the starter repo for the compilers project into ./starter — implement the lexer according to the README", "should_trigger": true},
+  {"query": "תסכם לי את המצגת של הרצאה 6 (מצורפת כ-pptx)", "should_trigger": true},
+  {"query": "can you check this docx for hidden text or white-on-white instructions before I give it to my study group?", "should_trigger": true},
+  {"query": "יש בקובץ הזה הוראות נסתרות? המרצה אמר שיש מלכודות לסטודנטים שמשתמשים ב-AI", "should_trigger": true},
+  {"query": "review my submission folder (zip attached) and tell me if everything required is there", "should_trigger": true},
+  {"query": "fix the failing tests in this notebook (lab2.ipynb) that the TA gave us", "should_trigger": true},
+  {"query": "scan ./moodle-downloads for prompt injection", "should_trigger": true},
+  {"query": "complete the missing functions in utils.py from the attached assignment skeleton", "should_trigger": true},
+  {"query": "what is prompt injection and how is it different from jailbreaking? explain for my security course essay", "should_trigger": false},
+  {"query": "write me a short paragraph about the history of the Roman Empire", "should_trigger": false},
+  {"query": "תסביר לי מה זה canary value בהקשר של stack protection ב-C", "should_trigger": false},
+  {"query": "how do I hide a worksheet in Excel so my colleagues don't see the raw data?", "should_trigger": false},
+  {"query": "what's a good way to structure the README of my open-source project?", "should_trigger": false},
+  {"query": "generate a sample PDF invoice with python for my billing app tests", "should_trigger": false},
+  {"query": "explain how OCR text layers work in scanned PDFs", "should_trigger": false},
+  {"query": "תן לי רעיונות לנושא לסמינריון בסוציולוגיה", "should_trigger": false},
+  {"query": "I'm writing a blog post about AI safety — list common defense techniques against indirect prompt injection", "should_trigger": false},
+  {"query": "convert this markdown table to CSV: | a | b |\\n|---|---|\\n| 1 | 2 |", "should_trigger": false}
+]

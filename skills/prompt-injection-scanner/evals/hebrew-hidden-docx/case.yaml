@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: hebrew-hidden-docx
+expected_outcome: |
+  The hidden Hebrew run in the Word file is found, quoted verbatim in correct Hebrew, labelled, and the skill stops to ask before solving; the reply is in Hebrew and passes the RTL rules.
+context:
+  scaffold_script: place-files.sh
