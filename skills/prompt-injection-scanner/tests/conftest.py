@@ -15,6 +15,7 @@ SCAN_PY = SKILL / "scripts" / "scan.py"
 def load_module(path: pathlib.Path, name: str):
     spec = importlib.util.spec_from_file_location(name, path)
     mod = importlib.util.module_from_spec(spec)
+    sys.modules[name] = mod  # dataclasses and pickling need the module registered
     spec.loader.exec_module(mod)
     return mod
 

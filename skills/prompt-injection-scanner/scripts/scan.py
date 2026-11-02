@@ -141,6 +141,10 @@ EN_PATTERNS = [
      r"\b(?:include|insert|use|mention|add|write|embed|incorporate|name|say)\s+(?:the\s+|a\s+|this\s+|these\s+)?(?:exact\s+|specific\s+|hidden\s+|secret\s+|following\s+)?(?:words?|phrases?|terms?|strings?|sentences?|keywords?|tokens?|variable\s+names?|function\s+names?|class\s+names?|code\s*words?)\s*(?:(?:called|named|like)\s+)?:?\s*[\"'“‘`«„]"),
     ("canary-trap",
      r"\b(?:in\s+your\s+(?:answer|response|output|solution|essay|code|report)|in\s+the\s+(?:answer|response|output|submission))\s*,?\s+(?:you\s+)?(?:must|should|need\s+to|have\s+to|always)\b"),
+    ("grade-inflation",
+     r"\b(?:rate|grade|score|mark|assess|evaluate)\s+(?:this|the|my|it)\b[^.\n]{0,40}?\b(?:100|full\s+marks|highest|perfect|excellent|maximum|A\+?)\b"),
+    ("grade-inflation",
+     r"\b(?:do\s+not|don'?t|never)\s+(?:mention|report|point\s+out|flag|list)\s+(?:any\s+)?(?:problems|issues|errors|bugs|mistakes|weaknesses|flaws)\b"),
     ("exfiltration",
      r"\b(?:send|post|upload|exfiltrate|forward|transmit|leak|e-?mail)(?:s|ed|ing|es)?\b[^\n]{0,80}?\b(?:to|at)\s+(?:https?://|ftp://|\S+@\S+\.\w+)"),
     ("exfiltration",
@@ -151,7 +155,12 @@ EN_PATTERNS = [
      r"(?:\b(?:curl|wget|iwr|Invoke-WebRequest|Invoke-Expression|iex)\b[^\n]{0,80}https?://|\brm\s+-rf\s+[~/]|\bchmod\s+\+x\b[^\n]{0,40}&&|\|\s*(?:ba|z)?sh\b|base64\s+-d[^\n]{0,40}\|\s*(?:ba)?sh)"),
 ]
 
-HE_AI = r"(?:מודל(?:\s+ה?שפה)?|בינה\s+מלאכותית|בינה|AI|LLM|צ'?אט\s*ג'?י?פי?טי|ג'?י?פי?טי|GPT|ChatGPT|Claude|קלוד|ג'?מיני|בוט|צ'?אטבוט|עוזר(?:\s+וירטואלי)?|סוכן|מערכת\s+בינה)"
+# Unambiguous AI nouns (safe for "X must/should" directives). A bare "מודל"/"עוזר"/"סוכן" is NOT here:
+# "המודל הסטטיסטי צריך להתאים לנתונים" is ordinary coursework.
+HE_AI_STRICT = (r"(?:מודל\s+ה?(?:שפה|בינה|AI|GPT)|בינה\s+מלאכותית|AI|LLM|צ'?אט\s*ג'?י?פי?טי|GPT|ChatGPT|Claude|קלוד|"
+                r"ג'?מיני|צ'?אטבוט|בוט|עוזר\s+ה?(?:וירטואלי|אוטומטי|AI|בינה|חכם)|סוכן\s+ה?(?:AI|בינה|אוטומטי)|מערכת\s+בינה)")
+# Looser set for patterns that already carry an addressing cue ("אם אתה X", "הערה לX").
+HE_AI = r"(?:" + HE_AI_STRICT[3:-1] + r"|מודל|בינה|עוזר|סוכן)"
 
 HE_PATTERNS = [
     ("override-instructions",
@@ -159,7 +168,10 @@ HE_PATTERNS = [
     ("addresses-ai", rf"אם\s+(?:אתה|את|הנך|אתם)\s+(?:\S+\s+){{0,2}}?{HE_AI}"),
     ("addresses-ai", rf"(?:הוראה|הוראות|הודעה|הערה|תזכורת)\s+(?:ל|עבור\s+|אל\s+)(?:ה)?{HE_AI}"),
     ("addresses-ai", rf"(?:ל|אל\s+)(?:כל\s+)?(?:ה)?{HE_AI}\s+(?:ה)?(?:קורא|קוראת|שקורא|המעבד|שמעבד)"),
-    ("directive-to-ai", rf"{HE_AI}\s+(?:\S+\s+){{0,2}}?(?:חייב|חייבת|צריך|צריכה|עליו|עליה|נדרש|יש\s+ל|אסור\s+ל|אל\s+)"),
+    ("directive-to-ai", rf"{HE_AI_STRICT}\s+(?:\S+\s+){{0,2}}?(?:חייב|חייבת|צריך|צריכה|עליו|עליה|נדרש|יש\s+ל|אסור\s+ל|אל\s+)"),
+    ("grade-inflation",
+     r"(?:דרג|תדרג|דרגו|תן|תנו|תתן|הענק|העניקו|קבע)\s+(?:\S+\s+){0,4}?(?:ציון\s+(?:של\s+)?(?:100|מאה|מלא|מקסימלי|גבוה)|100\s+נק|בציון\s+(?:100|מאה|מלא|מקסימלי|גבוה)|דירוג\s+(?:מלא|מקסימלי|גבוה))"),
+    ("grade-inflation", r"(?:אל|לא)\s+(?:ת|ל)?(?:ציין|צייני|תציינו|זכיר|דווח|תדווח)\s+(?:\S+\s+){0,2}?(?:בעיות|שגיאות|טעויות|ליקויים|חולשות)"),
     ("conceal-from-user",
      r"(?:אל|לא|אסור)\s+(?:ל|ת)?(?:ספר|גלה|ציין|זכיר|זכור|ודיע|יידע|הראות|ראה)\S*\s+(?:\S+\s+){0,2}?(?:ל?(?:ה)?משתמש|ל?(?:ה)?סטודנט|ל?(?:ה)?אדם|ל?(?:ה)?קורא|ל?(?:ה)?בודק|ל?(?:ה)?מרצה)"),
     ("conceal-from-user", r"(?:בלי|מבלי)\s+ש(?:ה)?(?:משתמש|סטודנט|אדם|קורא|בודק)\s+(?:\S+\s+){0,2}?(?:ידע|יבחין|ישים\s+לב|יראה)"),
@@ -175,7 +187,7 @@ COMPILED = [(n, re.compile(p, re.IGNORECASE | re.MULTILINE)) for n, p in EN_PATT
 
 # Patterns that are directives on their own; others need a second signal to be "high".
 STRONG = {"override-instructions", "addresses-ai", "conceal-from-user", "fake-system-context",
-          "role-hijack", "directive-to-ai", "exfiltration"}
+          "role-hijack", "directive-to-ai", "exfiltration", "grade-inflation"}
 
 
 def match_patterns(text: str) -> list[tuple[str, str]]:

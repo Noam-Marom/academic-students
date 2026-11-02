@@ -1,4 +1,5 @@
 import importlib.util
+import sys
 import pathlib
 
 import pytest
@@ -14,6 +15,7 @@ def load_module(path: pathlib.Path, name: str):
     """Import a script by path without touching sys.path (scripts live in several skills)."""
     spec = importlib.util.spec_from_file_location(name, path)
     mod = importlib.util.module_from_spec(spec)
+    sys.modules[name] = mod  # dataclasses and pickling need the module registered
     spec.loader.exec_module(mod)
     return mod
 
