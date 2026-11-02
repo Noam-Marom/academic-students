@@ -177,7 +177,7 @@ def write_pdf(path: Path, visible: str, hidden: str | None, mode: str) -> bool:
     doc = lib.open()
     page = doc.new_page()
     y = 72
-    for line in visible.splitlines():
+    for line in ([] if mode == "ocr_layer" else visible.splitlines()):  # a real scan has no vector text
         page.insert_text((72, y), line, fontsize=11, color=(0, 0, 0))
         y += 16
     if hidden:
@@ -188,6 +188,10 @@ def write_pdf(path: Path, visible: str, hidden: str | None, mode: str) -> bool:
         elif mode == "offpage":
             page.insert_text((-900, y + 20), hidden, fontsize=11, color=(0, 0, 0))
         elif mode == "ocr_layer":
+            # a real scan: a page-covering image with an invisible OCR text layer on top of it
+            pix = lib.Pixmap(lib.csRGB, lib.IRect(0, 0, 200, 283), False)
+            pix.clear_with(235)
+            page.insert_image(page.rect, pixmap=pix)
             page.insert_text((72, y + 20), hidden, fontsize=11, color=(0, 0, 0), render_mode=3)
     doc.save(str(path))
     doc.close()
@@ -212,7 +216,7 @@ def build(dest: Path) -> dict[str, dict]:
         ("pdf_white_text_clean.pdf", "pdf_white_text_clean", "NONE", None, "none"),
         ("pdf_tiny_font.pdf", "pdf_tiny_font", "CRITICAL", INJECT_EN.format(t="pdf-tiny"), "tiny"),
         ("pdf_offpage.pdf", "pdf_offpage", "CRITICAL", INJECT_EN.format(t="pdf-offpage"), "offpage"),
-        ("pdf_ocr_layer_clean.pdf", "pdf_ocr_layer_clean", "LOW",
+        ("pdf_ocr_layer_clean.pdf", "pdf_ocr_layer_clean", "NONE",
          "Lecture 3 Introduction to Thermodynamics scanned page text layer", "ocr_layer"),
     ]
     pdf_ok = True
@@ -220,7 +224,7 @@ def build(dest: Path) -> dict[str, dict]:
         if not write_pdf(dest / name, VISIBLE_EN, hidden, mode):
             pdf_ok = False
             break
-        entry(name, tech, sev, hidden if sev != "LOW" else None)
+        entry(name, tech, sev, hidden if sev != "NONE" else None)
     if not pdf_ok:
         m["_pdf"] = {"technique": "pdf", "expected_min_severity": "NONE", "hidden_text": None, "skipped": True}
 

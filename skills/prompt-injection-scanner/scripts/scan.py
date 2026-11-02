@@ -1567,6 +1567,8 @@ def walk(root: Path):
         dpp = Path(dp)
         keep = []
         for d in dns:
+            if d == ".git":
+                GIT_REPOS.append(dpp)  # nested repos (starter code inside a course folder) get scan_git too
             if d in VENDOR_DIRS and not OPTS.include_vendor:
                 if d == ".git":
                     hooks = dpp / d / "hooks"
@@ -1586,6 +1588,7 @@ def walk(root: Path):
 
 
 SKIPPED: list[str] = []
+GIT_REPOS: list[Path] = []
 
 
 def scan_git(root: Path):
@@ -1717,8 +1720,8 @@ def main():
             if t.is_dir():
                 disp = f"{t.name}/{disp}"
             scan_bytes(f, data, disp)
-        if t.is_dir():
-            scan_git(t)
+    for repo in dict.fromkeys(GIT_REPOS):
+        scan_git(repo)
     uniq, counts = render_report(targets)
     print(f"Scanned {len(INVENTORY)} files. Findings: " +
           ", ".join(f"{s}={counts.get(s, 0)}" for s in SEVERITY_ORDER))
