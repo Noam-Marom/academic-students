@@ -1,5 +1,5 @@
 {
-  "disciplines": [],
-  "course_template": [],
-  "ai_policy": []
+  "disciplines": ["assignment-coach"],
+  "course_template": ["assignment-coach"],
+  "ai_policy": ["assignment-coach"]
 }
