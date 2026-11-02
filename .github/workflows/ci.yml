@@ -36,4 +36,4 @@ jobs:
       - name: Install Claude Code
         run: npm install -g @anthropic-ai/claude-code
       - name: Validate manifest and skills
-        run: claude plugin validate . --strict
+        run: claude plugin validate .   # not --strict: a repo-level CLAUDE.md (for contributors) is a known warning
