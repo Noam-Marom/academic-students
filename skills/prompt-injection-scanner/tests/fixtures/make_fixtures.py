@@ -176,23 +176,30 @@ def write_pdf(path: Path, visible: str, hidden: str | None, mode: str) -> bool:
         return False
     doc = lib.open()
     page = doc.new_page()
+    # Base-14 fonts have no Hebrew glyphs; use a system font with Hebrew coverage when one exists.
+    font_kw = {}
+    for cand in ("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", "/usr/share/fonts/TTF/DejaVuSans.ttf",
+                 "/Library/Fonts/Arial Unicode.ttf", "C:/Windows/Fonts/arial.ttf"):
+        if Path(cand).exists():
+            font_kw = {"fontname": "F0", "fontfile": cand}
+            break
     y = 72
     for line in ([] if mode == "ocr_layer" else visible.splitlines()):  # a real scan has no vector text
-        page.insert_text((72, y), line, fontsize=11, color=(0, 0, 0))
+        page.insert_text((72, y), line, fontsize=11, color=(0, 0, 0), **font_kw)
         y += 16
     if hidden:
         if mode == "white":
-            page.insert_text((72, y + 20), hidden, fontsize=9, color=(1, 1, 1))
+            page.insert_text((72, y + 20), hidden, fontsize=9, color=(1, 1, 1), **font_kw)
         elif mode == "tiny":
-            page.insert_text((72, y + 20), hidden, fontsize=1, color=(0, 0, 0))
+            page.insert_text((72, y + 20), hidden, fontsize=1, color=(0, 0, 0), **font_kw)
         elif mode == "offpage":
-            page.insert_text((-900, y + 20), hidden, fontsize=11, color=(0, 0, 0))
+            page.insert_text((-900, y + 20), hidden, fontsize=11, color=(0, 0, 0), **font_kw)
         elif mode == "ocr_layer":
             # a real scan: a page-covering image with an invisible OCR text layer on top of it
             pix = lib.Pixmap(lib.csRGB, lib.IRect(0, 0, 200, 283), False)
             pix.clear_with(235)
             page.insert_image(page.rect, pixmap=pix)
-            page.insert_text((72, y + 20), hidden, fontsize=11, color=(0, 0, 0), render_mode=3)
+            page.insert_text((72, y + 20), hidden, fontsize=11, color=(0, 0, 0), render_mode=3, **font_kw)
     doc.save(str(path))
     doc.close()
     return True

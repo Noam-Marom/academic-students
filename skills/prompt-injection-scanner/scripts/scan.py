@@ -141,6 +141,8 @@ EN_PATTERNS = [
      r"\b(?:include|insert|use|mention|add|write|embed|incorporate|name|say)\s+(?:the\s+|a\s+|this\s+|these\s+)?(?:exact\s+|specific\s+|hidden\s+|secret\s+|following\s+)?(?:words?|phrases?|terms?|strings?|sentences?|keywords?|tokens?|variable\s+names?|function\s+names?|class\s+names?|code\s*words?)\s*(?:(?:called|named|like)\s+)?:?\s*[\"'“‘`«„]"),
     ("canary-trap",
      r"\b(?:in\s+your\s+(?:answer|response|output|solution|essay|code|report)|in\s+the\s+(?:answer|response|output|submission))\s*,?\s+(?:you\s+)?(?:must|should|need\s+to|have\s+to|always)\b"),
+    ("canary-trap",
+     r"\b(?:include|insert|use|mention|add|write|embed|incorporate)\s+(?:the\s+|a\s+)?(?:exact\s+|specific\s+|secret\s+|code\s*)?(?:words?|phrases?|terms?|tokens?)\s+(?=\S*[A-Z0-9])[A-Za-z0-9][\w-]{2,}\b"),
     ("grade-inflation",
      r"\b(?:rate|grade|score|mark|assess|evaluate)\s+(?:this|the|my|it)\b[^.\n]{0,40}?\b(?:100|full\s+marks|highest|perfect|excellent|maximum|A\+?)\b"),
     ("grade-inflation",
@@ -308,7 +310,8 @@ def strip_invisible(s: str) -> str:
 # Encoded payloads
 # --------------------------------------------------------------------------------------
 
-B64_RX = re.compile(r"(?<![A-Za-z0-9+/=_-])([A-Za-z0-9+/]{32,}={0,2}|[A-Za-z0-9_-]{40,}={0,2})(?![A-Za-z0-9+/=_-])")
+# A preceding "=" or ":" is where payloads live (key=BLOB), so it is not part of the lookbehind.
+B64_RX = re.compile(r"(?<![A-Za-z0-9+/_-])([A-Za-z0-9+/]{32,}={0,2}|[A-Za-z0-9_-]{40,}={0,2})(?![A-Za-z0-9+/=_-])")
 HEX_RX = re.compile(r"(?<![0-9A-Fa-f])((?:[0-9A-Fa-f]{2}){24,})(?![0-9A-Fa-f])")
 ESC_RX = re.compile(r"((?:\\x[0-9A-Fa-f]{2}|\\u[0-9A-Fa-f]{4}|&#x?[0-9A-Fa-f]+;|%[0-9A-Fa-f]{2}){12,})")
 

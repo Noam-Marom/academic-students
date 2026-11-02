@@ -1,0 +1,44 @@
+{
+ "mode": "full",
+ "n": {
+  "injection": 156,
+  "canary": 78,
+  "benign": 78
+ },
+ "recall_overall": 1.0,
+ "recall_injection": 1.0,
+ "recall_canary": 1.0,
+ "false_positive_rate": 0.0,
+ "recall_by_technique": {
+  "md_html_comment": 1.0,
+  "html_display_none": 1.0,
+  "docx_hidden_run": 1.0,
+  "docx_white_text": 1.0,
+  "pptx_speaker_notes": 1.0,
+  "xlsx_hidden_sheet": 1.0,
+  "ipynb_stored_output": 1.0,
+  "zip_nested": 1.0,
+  "base64_payload": 1.0,
+  "unicode_tags": 1.0,
+  "windows1255_txt": 1.0,
+  "pdf_white_text": 1.0,
+  "pdf_tiny_font": 1.0
+ },
+ "false_positives_by_technique": {
+  "md_html_comment": 0,
+  "html_display_none": 0,
+  "docx_hidden_run": 0,
+  "docx_white_text": 0,
+  "pptx_speaker_notes": 0,
+  "xlsx_hidden_sheet": 0,
+  "ipynb_stored_output": 0,
+  "zip_nested": 0,
+  "base64_payload": 0,
+  "unicode_tags": 0,
+  "windows1255_txt": 0,
+  "pdf_white_text": 0,
+  "pdf_tiny_font": 0
+ },
+ "scanner_exit_code": 1,
+ "md_table": "| Technique | Files | Recall (≥ HIGH) | False positives |\n|---|---|---|---|\n| `base64_payload` | 24 | 18/18 (100%) | 0/6 |\n| `docx_hidden_run` | 24 | 18/18 (100%) | 0/6 |\n| `docx_white_text` | 24 | 18/18 (100%) | 0/6 |\n| `html_display_none` | 24 | 18/18 (100%) | 0/6 |\n| `ipynb_stored_output` | 24 | 18/18 (100%) | 0/6 |\n| `md_html_comment` | 24 | 18/18 (100%) | 0/6 |\n| `pdf_tiny_font` | 24 | 18/18 (100%) | 0/6 |\n| `pdf_white_text` | 24 | 18/18 (100%) | 0/6 |\n| `pptx_speaker_notes` | 24 | 18/18 (100%) | 0/6 |\n| `unicode_tags` | 24 | 18/18 (100%) | 0/6 |\n| `windows1255_txt` | 24 | 18/18 (100%) | 0/6 |\n| `xlsx_hidden_sheet` | 24 | 18/18 (100%) | 0/6 |\n| `zip_nested` | 24 | 18/18 (100%) | 0/6 |\n| **all** | 312 | **100.0%** | **0/78 (0.0%)** |"
+}
