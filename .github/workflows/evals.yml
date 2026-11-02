@@ -1,0 +1,41 @@
+# Behaviour evals are real, billed model runs. They run on demand and weekly, never on every PR.
+# Requires the ANTHROPIC_API_KEY repository secret.
+name: evals
+
+on:
+  workflow_dispatch:
+    inputs:
+      case:
+        description: "Glob of eval cases to run (default: all)"
+        required: false
+        default: "*"
+  schedule:
+    - cron: "0 4 * * 0"
+
+jobs:
+  plugin-eval:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Claude Code and sandbox helpers
+        run: |
+          npm install -g @anthropic-ai/claude-code
+          sudo apt-get update -y && sudo apt-get install -y bubblewrap socat
+      - name: Run plugin evals
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: >
+          claude plugin eval . --trust-plugin --threshold 0.8 --max-cost-usd 20
+          --no-publish --json results.json --case "${{ github.event.inputs.case || '*' }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: eval-results
+          path: results.json
