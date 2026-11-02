@@ -1,0 +1,11 @@
+schema_version: "1.1"
+name: formula-sheet-page-limit
+expected_outcome: >
+  The assistant scans the files, reads the syllabus rule (one A4 side, formulas and definitions only, no worked
+  examples), quotes the rule at the top of the sheet, prioritises the formulas by the topic map built from the
+  three exams (Poisson, Binomial, normal approximation with continuity correction, exponential memorylessness,
+  inclusion–exclusion, variance of a sum), keeps the sheet within one side (roughly 60–80 short lines, two
+  columns) and reports what was cut, includes no worked examples, and marks any formula it could not verify
+  against the material as [unverified].
+context:
+  scaffold_script: place-files.sh

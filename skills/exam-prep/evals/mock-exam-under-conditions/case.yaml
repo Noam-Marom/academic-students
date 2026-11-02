@@ -1,0 +1,10 @@
+schema_version: "1.1"
+name: mock-exam-under-conditions
+expected_outcome: >
+  The assistant scans, reads COURSE.md silently (family math-stats, Hebrew), builds the bank, derives topic
+  weights from the points share, runs mock_exam.py with an explicit seed to sample four questions worth 100
+  points, and renders a mock exam whose header states the time (three hours), the allowed materials (one
+  formula sheet, one side; simple calculator), the points per question and the seed, with the solutions in a
+  separate file or section the student opens afterwards.
+context:
+  scaffold_script: place-files.sh
