@@ -1,0 +1,13 @@
+{
+  "name": "noam-academic",
+  "owner": {
+    "name": "Noam Marom"
+  },
+  "plugins": [
+    {
+      "name": "academic-students",
+      "source": "./",
+      "description": "Skills for university students in any degree (Hebrew and English): assignments, academic writing, exam prep, lecture notes, study planning, read-only Moodle sync, and a prompt-injection scanner for course files."
+    }
+  ]
+}

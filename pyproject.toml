@@ -1,0 +1,17 @@
+[project]
+name = "academic-students-dev"
+version = "0.1.0"
+description = "Development tooling for the academic-students Claude plugin (the plugin itself is the skills/ tree)."
+requires-python = ">=3.10"
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pyyaml>=6"]
+# Optional runtime helpers for skill scripts; every script degrades gracefully without them.
+extras = ["pymupdf", "python-docx", "pint", "jsonschema"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "skills", "servers"]
+python_files = ["test_*.py"]
+pythonpath = ["."]
+addopts = "-ra"
+filterwarnings = ["error::DeprecationWarning:academic_students.*"]

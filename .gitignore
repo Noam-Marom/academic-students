@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+*.egg-info/
+dist/
+build/
+
+# Plugin evals and skill-creator workspaces (results are billed model runs, never committed)
+evals/results/
+*-workspace/
+.superpowers/
+
+# Scanner and benchmark output
+injection-scan/
+skills/prompt-injection-scanner/benchmark/corpus/
+
+# Moodle MCP server
+servers/moodle-mcp/.venv/
+servers/moodle-mcp/uv.lock
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
