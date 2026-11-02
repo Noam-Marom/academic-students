@@ -1,5 +1,6 @@
 {
   "name": "noam-academic",
+  "description": "Noam Marom's plugins for university students: academic-students (assignments, writing, exams, Moodle, prompt-injection scanning) in Hebrew and English.",
   "owner": {
     "name": "Noam Marom"
   },
