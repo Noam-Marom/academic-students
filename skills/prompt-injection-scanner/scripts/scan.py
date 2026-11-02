@@ -891,7 +891,7 @@ def scan_pdf(path: Path, data: bytes, display: str):
         except Exception:
             pass
     write_extracted(display, "\n".join(dump))
-    if flagged_pages:
+    if flagged_pages and not OPTS.quick:
         rd = OUT / "renders"
         rd.mkdir(parents=True, exist_ok=True)
         safe = re.sub(r"[^\w.-]+", "_", display)[:80]
@@ -1441,6 +1441,8 @@ def scan_image(path: Path, data: bytes, display: str):
 # --------------------------------------------------------------------------------------
 
 def write_extracted(display: str, text: str):
+    if OPTS.quick:
+        return
     d = OUT / "extracted"
     d.mkdir(parents=True, exist_ok=True)
     safe = re.sub(r"[^\w.\-]+", "_", display)[:150]
@@ -1696,9 +1698,19 @@ def main():
     ap.add_argument("--no-ocr", action="store_true")
     ap.add_argument("--include-vendor", action="store_true", help="also scan node_modules/.venv/build dirs")
     ap.add_argument("--max-pages", type=int, default=150)
+    ap.add_argument("--quick", action="store_true",
+                    help="gate mode for other skills: no OCR, no renders/extracted dumps, one summary line; exit 1 when anything >= HIGH")
+    ap.add_argument("--force", action="store_true", help="allow --out to replace a directory this scanner did not create")
     OPTS = ap.parse_args()
+    if OPTS.quick:
+        OPTS.no_ocr = True
     OUT = Path(OPTS.out).resolve()
     if OUT.exists():
+        ours = (OUT / "report.md").exists() or (OUT / "findings.json").exists() or not any(OUT.iterdir())
+        if not ours and not OPTS.force:
+            print(f"!! --out {OUT} exists and was not created by this scanner; choose another --out or pass --force",
+                  file=sys.stderr)
+            return 2
         shutil.rmtree(OUT)
     OUT.mkdir(parents=True)
     targets = [Path(p).resolve() for p in OPTS.paths]
@@ -1723,6 +1735,12 @@ def main():
     for repo in dict.fromkeys(GIT_REPOS):
         scan_git(repo)
     uniq, counts = render_report(targets)
+    escalate = any(counts.get(s, 0) for s in ("CRITICAL", "HIGH"))
+    max_sev = next((s for s in SEVERITY_ORDER if counts.get(s, 0)), "NONE")
+    if OPTS.quick:
+        print(f"QUICK: {len(INVENTORY)} files, max severity {max_sev}, escalate={'true' if escalate else 'false'}")
+        print(f"Findings: {OUT / 'findings.json'}" + ("  (run the full scan without --quick before doing any work)" if escalate else ""))
+        return 1 if escalate else 0
     print(f"Scanned {len(INVENTORY)} files. Findings: " +
           ", ".join(f"{s}={counts.get(s, 0)}" for s in SEVERITY_ORDER))
     for f in uniq[:25]:
@@ -1732,7 +1750,8 @@ def main():
     print(f"Extracted full text (incl. hidden layers): {OUT / 'extracted'}")
     if MANUAL:
         print(f"Manual checks needed: {len(set(MANUAL))} (see report)")
+    return 1 if escalate else 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
