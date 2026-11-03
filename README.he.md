@@ -74,16 +74,24 @@ uv run --directory <plugin>/servers/moodle-mcp moodle-mcp login https://moodle.y
 
 ## סטטוס
 
-הפרויקט בפיתוח מוקדם (גרסה 0.1). מפת הדרכים נמצאת בפרק 7 של [המפרט](docs/superpowers/specs/2026-11-02-academic-students-plugin-design.md#7-roadmap-and-gates) באנגלית.
+גרסה 0.1: כל שמונת הסקילים ושרת המודל בנויים ונבדקים (580 בדיקות אוטומטיות, ה-CI ירוק). מפת הדרכים נמצאת בפרק 7 של [המפרט](docs/superpowers/specs/2026-11-02-academic-students-plugin-design.md#7-roadmap-and-gates) באנגלית.
 
 | התחום | המצב |
 |---|---|
-| שלד הפלאגין, CI, חבילות תחום משותפות | הושלם |
-| הסקילים `hebrew-with-english` ו-`prompt-injection-scanner` | הועברו; טסטים ו-benchmark בעבודה |
-| הסקילים `assignment-coach`, `academic-writing`, `exam-prep`, `lecture-notes`, `study-planner` | בעבודה |
-| השרת `moodle-mcp` והסקיל `moodle-sync` | בעבודה |
+| שלד הפלאגין, CI, 12 חבילות תחום | הושלם |
+| הסקיל `hebrew-with-english` (צ'אט, Word, LaTeX, PowerPoint, 12 מילונים) | הושלם |
+| הסקיל `prompt-injection-scanner` (מצב `--quick`, דפוסים בעברית, benchmark) | הושלם |
+| הסקילים `assignment-coach` ו-`academic-writing` | הושלם |
+| הסקילים `exam-prep`, `lecture-notes` ו-`study-planner` | הושלם |
+| השרת `moodle-mcp` והסקיל `moodle-sync` | הושלם; עוד לא נוסה מול מודל אמיתי של אוניברסיטה |
+| בדיקות התנהגות עם הרצות מודל אמיתיות | נכתבו, עוד לא הורצו |
 
-מספרים (שיעור זיהוי של הסורק לפי טכניקה, שיעורי מעבר של evals) יופיעו כאן אחרי שיימדדו. שום דבר לא נטען לפני שנמדד.
+מה נמדד עד עכשיו:
+
+- הסורק: על 312 קבצים סינתטיים ב-13 טכניקות הסתרה, בעברית ובאנגלית, דווחו 100% מההוראות הנסתרות ברמה HIGH ומעלה, ואף אחד מ-78 הקבצים הנקיים לא סומן. את הקבצים כתבנו בעצמנו, ולכן זו בדיקת רגרסיה ולא הבטחה מול התקפות לא מוכרות. הפרטים נמצאים בקובץ [benchmark/README.md](skills/prompt-injection-scanner/benchmark/README.md).
+- העברית: ראו את ההשוואה למעלה, מ-8 שגיאות RTL ל-0 על אותה בקשה.
+
+שיעורי המעבר של בדיקות ההתנהגות יופיעו כאן אחרי שירוצו. שום דבר לא נטען לפני שנמדד.
 
 ## תרומה לפרויקט
 

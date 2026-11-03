@@ -80,16 +80,28 @@ Every skill reads an optional `COURSE.md` in your course folder (language, citat
 
 ## Status
 
-Early development (v0.1). See the [roadmap](docs/superpowers/specs/2026-11-02-academic-students-plugin-design.md#7-roadmap-and-gates).
+v0.1 — all eight skills and the Moodle server are built and tested (580 automated tests, CI green).
+See the [roadmap](docs/superpowers/specs/2026-11-02-academic-students-plugin-design.md#7-roadmap-and-gates).
 
 | Area | State |
 |---|---|
-| Plugin skeleton, CI, shared discipline packs | done |
-| `hebrew-with-english`, `prompt-injection-scanner` | migrated; tests and benchmark in progress |
-| `assignment-coach`, `academic-writing`, `exam-prep`, `lecture-notes`, `study-planner` | in progress |
-| `moodle-mcp`, `moodle-sync` | in progress |
+| Plugin skeleton, CI, 12 shared discipline packs | done |
+| `hebrew-with-english` (chat, Word, LaTeX, PowerPoint; 12 glossaries) | done |
+| `prompt-injection-scanner` (+ `--quick` gate, Hebrew patterns, benchmark) | done |
+| `assignment-coach`, `academic-writing` | done |
+| `exam-prep`, `lecture-notes`, `study-planner` | done |
+| `moodle-mcp` server, `moodle-sync` skill | done; not yet tried against a live university Moodle |
+| Behaviour evals with real model runs (`claude plugin eval`) | written, not yet run |
 
-Numbers (scanner recall per technique, eval pass rates) will appear here once measured — nothing is claimed before it is measured.
+Measured so far:
+
+- **Scanner benchmark** (312 synthetic files, 13 hiding techniques, Hebrew and English): 100% of hidden
+  instructions reported at HIGH or above, 0 of 78 clean look-alikes flagged. The corpus was written by the same
+  project, so this is a regression check, not a claim about unknown attacks. Details and the reproduce command:
+  [`benchmark/README.md`](skills/prompt-injection-scanner/benchmark/README.md).
+- **Hebrew rendering:** see the before/after above (8 → 0 RTL errors on the same prompt).
+
+Eval pass rates will appear here once the evals have been run. Nothing is claimed before it is measured.
 
 ## Contributing
 
