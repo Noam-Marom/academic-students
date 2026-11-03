@@ -32,3 +32,11 @@ def test_no_bin_dir():
 def test_license_is_mit():
     text = (ROOT / "LICENSE").read_text(encoding="utf-8")
     assert "MIT License" in text and "Noam Marom" in text
+
+
+def test_test_module_basenames_are_unique():
+    # pytest's default import mode imports test files by basename; two test_cli.py files break collection
+    import collections
+    names = collections.Counter(p.name for p in ROOT.rglob("test_*.py")
+                                if ".venv" not in p.parts and ".git" not in p.parts)
+    assert [n for n, c in names.items() if c > 1] == []
