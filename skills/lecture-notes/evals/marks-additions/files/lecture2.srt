@@ -1,0 +1,19 @@
+1
+00:00:01,000 --> 00:00:09,000
+Today: Bayes' theorem. P of A given B equals P of B given A times P of A, over P of B.
+
+2
+00:00:09,000 --> 00:00:18,000
+Example. A test for a disease. The disease affects one percent of people.
+
+3
+00:00:18,000 --> 00:00:27,000
+The test catches ninety-nine percent of sick people, and has a five percent false positive rate.
+
+4
+00:00:27,000 --> 00:00:36,000
+You test positive. Most of you think you're ninety-nine percent sick. Work it out at home, we'll see next week.
+
+5
+00:00:36,000 --> 00:00:41,000
+That's it for today.

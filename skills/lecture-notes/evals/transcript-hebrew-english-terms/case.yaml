@@ -1,0 +1,10 @@
+schema_version: "1.1"
+name: transcript-hebrew-english-terms
+expected_outcome: >
+  The assistant scans lecture7.vtt, converts it with transcribe.py (subtitle path, no model), writes a Hebrew
+  summary in the five fixed sections where each term appears first in Hebrew with the English term in
+  parentheses (דף (page), מסגרת (frame), טבלת דפים (page table), TLB), gives the EAT formula in LaTeX under
+  formulas and under "sounds like exam material" with its timestamp, and appends new rows to glossary.md whose
+  every row starts with the Hebrew term; Hebrew output passes check_rtl.py.
+context:
+  scaffold_script: place-files.sh
