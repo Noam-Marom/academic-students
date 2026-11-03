@@ -1,0 +1,5 @@
+[
+ {"id": "os-hw4", "course": "OS", "title": "HW4", "due": "2026-11-19T23:59", "tz": "Asia/Jerusalem", "kind": "assignment", "source": "moodle", "weight": 5, "estimate_hours": 8},
+ {"id": "phys-lab3", "course": "Physics", "title": "Lab report 3", "due": "2026-11-18T12:00", "tz": "Asia/Jerusalem", "kind": "assignment", "source": "moodle", "weight": 4, "estimate_hours": 6},
+ {"id": "prob-quiz5", "course": "Probability", "title": "Quiz 5", "due": "2026-11-17T23:59", "tz": "Asia/Jerusalem", "kind": "quiz", "source": "syllabus", "weight": 2, "estimate_hours": 3}
+]

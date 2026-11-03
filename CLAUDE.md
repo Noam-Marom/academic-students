@@ -24,7 +24,7 @@ anything; then read the spec and the plan for the area you touch.
 | 1 Foundation | manifest, marketplace, shared/, tools, tests, CI, docs, two skills migrated | in progress |
 | 2 Existing skills | scanner tests + benchmark + `--quick`; hebrew formats + glossary | pending |
 | 3 Core | assignment-coach, academic-writing | pending |
-| 4 Support | exam-prep, lecture-notes, study-planner | pending |
+| 4 Support | exam-prep, lecture-notes, study-planner | done |
 | 5 Moodle | moodle-mcp server, moodle-sync skill | pending |
 
 Update this table in the same commit that finishes a plan.

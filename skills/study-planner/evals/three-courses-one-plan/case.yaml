@@ -1,0 +1,10 @@
+schema_version: "1.1"
+name: three-courses-one-plan
+expected_outcome: >
+  The assistant scans the .ics, merges it with both COURSE.md files using merge_deadlines.py into one
+  deduplicated list of four deadlines (HW3, Lab report 2, Quiz 4, Midterm), reports once that HW3 has two
+  times (Moodle 23:59 vs COURSE.md 18:00) and plans for 18:00, writes availability.json from the stated hours,
+  runs plan_week.py for the week of 2026-11-08, and replies in Hebrew with a day-by-day table whose blocks stay
+  inside the free hours, plus the overflow (if any) and an .ics from export_ics.py.
+context:
+  scaffold_script: place-files.sh

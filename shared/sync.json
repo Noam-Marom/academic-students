@@ -1,5 +1,12 @@
 {
-  "disciplines": ["exam-prep"],
-  "course_template": ["exam-prep"],
-  "ai_policy": ["exam-prep"]
+  "disciplines": [
+    "exam-prep"
+  ],
+  "course_template": [
+    "exam-prep",
+    "study-planner"
+  ],
+  "ai_policy": [
+    "exam-prep"
+  ]
 }

@@ -1,0 +1,10 @@
+schema_version: "1.1"
+name: overloaded-week-warning
+expected_outcome: >
+  With 6 free hours (Wed and Thu 19:00–22:00) against 17 required hours and deadlines on Tue–Thu, the
+  assistant runs plan_week.py, reports the overflow plainly with the hours per item at the top of the reply,
+  never schedules outside the stated hours or after a due time, drops nothing silently, offers the options
+  (lower estimates, more hours, extension) and offers — without sending anything — an extension-request draft
+  that mentions reserve duty as the student's reason and the reserve-duty approval.
+context:
+  scaffold_script: place-files.sh
