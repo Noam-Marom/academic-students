@@ -1,0 +1,4 @@
+{"course_id": 12, "synced_at": "2026-11-02T20:00:00+02:00", "items": {
+ "1005/fork_demo.c": {"rel_path": "materials/01-week-1-processes/fork_demo.c", "sha256": "0000000000000000000000000000000000000000000000000000000000000000", "timemodified": 1793190600},
+ "1006/ostep-processes-chapter.url.md": {"rel_path": "materials/01-week-1-processes/ostep-processes-chapter.url.md", "sha256": "0000000000000000000000000000000000000000000000000000000000000000", "timemodified": 1793190600},
+ "1007/brief.md": {"rel_path": "assignments/homework-1-processes/brief.md", "sha256": "0000000000000000000000000000000000000000000000000000000000000000", "timemodified": 1793190600}}}

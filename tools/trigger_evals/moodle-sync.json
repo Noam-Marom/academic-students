@@ -1,0 +1,82 @@
+[
+  {
+    "query": "תוריד לי את כל החומר מהמודל של מערכות הפעלה",
+    "should_trigger": true
+  },
+  {
+    "query": "מה חדש במודל השבוע?",
+    "should_trigger": true
+  },
+  {
+    "query": "sync my Moodle courses into this folder",
+    "should_trigger": true
+  },
+  {
+    "query": "אילו הגשות יש לי במודל החודש?",
+    "should_trigger": true
+  },
+  {
+    "query": "download all the lecture slides from my Algorithms course on Moodle",
+    "should_trigger": true
+  },
+  {
+    "query": "מתי נסגר הבוחן במודל בקורס מבני נתונים?",
+    "should_trigger": true
+  },
+  {
+    "query": "what's new on Moodle since last week, any announcements?",
+    "should_trigger": true
+  },
+  {
+    "query": "תוריד מהמודל את המבחנים של השנים הקודמות",
+    "should_trigger": true
+  },
+  {
+    "query": "pull my Moodle deadlines so I can plan the semester",
+    "should_trigger": true
+  },
+  {
+    "query": "can you check my grades on Moodle for OS?",
+    "should_trigger": true
+  },
+  {
+    "query": "how do I submit my assignment on Moodle? the button is greyed out",
+    "should_trigger": false
+  },
+  {
+    "query": "תענה לי על הבוחן במודל, הוא נסגר עוד שעה",
+    "should_trigger": false
+  },
+  {
+    "query": "here's HW1 I downloaded from Moodle, help me solve question 2",
+    "should_trigger": false
+  },
+  {
+    "query": "plan my week around the deadlines I already have in deadlines.json",
+    "should_trigger": false
+  },
+  {
+    "query": "summarise lecture 3 slides (attached pdf)",
+    "should_trigger": false
+  },
+  {
+    "query": "I need to write a Moodle plugin in PHP for my web course, where do I start?",
+    "should_trigger": false
+  },
+  {
+    "query": "תבדוק אם יש הוראות נסתרות בקובץ המטלה הזה",
+    "should_trigger": false
+  },
+  {
+    "query": "make me a mock exam from these past exams",
+    "should_trigger": false
+  },
+  {
+    "query": "what is the difference between Moodle and Canvas for universities?",
+    "should_trigger": false
+  },
+  {
+    "query": "תכתוב לי מייל למרצה לבקש הארכה בהגשה",
+    "should_trigger": false
+  }
+]

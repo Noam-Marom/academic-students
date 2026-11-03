@@ -1,0 +1,56 @@
+"""The Moodle MCP is registered for the plugin, and the moodle-sync skill ships its evals and trigger queries."""
+import json
+import pathlib
+
+import yaml
+
+ROOT = pathlib.Path(__file__).resolve().parents[1]
+SKILL = ROOT / "skills" / "moodle-sync"
+EVAL_CASES = ["sync-then-scan", "no-mcp-fallback-zip", "refuses-password", "refuses-quiz"]
+
+
+def test_mcp_json_registers_the_moodle_server_via_uv():
+    cfg = json.loads((ROOT / ".mcp.json").read_text(encoding="utf-8"))
+    assert cfg == {"mcpServers": {"moodle": {"command": "uv", "args": [
+        "run", "--directory", "${CLAUDE_PLUGIN_ROOT}/servers/moodle-mcp", "moodle-mcp", "serve"]}}}
+    assert (ROOT / "servers/moodle-mcp/pyproject.toml").exists()
+
+
+def test_moodle_sync_skill_files_exist():
+    for rel in ["SKILL.md", "references/without-mcp.md", "references/folder-layout.md"]:
+        assert (SKILL / rel).exists(), rel
+    for rel in ["README.md", "MANUAL_CHECKS.md"]:
+        assert (ROOT / "servers/moodle-mcp" / rel).exists(), rel
+
+
+def test_moodle_sync_description_is_bilingual():
+    text = (SKILL / "SKILL.md").read_text(encoding="utf-8")
+    fm = yaml.safe_load(text.split("---", 2)[1])
+    desc = fm["description"]
+    assert any("֐" <= ch <= "׿" for ch in desc), "description needs Hebrew trigger phrases"
+    assert "moodle" in desc.lower()
+
+
+def test_eval_cases_have_the_plugin_eval_layout():
+    for case in EVAL_CASES:
+        d = SKILL / "evals" / case
+        assert (d / "prompt.md").exists(), case
+        meta = yaml.safe_load((d / "case.yaml").read_text(encoding="utf-8"))
+        assert meta["schema_version"] == "1.1" and meta["name"] == case and meta["expected_outcome"]
+        assert sorted((d / "graders").glob("*.md")), f"{case}: no graders"
+
+
+def test_refuses_password_case_checks_the_password_is_not_echoed():
+    prompt = (SKILL / "evals/refuses-password/prompt.md").read_text(encoding="utf-8")
+    assert "hunter2" in prompt
+    graders = " ".join(p.read_text(encoding="utf-8") for p in (SKILL / "evals/refuses-password/graders").glob("*.md"))
+    assert "hunter2" in graders and "moodle-mcp login" in graders
+
+
+def test_trigger_evals_twenty_queries_with_near_miss_negatives():
+    data = json.loads((ROOT / "tools/trigger_evals/moodle-sync.json").read_text(encoding="utf-8"))
+    assert len(data) == 20
+    assert all(set(q) == {"query", "should_trigger"} for q in data)
+    assert sum(not q["should_trigger"] for q in data) >= 8
+    assert sum(q["should_trigger"] for q in data) >= 8
+    assert len({q["query"] for q in data}) == 20
