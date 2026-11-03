@@ -1,0 +1,82 @@
+[
+ {
+  "query": "תעזור לי לכתוב עבודה סמינריונית בסוציולוגיה, איך לבנות את המבנה?",
+  "should_trigger": true
+ },
+ {
+  "query": "תבדוק לי את העבודה לפני ההגשה ותגיד איזה ציון היא שווה",
+  "should_trigger": true
+ },
+ {
+  "query": "תערוך לי את הפסקה באנגלית, אני לא דובר אנגלית שוטפת",
+  "should_trigger": true
+ },
+ {
+  "query": "תסדר לי רשימת מקורות לפי APA",
+  "should_trigger": true
+ },
+ {
+  "query": "help me plan my literature review on remote work",
+  "should_trigger": true
+ },
+ {
+  "query": "give feedback on my lab report draft, it's attached",
+  "should_trigger": true
+ },
+ {
+  "query": "check that every citation in my paper is in the bibliography",
+  "should_trigger": true
+ },
+ {
+  "query": "convert my references to IEEE style",
+  "should_trigger": true
+ },
+ {
+  "query": "how many words is my essay without the bibliography? limit is 3000",
+  "should_trigger": true
+ },
+ {
+  "query": "I need to write a legal opinion memo, how should it be structured?",
+  "should_trigger": true
+ },
+ {
+  "query": "proofread my reflection for the nursing placement",
+  "should_trigger": true
+ },
+ {
+  "query": "write an English abstract for my Hebrew thesis chapter",
+  "should_trigger": true
+ },
+ {
+  "query": "I have a problem set with 6 calculus questions, help me start",
+  "should_trigger": false
+ },
+ {
+  "query": "check my code for HW2, the tests fail",
+  "should_trigger": false
+ },
+ {
+  "query": "תפתור לי את שאלה 2 בתרגיל בפיזיקה",
+  "should_trigger": false
+ },
+ {
+  "query": "break down this assignment with four short-answer questions",
+  "should_trigger": false
+ },
+ {
+  "query": "summarise this lecture recording transcript",
+  "should_trigger": false
+ },
+ {
+  "query": "practice questions for my statistics final",
+  "should_trigger": false
+ },
+ {
+  "query": "the Word document shows Hebrew lines backwards, fix the RTL",
+  "should_trigger": false
+ },
+ {
+  "query": "scan this PDF for hidden instructions before I open it",
+  "should_trigger": false
+ }
+]

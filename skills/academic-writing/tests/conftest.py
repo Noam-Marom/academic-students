@@ -54,3 +54,21 @@ def _minimal_docx(path: pathlib.Path, paragraphs: list[str]) -> None:
 def minimal_docx():
     """Build a bare OOXML document in code (no binaries in the repo): minimal_docx(path, [paragraph, ...])."""
     return _minimal_docx
+
+
+_CONTRACT = SKILL_DIR.parents[1] / "tests" / "eval_contract.py"
+
+
+@pytest.fixture(scope="session")
+def check_rtl_mod():
+    return _load_module(SKILL_DIR.parents[1] / "skills/hebrew-with-english/scripts/check_rtl.py", "writing_check_rtl")
+
+
+@pytest.fixture(scope="session")
+def eval_case_ok():
+    return _load_module(_CONTRACT, "writing_eval_contract").check_case
+
+
+@pytest.fixture(scope="session")
+def trigger_evals_ok():
+    return _load_module(_CONTRACT, "writing_eval_contract_t").check_trigger_file

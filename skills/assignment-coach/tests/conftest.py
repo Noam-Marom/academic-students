@@ -26,3 +26,16 @@ def skill_dir() -> pathlib.Path:
 @pytest.fixture(scope="session")
 def load_module():
     return _load_module
+
+
+_CONTRACT = SKILL_DIR.parents[1] / "tests" / "eval_contract.py"
+
+
+@pytest.fixture(scope="session")
+def eval_case_ok():
+    return _load_module(_CONTRACT, "coach_eval_contract").check_case
+
+
+@pytest.fixture(scope="session")
+def trigger_evals_ok():
+    return _load_module(_CONTRACT, "coach_eval_contract_t").check_trigger_file

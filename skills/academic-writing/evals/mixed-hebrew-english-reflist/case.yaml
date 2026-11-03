@@ -1,0 +1,7 @@
+schema_version: "1.1"
+name: mixed-hebrew-english-reflist
+expected_outcome: >
+  An APA 7 list with the Latin-alphabet entries first (Adams, Smith) and the Hebrew entries after them
+  (כהן, לוי), Hebrew author pairs joined with ו and not &, and the Hebrew reply RTL-safe.
+context:
+  scaffold_script: place-files.sh

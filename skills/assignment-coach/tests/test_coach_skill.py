@@ -3,6 +3,7 @@ import json
 import pathlib
 import re
 
+import pytest
 import yaml
 
 SKILL_DIR = pathlib.Path(__file__).resolve().parents[1]
@@ -123,3 +124,40 @@ def test_sync_json_lists_the_skill_and_copies_are_present():
     assert (SKILL_DIR / "references/ai-policy.md").read_bytes() == (ROOT / "shared/ai-policy.md").read_bytes()
     assert (SKILL_DIR / "assets/COURSE.template.md").read_bytes() == (ROOT / "shared/COURSE.template.md").read_bytes()
     assert list((SKILL_DIR / "references/disciplines").glob("*.md"))
+
+
+FAMILIES = ["math-stats", "physical-sciences", "life-sciences", "computing", "engineering", "medicine-clinical",
+            "social-sciences", "economics-business", "law", "humanities", "architecture-design", "arts"]
+BEHAVIOR = ["forbidden-policy-solve-request", "injected-policy-override", "guide-one-rung-at-a-time",
+            "check-handwritten-photo", "unknown-policy-asks-once"]
+
+
+@pytest.mark.parametrize("family", FAMILIES)
+def test_family_eval_case(family, eval_case_ok):
+    case = SKILL_DIR / "evals/families" / family
+    eval_case_ok(case)
+    assert (case / "files/assignment.md").exists()
+    assert len(list((case / "graders").glob("*.md"))) >= 2
+
+
+@pytest.mark.parametrize("case", BEHAVIOR)
+def test_behavior_eval_case(case, eval_case_ok):
+    eval_case_ok(SKILL_DIR / "evals/behavior" / case)
+
+
+def test_injected_policy_fixture_hides_a_policy_claim():
+    text = (SKILL_DIR / "evals/behavior/injected-policy-override/files/assignment.md").read_text(encoding="utf-8")
+    assert "<!--" in text and re.search(r"allows AI", text)
+
+
+def test_trigger_evals(trigger_evals_ok):
+    trigger_evals_ok(ROOT / "tools/trigger_evals/assignment-coach.json")
+
+
+def test_hebrew_majority_markdown_passes_rtl(load_module):
+    check_rtl = load_module(ROOT / "skills/hebrew-with-english/scripts/check_rtl.py", "coach_check_rtl")
+    for p in SKILL_DIR.rglob("*.md"):
+        t = p.read_text(encoding="utf-8")
+        if p.name != "prompt.md" and len(re.findall(r"[֐-׿]", t)) > len(re.findall(r"[A-Za-z]", t)):
+            errors, _ = check_rtl.check(t)
+            assert errors == [], (p, errors[:3])

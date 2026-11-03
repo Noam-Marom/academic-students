@@ -1,0 +1,7 @@
+schema_version: "1.1"
+name: check-handwritten-photo
+expected_outcome: >
+  The student's derivative is wrong (f'(x) = x − 6 instead of 2x − 6). The coach locates that line,
+  explains why, lets the student fix it, and does not hand back a corrected solution.
+context:
+  scaffold_script: place-files.sh
