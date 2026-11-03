@@ -26,8 +26,8 @@ table and a C example").
 
 | Without the plugin | With `/academic-students:hebrew-with-english` |
 |---|---|
-| ![Without the plugin: bullets that start with `fork()` flip to left-to-right and the sentence breaks apart; 8 RTL errors](docs/images/hebrew-before.png) | ![With the skill: every line opens with a Hebrew word, the table and the code read correctly; 0 RTL errors](docs/images/hebrew-after.png) |
-| `check_rtl.py`: **8 errors** | `check_rtl.py`: **0 errors** |
+| ![Without the plugin: bullets that start with `fork()` flip to left-to-right and the sentence breaks apart; 11 RTL errors](docs/images/hebrew-before.png) | ![With the skill: every line opens with a Hebrew word, the table and the code read correctly; 0 RTL errors](docs/images/hebrew-after.png) |
+| `check_rtl.py`: **11 errors** | `check_rtl.py`: **0 errors** |
 
 Both replies are real, unedited outputs (`claude -p`, 2026-11-03), kept as text in
 [`docs/images/hebrew-before.md`](docs/images/hebrew-before.md) and [`docs/images/hebrew-after.md`](docs/images/hebrew-after.md)
@@ -99,7 +99,7 @@ Measured so far:
   instructions reported at HIGH or above, 0 of 78 clean look-alikes flagged. The corpus was written by the same
   project, so this is a regression check, not a claim about unknown attacks. Details and the reproduce command:
   [`benchmark/README.md`](skills/prompt-injection-scanner/benchmark/README.md).
-- **Hebrew rendering:** see the before/after above (8 → 0 RTL errors on the same prompt).
+- **Hebrew rendering:** see the before/after above (11 → 0 RTL errors on the same prompt).
 
 Eval pass rates will appear here once the evals have been run. Nothing is claimed before it is measured.
 
