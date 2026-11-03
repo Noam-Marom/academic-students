@@ -53,7 +53,7 @@ reader sees, and is it Hebrew?**
    Output, Pros / Cons, Baseline, Setup, Results, TL;DR, Note, Step 1, Q / A, Before / After, Server / Client
    feel like fixed names, so they get written in English automatically as the first word of a bullet. If the
    term must stay in English, put a Hebrew noun in front of it inside the label:
-   - `- **Train (10):** 5 אתגרי…` → `- **סט ה-Train (10):** 5 אתגרי…`
+   - `- **Train (10):** 5 אתגרי…` → `- **סט ה-Train (10 אתגרים):** 5 אתגרי…`
    - `- **Test (6), held-out:** …` → `- **סט ה-Test (6, held-out):** …`
    - `**Input:** …` → `**הקלט:** …`, `**Pros:**` → `**יתרונות:**`, `**Step 1:**` → `**שלב 1:**`
 5. **Tables.** Each cell is its own line for direction purposes. Start every cell, header included, with
@@ -68,7 +68,7 @@ reader sees, and is it Hebrew?**
 | Where it slips | Wrong | Right |
 |---|---|---|
 | Heading with a product name | `## Git Branching` | `## עבודה עם ענפים ב-Git` |
-| Bold term-of-art label in a list | `- **Train (10):** …` | `- **סט ה-Train (10):** …` |
+| Bold term-of-art label in a list | `- **Train (10):** …` | `- **סט ה-Train (10 אתגרים):** …` |
 | Bold label | `**Note:** …` / `**Redis:** …` | `**הערה:** …` / `**השירות Redis:** …` |
 | List of tools/functions | `- pthread_create – …` | `- הפונקציה pthread_create – …` |
 | List item starting with code | ``- `ls -la` מציג…`` | ``- הפקודה `ls -la` מציגה…`` |
@@ -78,6 +78,9 @@ reader sees, and is it Hebrew?**
 | Path / URL / version at line start | `~/.bashrc is…` | `הקובץ `~/.bashrc` הוא…` |
 | Short follow-up reply | `Yes, use `--force`.` | `כן, צריך להשתמש בדגל `--force`.` |
 | Status line between tool calls | `Running tests…` | `מריץ את הבדיקות…` |
+| First paragraph after a heading, opening with a name | `Marvel היא חברת קומיקס…` | `החברה Marvel היא חברת קומיקס…` |
+| English name followed by a number in parentheses | `נפתחת ב-*Iron Man* (2008)` | `נפתחת בסרט *Iron Man* משנת 2008` |
+| English title with a colon, then a comma | `ב-*Avengers: Endgame* (2019), עם…` | `בסרט *Avengers: Endgame* משנת 2019, עם…` |
 
 ## How to write it (habit, not afterthought)
 

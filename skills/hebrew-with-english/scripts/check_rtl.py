@@ -128,6 +128,18 @@ def suggest_fix(line: str) -> str | None:
     return f"{prefix}{opener}{rest}"
 
 
+# An English run (optionally *emphasised*) followed by "(digits…)" inside a Hebrew line: renderers that isolate
+# emphasis spans resolve the parentheses against the Hebrew context and the number jumps to the other side of
+# the name ("ב-(2008) Iron Man"). Writing the number in a Hebrew phrase avoids it: "משנת 2008", "(שנת 2008)".
+EN_THEN_NUMBER_PARENS = re.compile(r"[A-Za-z0-9][\w:'’.!?&+-]*[*_`]*\s*\(\s*\d[^)֐-׿]*\)")
+
+
+def midline_issue(text: str):
+    if HEB.search(text) and EN_THEN_NUMBER_PARENS.search(text):
+        return "English name followed by a number in parentheses (it renders on the wrong side); write 'משנת 2008' or '(שנת 2008)'"
+    return None
+
+
 def ending_issue(text: str):
     """Warn when a line ends with an English token followed by punctuation (punctuation may jump)."""
     t = text.rstrip()
@@ -167,6 +179,9 @@ def check(text: str):
         issue = first_issue(line)
         if issue:
             errors.append({"line": n, "where": "line start", "issue": issue, "text": line.strip()})
+        mid = midline_issue(line)
+        if mid:
+            errors.append({"line": n, "where": "mid-line", "issue": mid, "text": line.strip()})
         end = ending_issue(line)
         if end:
             warnings.append({"line": n, "where": "line end", "issue": end, "text": line.strip()})

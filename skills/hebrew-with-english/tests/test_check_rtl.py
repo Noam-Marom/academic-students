@@ -23,7 +23,7 @@ WRONG = [
 ]
 RIGHT = [
     "## עבודה עם ענפים ב-Git",
-    "- **סט ה-Train (10):** 5 אתגרי CTF",
+    "- **סט ה-Train (10 אתגרים):** 5 אתגרי CTF",
     "**הערה:** זה חשוב",
     "- הפונקציה pthread_create יוצרת חוט",
     "- הפקודה `ls -la` מציגה קבצים",
@@ -83,3 +83,30 @@ def test_json_output_carries_suggestions_with_fix(tmp_path):
     data = json.loads(proc.stdout)
     [err] = data[str(f)]["errors"]
     assert err["suggestion"].startswith("**הערה:**")
+
+
+# --- regressions from a real chat reply (Marvel summary, 2026-11-03) ---------------------------------------
+
+def test_paragraph_opening_with_brand_name_is_error(rtl):
+    errors, _ = rtl.check("## העולם של Marvel בקצרה\n\nMarvel היא חברת קומיקס שיצרה יקום בדיוני משותף.\n")
+    assert [e["line"] for e in errors] == [3]
+
+
+@pytest.mark.parametrize("line", [
+    "- סאגת The Infinity Saga נפתחת ב-*Iron Man* (2008) ומסתיימת ב-*Avengers: Endgame* (2019), עם המאבק.",
+    "- הסרט Iron Man (2008) פתח את היקום הקולנועי.",
+    "- הגרסה Python 3 (2008) שברה תאימות לאחור.",
+])
+def test_english_name_followed_by_parenthesised_number_is_error(rtl, line):
+    errors, _ = rtl.check(line + "\n")
+    assert any("number in parentheses" in e["issue"] for e in errors), errors
+
+
+@pytest.mark.parametrize("line", [
+    "- הדמות Iron Man (Tony Stark) היא מיליארדר וממציא.",
+    "- הסרט Iron Man משנת 2008 פתח את היקום הקולנועי.",
+    "- מעגל RC (נגד וקבל) נטען לאט.",
+])
+def test_safe_parentheses_are_clean(rtl, line):
+    errors, _ = rtl.check(line + "\n")
+    assert errors == [], errors
