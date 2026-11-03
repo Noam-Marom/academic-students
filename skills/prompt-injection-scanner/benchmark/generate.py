@@ -77,7 +77,7 @@ def _write(mod, technique: str, path: pathlib.Path, visible: str, hidden: str | 
         path.write_text(json.dumps(nb, ensure_ascii=False), encoding="utf-8")
     elif technique == "zip_nested":
         with zipfile.ZipFile(path, "w") as z:
-            z.writestr("notes/readme.txt", visible + ("\n" + hidden if hidden else ""))
+            mod._writestr(z, "notes/readme.txt", visible + ("\n" + hidden if hidden else ""))
     elif technique == "base64_payload":
         payload = base64.b64encode((hidden or visible).encode()).decode()
         path.write_text(f"{visible}\nconfig={payload}\n", encoding="utf-8")

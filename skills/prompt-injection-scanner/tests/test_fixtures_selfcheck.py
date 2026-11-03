@@ -8,6 +8,8 @@ def test_manifest_shape_and_coverage(fixtures):
     dest, manifest = fixtures
     assert len(manifest) >= 20
     for rel, meta in manifest.items():
+        if rel.startswith("_"):  # markers such as "_pdf" (PyMuPDF missing) are not files
+            continue
         assert (dest / rel).exists(), rel
         assert meta["expected_min_severity"] in SEVERITIES, rel
         assert "technique" in meta and "hidden_text" in meta

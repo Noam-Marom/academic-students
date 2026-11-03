@@ -19,7 +19,7 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
       - name: Install test dependencies
-        run: python -m pip install --upgrade pip pytest pyyaml
+        run: python -m pip install --upgrade pip pytest pyyaml pymupdf python-docx jsonschema pint mcp httpx keyring respx
       - name: Shared copies are in sync
         run: python tools/sync_shared.py --check
       - name: Unit and repo tests
