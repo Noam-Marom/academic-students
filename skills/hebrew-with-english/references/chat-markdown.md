@@ -80,6 +80,7 @@ reader sees, and is it Hebrew?**
 | Status line between tool calls | `Running tests…` | `מריץ את הבדיקות…` |
 | First paragraph after a heading, opening with a name | `Marvel היא חברת קומיקס…` | `החברה Marvel היא חברת קומיקס…` |
 | English name followed by a number in parentheses | `נפתחת ב-*Iron Man* (2008)` | `נפתחת בסרט *Iron Man* משנת 2008` |
+| Function call with `()` in inline code | ``הקריאה `fork()` יוצרת…`` | ``הקריאה `fork` יוצרת…`` |
 | English title with a colon, then a comma | `ב-*Avengers: Endgame* (2019), עם…` | `בסרט *Avengers: Endgame* משנת 2019, עם…` |
 
 ## How to write it (habit, not afterthought)

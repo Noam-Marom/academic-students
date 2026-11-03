@@ -110,3 +110,13 @@ def test_english_name_followed_by_parenthesised_number_is_error(rtl, line):
 def test_safe_parentheses_are_clean(rtl, line):
     errors, _ = rtl.check(line + "\n")
     assert errors == [], errors
+
+
+def test_inline_code_call_with_empty_parens_in_hebrew_is_error(rtl):
+    errors, _ = rtl.check("הקריאה `fork()` יוצרת תהליך חדש.\n")
+    assert any("empty parentheses" in e["issue"] for e in errors), errors
+
+
+def test_inline_code_without_parens_is_clean(rtl):
+    errors, _ = rtl.check("הקריאה `fork` יוצרת תהליך חדש.\n")
+    assert errors == []

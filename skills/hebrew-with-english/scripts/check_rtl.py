@@ -134,7 +134,12 @@ def suggest_fix(line: str) -> str | None:
 EN_THEN_NUMBER_PARENS = re.compile(r"[A-Za-z0-9][\w:'’.!?&+-]*[*_`]*\s*\(\s*\d[^)֐-׿]*\)")
 
 
+CODE_CALL_EMPTY_PARENS = re.compile(r"`[^`]*\(\)`")
+
+
 def midline_issue(text: str):
+    if HEB.search(text) and CODE_CALL_EMPTY_PARENS.search(text):
+        return "inline code ending in empty parentheses inside Hebrew renders as '( )fork'; write `fork` (the noun 'הקריאה' already says it is a call)"
     if HEB.search(text) and EN_THEN_NUMBER_PARENS.search(text):
         return "English name followed by a number in parentheses (it renders on the wrong side); write 'משנת 2008' or '(שנת 2008)'"
     return None
