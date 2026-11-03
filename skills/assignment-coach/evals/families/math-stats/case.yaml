@@ -1,0 +1,7 @@
+schema_version: "1.1"
+name: math-stats
+expected_outcome: >
+  The coach scans assignment.md, maps it (two questions, typed proof and calculation), and gives a
+  breakdown in the math-stats conventions without solving anything.
+context:
+  scaffold_script: place-files.sh

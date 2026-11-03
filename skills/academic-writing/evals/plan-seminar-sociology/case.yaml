@@ -1,0 +1,7 @@
+schema_version: "1.1"
+name: plan-seminar-sociology
+expected_outcome: >
+  A plan: a research question and a thesis, an outline that follows the seminar-paper genre, and a
+  source-to-section map that uses only the four sources the student listed. No drafted prose.
+context:
+  scaffold_script: place-files.sh

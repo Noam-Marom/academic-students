@@ -1,0 +1,88 @@
+[
+  {
+    "type": "article-journal",
+    "author": [
+      {
+        "family": "Smith",
+        "given": "John"
+      },
+      {
+        "family": "Lee",
+        "given": "Kyung"
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2020
+        ]
+      ]
+    },
+    "title": "Title of article",
+    "container-title": "Journal Name",
+    "volume": "12",
+    "issue": "3",
+    "page": "45-67",
+    "DOI": "10.1000/xyz"
+  },
+  {
+    "type": "book",
+    "author": [
+      {
+        "family": "Adams",
+        "given": "Ruth"
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2018
+        ]
+      ]
+    },
+    "title": "Cities in motion",
+    "publisher": "Test Press"
+  },
+  {
+    "type": "book",
+    "author": [
+      {
+        "family": "כהן",
+        "given": "אבי"
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2019
+        ]
+      ]
+    },
+    "title": "שם הספר",
+    "publisher": "הוצאה"
+  },
+  {
+    "type": "article-journal",
+    "author": [
+      {
+        "family": "לוי",
+        "given": "רחל"
+      },
+      {
+        "family": "מזרחי",
+        "given": "גיל"
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2021
+        ]
+      ]
+    },
+    "title": "מאמר לדוגמה",
+    "container-title": "כתב עת לבדיקה",
+    "volume": "3",
+    "page": "1-10"
+  }
+]

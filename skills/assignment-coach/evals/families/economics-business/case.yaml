@@ -1,0 +1,7 @@
+schema_version: "1.1"
+name: economics-business
+expected_outcome: >
+  The coach scans assignment.md, maps it (two questions, typed calculation and analysis), and gives a
+  breakdown in the economics-business conventions without solving anything.
+context:
+  scaffold_script: place-files.sh

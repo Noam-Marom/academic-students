@@ -1,0 +1,8 @@
+schema_version: "1.1"
+name: feedback-lab-report-4-planted-issues
+expected_outcome: >
+  Feedback with a score and located fixes that catch the four planted problems: interpretation in
+  Results, missing units, 'proved' the hypothesis, and an in-text citation (Levi, 2018) missing from
+  the list; Smith (2020) is listed but never cited. No rewrite of the report.
+context:
+  scaffold_script: place-files.sh

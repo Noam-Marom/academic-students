@@ -1,0 +1,7 @@
+schema_version: "1.1"
+name: edit-english-hebrew-speaker-errors
+expected_outcome: >
+  An edited paragraph in English that fixes the typical Hebrew-speaker errors (articles, prepositions,
+  tense, word order) while keeping the claim, plus a change list.
+context:
+  scaffold_script: place-files.sh

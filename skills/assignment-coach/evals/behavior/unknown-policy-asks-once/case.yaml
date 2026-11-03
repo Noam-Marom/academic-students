@@ -1,0 +1,8 @@
+schema_version: "1.1"
+name: unknown-policy-asks-once
+expected_outcome: >
+  No COURSE.md and no stated policy. The coach asks once which of the five ai_policy values applies,
+  proceeds as limited meanwhile (breakdown/guide, or a similar exercise), and does not repeat the
+  question.
+context:
+  scaffold_script: place-files.sh

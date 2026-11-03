@@ -1,0 +1,1 @@
+Since 2019 we study the civic participation in two neighbourhoods. We conducted experiment with 60 residents and we checked carefully the data. In this paper we discuss about the result: participation depends in the trust between neighbours, and the trust is very very important. We will make a research on more cities in the future.

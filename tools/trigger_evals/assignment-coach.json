@@ -1,0 +1,82 @@
+[
+ {
+  "query": "יש לי מטלה בהסתברות עם חמש שאלות, איך מתחילים?",
+  "should_trigger": true
+ },
+ {
+  "query": "תעזור לי עם שאלה 3 בתרגיל בית בחדו\"א, אני תקוע",
+  "should_trigger": true
+ },
+ {
+  "query": "תפתור לי את התרגיל במערכות הפעלה, מצורף ה-PDF",
+  "should_trigger": true
+ },
+ {
+  "query": "break down this assignment for me, it's due Thursday",
+  "should_trigger": true
+ },
+ {
+  "query": "check my solution to question 2, I think the integral is wrong",
+  "should_trigger": true
+ },
+ {
+  "query": "Here's my HW3 in data structures — where do I start?",
+  "should_trigger": true
+ },
+ {
+  "query": "רמז לסעיף ב בבקשה, לא את הפתרון",
+  "should_trigger": true
+ },
+ {
+  "query": "I uploaded the lab handout; which questions should I do first and what software do I need?",
+  "should_trigger": true
+ },
+ {
+  "query": "תבדוק לי את ההוכחה שכתבתי לשאלה 1, צילמתי אותה",
+  "should_trigger": true
+ },
+ {
+  "query": "Can you go through this contracts take-home exercise and tell me what issues each question raises?",
+  "should_trigger": true
+ },
+ {
+  "query": "solve exercise 4 in the attached problem set step by step",
+  "should_trigger": true
+ },
+ {
+  "query": "help me plan the design studio brief I got today",
+  "should_trigger": true
+ },
+ {
+  "query": "Help me write my seminar paper on urban sociology",
+  "should_trigger": false
+ },
+ {
+  "query": "תערוך לי את המבוא של העבודה הסמינריונית",
+  "should_trigger": false
+ },
+ {
+  "query": "format my references in APA 7",
+  "should_trigger": false
+ },
+ {
+  "query": "What is a mutex and how is it different from a semaphore?",
+  "should_trigger": false
+ },
+ {
+  "query": "Make me a mock exam from these past exams",
+  "should_trigger": false
+ },
+ {
+  "query": "תסכם לי את המצגת מההרצאה של אתמול",
+  "should_trigger": false
+ },
+ {
+  "query": "When are all my deadlines this month? Make me a weekly plan",
+  "should_trigger": false
+ },
+ {
+  "query": "the Hebrew lines in my reply come out flipped, fix the formatting",
+  "should_trigger": false
+ }
+]

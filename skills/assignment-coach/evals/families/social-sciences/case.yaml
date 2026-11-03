@@ -1,0 +1,7 @@
+schema_version: "1.1"
+name: social-sciences
+expected_outcome: >
+  The coach scans assignment.md, maps it (two questions, typed analysis and essay), and gives a
+  breakdown in the social-sciences conventions without solving anything.
+context:
+  scaffold_script: place-files.sh
