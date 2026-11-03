@@ -13,7 +13,7 @@ pytest.importorskip("httpx")
 from moodle_mcp import sync  # noqa: E402
 from moodle_mcp.errors import AuthError, TransportError  # noqa: E402
 
-from conftest import SITE, load_fixture  # noqa: E402
+from moodle_fixtures import SITE, load_fixture  # noqa: E402
 
 
 def course() -> dict:

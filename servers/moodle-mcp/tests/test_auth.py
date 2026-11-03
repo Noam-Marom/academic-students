@@ -14,7 +14,7 @@ respx = pytest.importorskip("respx")
 from moodle_mcp import auth  # noqa: E402
 from moodle_mcp.errors import AuthError, TransportError  # noqa: E402
 
-from conftest import PRIVATE_TOKEN, SITE, TOKEN, load_fixture  # noqa: E402
+from moodle_fixtures import PRIVATE_TOKEN, SITE, TOKEN, load_fixture  # noqa: E402
 
 AJAX = f"{SITE}/lib/ajax/service-nologin.php"
 TOKEN_PHP = f"{SITE}/login/token.php"

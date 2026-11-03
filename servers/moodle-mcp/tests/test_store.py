@@ -12,7 +12,7 @@ import pytest
 
 from moodle_mcp import store as st  # noqa: E402
 
-from conftest import PRIVATE_TOKEN, SITE, TOKEN  # noqa: E402
+from moodle_fixtures import PRIVATE_TOKEN, SITE, TOKEN  # noqa: E402
 
 POSIX_ONLY = pytest.mark.skipif(sys.platform == "win32", reason="POSIX file modes")
 

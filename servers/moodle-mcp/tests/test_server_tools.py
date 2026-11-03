@@ -20,7 +20,7 @@ from moodle_mcp import client as mc  # noqa: E402
 from moodle_mcp import server as srv  # noqa: E402
 from moodle_mcp.store import Store  # noqa: E402
 
-from conftest import SITE, TOKEN, load_fixture  # noqa: E402
+from moodle_fixtures import SITE, TOKEN, load_fixture  # noqa: E402
 
 REST = f"{SITE}/webservice/rest/server.php"
 CAL_TOKEN = "cal0123456789abcdef0123456789abcdef01234567"

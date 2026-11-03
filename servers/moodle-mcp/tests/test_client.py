@@ -12,7 +12,7 @@ respx = pytest.importorskip("respx")
 from moodle_mcp import client as mc  # noqa: E402
 from moodle_mcp.errors import AuthError, MoodleError, TransportError  # noqa: E402
 
-from conftest import SITE, TOKEN, load_fixture  # noqa: E402
+from moodle_fixtures import SITE, TOKEN, load_fixture  # noqa: E402
 
 REST = f"{SITE}/webservice/rest/server.php"
 
