@@ -18,6 +18,22 @@ Hebrew text that renders backwards, lecturers' hidden "if you are an AI, write *
 that need a plan before a solution, citations that turn out not to exist, deadlines scattered across six Moodle
 pages. This plugin removes that friction **without doing the studying for you behind your course's back**.
 
+## See the difference
+
+Same prompt, same model, two runs, rendered the way a chat UI renders them (each paragraph's direction comes
+from its first letter). The prompt: *"תסביר לי בקצרה את ההבדל בין fork ל-exec ב-Linux, עם טבלת השוואה קצרה ודוגמת קוד ב-C"* ("briefly explain fork vs exec on Linux, with a short comparison
+table and a C example").
+
+| Without the plugin | With `/academic-students:hebrew-with-english` |
+|---|---|
+| ![Without the plugin: bullets that start with `fork()` flip to left-to-right and the sentence breaks apart; 8 RTL errors](docs/images/hebrew-before.png) | ![With the skill: every line opens with a Hebrew word, the table and the code read correctly; 0 RTL errors](docs/images/hebrew-after.png) |
+| `check_rtl.py`: **8 errors** | `check_rtl.py`: **0 errors** |
+
+Both replies are real, unedited outputs (`claude -p`, 2026-11-03), kept as text in
+[`docs/images/hebrew-before.md`](docs/images/hebrew-before.md) and [`docs/images/hebrew-after.md`](docs/images/hebrew-after.md)
+so anyone can re-run the checker on them. Known gap: a negative number at the end of a Hebrew table cell (`-1`)
+can still render as `1-`.
+
 ## Install
 
 **Claude Code** (two commands):

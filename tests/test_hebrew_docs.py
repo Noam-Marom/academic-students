@@ -7,7 +7,7 @@ import pytest
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 HEBREW = re.compile(r"[֐-׿]")
 LATIN = re.compile(r"[A-Za-z]")
-SKIP_PARTS = {"evals", "fixtures", "results", ".superpowers", "node_modules", ".git", "corpus"}
+SKIP_PARTS = {"evals", "fixtures", "results", ".superpowers", "node_modules", ".git", "corpus", "images"}  # docs/images holds raw before/after outputs, kept unedited
 
 
 def hebrew_docs() -> list[pathlib.Path]:
