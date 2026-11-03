@@ -9,6 +9,7 @@ URLs are returned as Moodle gives them (the client adds the token only when down
 from __future__ import annotations
 
 import functools
+import hashlib
 import os
 import time
 from datetime import datetime
@@ -343,9 +344,22 @@ def build_server(client_factory: Callable[[], MoodleClient] | None = None,
         if not c.is_site_url(file_url) or "/pluginfile.php" not in file_url:
             raise PermissionError("download_file only fetches pluginfile.php urls on the logged-in Moodle site")
         name = Path(unquote(urlparse(file_url).path)).name or "download"
-        dest = Path(dest_dir) / name
-        path, digest = c.download(file_url, dest)
-        return {"path": str(path), "filename": name, "sha256": digest, "size": path.stat().st_size}
+        target = Path(dest_dir) / name
+        if not target.exists():
+            path, digest = c.download(file_url, target)
+            return {"path": str(path), "filename": name, "sha256": digest, "size": path.stat().st_size}
+        # Never overwrite a file already in the folder (it may be the student's own edited copy).
+        incoming, digest = c.download(file_url, target.with_name(f".{name}.incoming"))
+        if hashlib.sha256(target.read_bytes()).hexdigest() == digest:
+            incoming.unlink()
+            return {"path": str(target), "filename": name, "sha256": digest, "size": target.stat().st_size,
+                    "already_present": True}
+        n = 1
+        while (final := target.with_name(f"{target.stem} ({n}){target.suffix}")).exists():
+            n += 1
+        os.replace(incoming, final)
+        return {"path": str(final), "filename": final.name, "sha256": digest, "size": final.stat().st_size,
+                "note": f"{name} already existed with different content; saved the Moodle copy as {final.name}"}
 
     @tool
     def export_calendar_ics(dest_path: str) -> dict:

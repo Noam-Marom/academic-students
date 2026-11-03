@@ -407,3 +407,24 @@ def test_sync_course_tool_mirrors_the_course_and_reports(tools, moodle, tmp_path
     assert TOKEN not in dumps(out)
     again = tools["sync_course"](12, str(tmp_path))
     assert again["new"] == [] and again["downloaded"] == 0
+
+
+def test_download_file_never_overwrites_a_different_existing_file(tools, moodle, tmp_path):
+    url = f"{SITE}/webservice/pluginfile.php/504/mod_resource/content/3/slides.pdf"
+    moodle.router.get(url + f"?token={TOKEN}").mock(
+        return_value=httpx.Response(200, content=b"new from moodle", headers={"content-type": "application/pdf"}))
+    (tmp_path / "slides.pdf").write_bytes(b"student's own annotated copy")
+    out = tools["download_file"](url, str(tmp_path))
+    assert (tmp_path / "slides.pdf").read_bytes() == b"student's own annotated copy"
+    assert out["path"] == str(tmp_path / "slides (1).pdf")
+    assert (tmp_path / "slides (1).pdf").read_bytes() == b"new from moodle"
+
+
+def test_download_file_identical_existing_file_is_reused(tools, moodle, tmp_path):
+    url = f"{SITE}/webservice/pluginfile.php/504/mod_resource/content/3/slides.pdf"
+    moodle.router.get(url + f"?token={TOKEN}").mock(
+        return_value=httpx.Response(200, content=b"same bytes", headers={"content-type": "application/pdf"}))
+    (tmp_path / "slides.pdf").write_bytes(b"same bytes")
+    out = tools["download_file"](url, str(tmp_path))
+    assert out["path"] == str(tmp_path / "slides.pdf") and out.get("already_present") is True
+    assert sorted(p.name for p in tmp_path.iterdir()) == ["slides.pdf"]

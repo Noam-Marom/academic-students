@@ -229,3 +229,22 @@ def test_fetch_text_returns_body_and_maps_http_errors():
 def test_fetch_text_refuses_urls_outside_the_site():
     with pytest.raises(PermissionError):
         make_client().fetch_text("https://evil.example/calendar/export_execute.php")
+
+
+@respx.mock
+def test_interrupted_download_leaves_no_partial_file_and_keeps_the_old_one(tmp_path):
+    url = f"{SITE}/webservice/pluginfile.php/504/mod_resource/content/3/slides.pdf"
+
+    class Broken(httpx.SyncByteStream):
+        def __iter__(self):
+            yield b"%PDF-1.4 first half"
+            raise httpx.ReadError("connection reset")
+
+    respx.get(url + f"?token={TOKEN}").mock(
+        return_value=httpx.Response(200, stream=Broken(), headers={"content-type": "application/pdf"}))
+    dest = tmp_path / "slides.pdf"
+    dest.write_bytes(b"previous complete version")
+    with pytest.raises(mc.TransportError):
+        make_client().download(url, dest)
+    assert dest.read_bytes() == b"previous complete version"
+    assert [p.name for p in tmp_path.iterdir()] == ["slides.pdf"]

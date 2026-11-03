@@ -8,6 +8,7 @@ it raises so that no exception, log line or tool result can leak it.
 from __future__ import annotations
 
 import hashlib
+import os
 from pathlib import Path
 from typing import Any
 
@@ -135,9 +136,13 @@ class MoodleClient:
         return f"{fileurl}{sep}token={self.token}"
 
     def download(self, fileurl: str, dest: Path) -> tuple[Path, str]:
-        """Stream a file to `dest` (parents created) and return (dest, sha256 hex digest)."""
+        """Stream a file to `dest` (parents created) and return (dest, sha256 hex digest).
+
+        Bytes go to a hidden `.part` file next to `dest` and replace `dest` only when the download completed, so
+        a broken connection never leaves a truncated file and never destroys a previous complete copy."""
         dest = Path(dest)
         dest.parent.mkdir(parents=True, exist_ok=True)
+        part = dest.with_name(f".{dest.name}.part")
         digest = hashlib.sha256()
         try:
             with self.http.stream("GET", self.file_url(fileurl)) as resp:
@@ -151,13 +156,18 @@ class MoodleClient:
                     except ValueError:
                         payload = None
                     self._raise_for_moodle_error(payload)
-                    dest.write_bytes(body)
+                    part.write_bytes(body)
                     digest.update(body)
-                    return dest, digest.hexdigest()
-                with dest.open("wb") as fh:
-                    for chunk in resp.iter_bytes():
-                        fh.write(chunk)
-                        digest.update(chunk)
+                else:
+                    with part.open("wb") as fh:
+                        for chunk in resp.iter_bytes():
+                            fh.write(chunk)
+                            digest.update(chunk)
+            os.replace(part, dest)
         except httpx.HTTPError as exc:
+            part.unlink(missing_ok=True)
             raise TransportError(self._strip(f"download failed: {type(exc).__name__}: {exc}")) from None
+        except BaseException:
+            part.unlink(missing_ok=True)
+            raise
         return dest, digest.hexdigest()
