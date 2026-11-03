@@ -25,7 +25,7 @@ anything; then read the spec and the plan for the area you touch.
 | 2 Existing skills | scanner tests + benchmark + `--quick`; hebrew formats + glossary | pending |
 | 3 Core | assignment-coach, academic-writing | pending |
 | 4 Support | exam-prep, lecture-notes, study-planner | pending |
-| 5 Moodle | moodle-mcp server, moodle-sync skill | pending |
+| 5 Moodle | moodle-mcp server, moodle-sync skill | done |
 
 Update this table in the same commit that finishes a plan.
 

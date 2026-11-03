@@ -1,0 +1,51 @@
+{
+  "notifications": [
+    {
+      "id": 9001,
+      "useridfrom": 5,
+      "useridto": 42,
+      "subject": "Operating Systems: Homework 1 published",
+      "shortenedsubject": "Operating Systems: Homework 1 publ...",
+      "text": "<p>Homework 1 is up. Due 20/11 at 23:55.</p>",
+      "fullmessage": "Homework 1 is up. Due 20/11 at 23:55.\nRead the brief carefully.",
+      "fullmessageformat": 1,
+      "fullmessagehtml": "<p>Homework 1 is up. Due <strong>20/11</strong> at 23:55.</p>",
+      "smallmessage": "Homework 1 is up.",
+      "contexturl": "https://moodle.example.ac.il/mod/forum/discuss.php?d=71",
+      "contexturlname": "Homework 1 published",
+      "timecreated": 1793602800,
+      "timecreatedpretty": "11 hours ago",
+      "timeread": null,
+      "read": false,
+      "deleted": false,
+      "iconurl": "https://moodle.example.ac.il/theme/image.php/boost/forum/1/monologo",
+      "component": "mod_forum",
+      "eventtype": "posts",
+      "customdata": "{\"notificationiconurl\":\"\"}"
+    },
+    {
+      "id": 9000,
+      "useridfrom": -10,
+      "useridto": 42,
+      "subject": "Assignment feedback released: Homework 0",
+      "shortenedsubject": "Assignment feedback released...",
+      "text": "<p>Your grade is available.</p>",
+      "fullmessage": "Your grade is available.",
+      "fullmessageformat": 1,
+      "fullmessagehtml": "<p>Your grade is available.</p>",
+      "smallmessage": "Your grade is available.",
+      "contexturl": "https://moodle.example.ac.il/mod/assign/view.php?id=1000",
+      "contexturlname": "Homework 0",
+      "timecreated": 1793001600,
+      "timecreatedpretty": "7 days ago",
+      "timeread": 1793002000,
+      "read": true,
+      "deleted": false,
+      "iconurl": "https://moodle.example.ac.il/theme/image.php/boost/assign/1/monologo",
+      "component": "mod_assign",
+      "eventtype": "assign_notification",
+      "customdata": null
+    }
+  ],
+  "unreadcount": 1
+}

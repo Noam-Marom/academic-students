@@ -1,0 +1,29 @@
+{
+  "quizzes": [
+    {
+      "id": 50,
+      "coursemodule": 1010,
+      "course": 12,
+      "name": "Quiz 1 - Processes",
+      "intro": "<p>Ten multiple-choice questions. One attempt.</p>",
+      "introformat": 1,
+      "introfiles": [],
+      "timeopen": 1794290400,
+      "timeclose": 1794952740,
+      "timelimit": 1800,
+      "preferredbehaviour": "deferredfeedback",
+      "attempts": 1,
+      "grademethod": 1,
+      "decimalpoints": 2,
+      "questiondecimalpoints": -1,
+      "sumgrades": 10,
+      "grade": 10,
+      "hasfeedback": 0,
+      "section": 1,
+      "visible": 1,
+      "groupmode": 0,
+      "groupingid": 0
+    }
+  ],
+  "warnings": []
+}
