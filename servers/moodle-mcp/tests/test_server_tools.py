@@ -37,7 +37,7 @@ EXPECTED_ALLOWLIST = frozenset({
 TOOL_NAMES = {
     "moodle_status", "list_courses", "get_course_contents", "list_assignments", "get_upcoming_events",
     "get_grades", "list_forum_discussions", "get_notifications", "list_quizzes", "download_file",
-    "export_calendar_ics",
+    "export_calendar_ics", "sync_course",
 }
 
 
@@ -383,9 +383,27 @@ def test_no_tool_result_contains_the_token(tools, moodle, tmp_path):
         "get_upcoming_events": (30,), "get_grades": (12,), "list_forum_discussions": (12, 20),
         "get_notifications": (20,), "list_quizzes": (12,), "download_file": (url, str(tmp_path)),
         "export_calendar_ics": (str(tmp_path / "c.ics"),),
+        "sync_course": (12, str(tmp_path / "courses")),
     }
+    moodle.router.get(url__startswith=f"{SITE}/webservice/pluginfile.php").mock(
+        return_value=httpx.Response(200, content=b"file", headers={"content-type": "application/pdf"}))
     assert set(calls) == TOOL_NAMES
     for name, args in calls.items():
         out = tools[name](*args)
         assert TOKEN not in dumps(out), name
         assert "error" not in out if isinstance(out, dict) else True, (name, out)
+
+
+# --- sync_course ---------------------------------------------------------------------------------------
+
+def test_sync_course_tool_mirrors_the_course_and_reports(tools, moodle, tmp_path):
+    moodle.router.get(url__startswith=f"{SITE}/webservice/pluginfile.php").mock(
+        return_value=httpx.Response(200, content=b"%PDF", headers={"content-type": "application/pdf"}))
+    out = tools["sync_course"](12, str(tmp_path))
+    root = tmp_path / "OS-2026A"
+    assert out["root"] == str(root) and out["downloaded"] == 7 and out["errors"] == []
+    assert (root / ".moodle-sync/manifest.json").exists() and (root / "announcements.md").exists()
+    assert "materials/01-week-1-processes/slides.pdf" in out["new"]
+    assert TOKEN not in dumps(out)
+    again = tools["sync_course"](12, str(tmp_path))
+    assert again["new"] == [] and again["downloaded"] == 0
