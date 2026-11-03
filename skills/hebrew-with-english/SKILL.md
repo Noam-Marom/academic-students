@@ -1,118 +1,73 @@
 ---
 name: hebrew-with-english
-description: "Write Hebrew with English technical terms so it renders right-to-left correctly, in chat and in files (Markdown, Word, LaTeX, PowerPoint). Use when the user types /hebrew-with-english or /academic-students:hebrew-with-english, when they complain that lines come out flipped, mirrored or with punctuation on the wrong side (\"השורות יוצאות הפוכות\", \"הנקודה קופצת\"), or when another skill in this plugin is about to write Hebrew prose into a file. Once invoked, keep applying it to every later reply until the user says to stop. Do not trigger just because the user wrote in Hebrew."
+description: "Write Hebrew with English technical terms so it renders right-to-left correctly, in chat and in files (Markdown, Word, LaTeX, PowerPoint). Use when the user types /hebrew-with-english or /academic-students:hebrew-with-english, when they complain that lines come out flipped, mirrored or with punctuation on the wrong side (\"השורות יוצאות הפוכות\", \"הנקודה קופצת\", \"הטקסט מתהפך\"), when they ask for a Hebrew document/summary/slide deck that contains English terms, or when another skill in this plugin is about to write Hebrew prose into a file. Once invoked, keep applying it to every later reply until the user says to stop. Do not trigger just because the user wrote in Hebrew, and not for translation requests."
 license: MIT
 ---
 
-# Hebrew with English (RTL-safe formatting)
+# Hebrew with English (RTL-safe writing)
 
-Goal: mix Hebrew prose with English technical terms without breaking the UI's right-to-left text direction.
+## Purpose
 
-## Why lines break
+Mix Hebrew prose with English technical terms without breaking right-to-left rendering — in the chat UI, in
+Markdown files, and in Word, LaTeX and PowerPoint documents. The failure this skill prevents looks small (a line
+that starts with an English word flips to left-to-right, punctuation jumps to the wrong side) and reads as broken
+to every Hebrew reader. The skill never translates technical terms: commands, identifiers, product names and
+terms of art stay in English inside Hebrew sentences.
 
-The chat UI picks each line's direction (each paragraph, list item, heading or table cell) from the first
-letter it contains. If that letter is Hebrew, the line renders RTL. If it is Latin (an English word, a
-command, a file name, a URL), the whole line flips to LTR, its punctuation jumps to the wrong side, and
-the Hebrew in it reads backwards. Markdown markers (`#`, `-`, `1.`, `>`, `**`) don't count. What counts is
-the first real character after them. So the question for every line is: **what is the first word the
-reader sees, and is it Hebrew?**
+## When this triggers
 
-## Scope: the whole conversation, every piece of prose
+- The user invokes it (`/hebrew-with-english`, `/academic-students:hebrew-with-english`) — then it stays on for
+  the whole conversation until they say to stop.
+- The user complains about direction: "השורות יוצאות הפוכות", "הנקודה קופצת לצד השני", "the Hebrew is mirrored".
+- The user asks for Hebrew output that will contain English terms: a summary, a report, a `.docx`, a LaTeX
+  section, slides.
+- Another skill in this plugin (assignment-coach, academic-writing, exam-prep, lecture-notes, study-planner,
+  moodle-sync) is about to write Hebrew prose into a file.
 
-- Apply this to every line of the reply, not just the opening paragraph. Most slips happen in the middle and
-  at the end of long technical answers: in a list of tools, a table, a heading, or the line after a code block.
-- **It persists.** After the skill is invoked, every later reply in this conversation follows these rules too,
-  including short answers, follow-ups, error explanations, progress messages between tool calls, questions
-  to the user (including multiple-choice option labels), and the final summary. It stops only when the user says so.
-- Write in Hebrew even when the user writes in English or pastes English material. Technical terms, names,
-  commands and identifiers stay in English inside Hebrew sentences.
-- It also applies to Hebrew prose you write into files or documents in this conversation (a Markdown file,
-  a doc, a README), unless the user wants a different format there.
+Not for: translating a text into English, questions about Hebrew grammar, or a Hebrew message that needs no
+special handling (plain prose with no English tokens renders fine on its own).
 
-## Rules
+## Workflow
 
-1. **Mandatory Hebrew start.** Every sentence, new line, paragraph, heading, table cell (header cells and
-   the first column included) and bullet point must begin with a Hebrew word. A line that starts with an
-   English word, a number, a symbol, an emoji, a quote mark, a link, a path or inline code breaks RTL rendering.
-2. **English word starters.** If a line logically must start with an English term:
-   - Preferred: reword so it opens with a natural Hebrew word. Usually one word is enough:
-     - "Python is…" → "השפה Python היא…"
-     - "Docker containers…" → "קונטיינרים של Docker…"
-     - "`malloc` returns…" → "הפונקציה `malloc` מחזירה…"
-     - "/etc/hosts maps…" → "הקובץ `/etc/hosts` ממפה…"
-     - "3 steps" → "שלושה שלבים", or "יש 3 שלבים"
-     - "v2.1 adds…" → "גרסה 2.1 מוסיפה…"
-     - "https://… has the docs" → "התיעוד נמצא ב-https://…"
-   - Natural Hebrew prefixes also work: "ב-Docker", "ה-API", "ל-Python", "מ-GitHub". The line starts with a
-     Hebrew letter and still reads naturally.
-   - Fallback when no Hebrew word fits (for example a table cell that holds only a name): prefix the English
-     word with the Hebrew letter 'א' and no space, for example "אDocker".
-3. **Punctuation anchoring.** Keep periods, commas, colons and parentheses inside a Hebrew sentence structure,
-   around the English terms, so they don't jump to the wrong side. Avoid ending a line with an English term
-   followed directly by punctuation. Close the sentence with a Hebrew word instead: "…ומריצים את הפקודה
-   `make` בטרמינל." instead of "…ומריצים את `make`.", "…של אתגרי ה-CTF עצמם." instead of "…של ה-CTFs.".
-   If no natural Hebrew ending fits, leave out the final period on that line rather than letting it jump.
-4. **Lists, headings, labels.** Bullet and numbered items follow rule 1: "- הפונקציה fork יוצרת…", not
-   "- fork creates…". Headings too: "## הגדרת Docker Compose", not "## Docker Compose Setup". Bold labels at
-   the start of a line too: "**הכלי Podman:** …", not "**Podman:** …".
-   **Labels that are terms of art are the most common slip.** Words like Train / Test / Validation, Input /
-   Output, Pros / Cons, Baseline, Setup, Results, TL;DR, Note, Step 1, Q / A, Before / After, Server / Client
-   feel like fixed names, so they get written in English automatically as the first word of a bullet. If the
-   term must stay in English, put a Hebrew noun in front of it inside the label:
-   - `- **Train (10):** 5 אתגרי…` → `- **סט ה-Train (10):** 5 אתגרי…`
-   - `- **Test (6), held-out:** …` → `- **סט ה-Test (6, held-out):** …`
-   - `**Input:** …` → `**הקלט:** …`, `**Pros:**` → `**יתרונות:**`, `**Step 1:**` → `**שלב 1:**`
-5. **Tables.** Each cell is its own line for direction purposes. Start every cell, header included, with
-   Hebrew: "| הכלי | יתרון |", "| הכלי Docker | נפוץ מאוד |". A cell that holds only a name can use
-   "אDocker", or carry a Hebrew noun ("הכלי Docker", "הפקודה `ls`").
-6. **Code.** Code blocks are exempt (they render LTR in their own block), but the line introducing a code
-   block must start in Hebrew, and so must the line right after it. Inline code (`like_this`) must not be the
-   first token of a line.
+1. **Pick the output format** and read the matching reference before writing:
+   - chat reply or Markdown file → `references/chat-markdown.md` (the core rules: every line opens with a Hebrew
+     word, punctuation anchoring, tables, code-block neighbours, bold labels).
+   - Word document → `references/docx.md` (`w:bidi` on paragraphs, `w:rtl` on runs, styles, fonts).
+   - LaTeX → `references/latex.md` (`polyglossia`, `\textenglish`, fonts, math inside Hebrew).
+   - PowerPoint → `references/pptx.md` (`rtl="1"`, `rtlCol`, complex-script fonts).
+2. **Terminology.** Look up the course's discipline family in `references/glossary/` (12 families; rule set in
+   `references/glossary/README.md`): first mention = Hebrew term with the English in parentheses, afterwards
+   whichever the course uses. A `COURSE.md` in the course folder may override individual terms.
+3. **Write with the opening word chosen first.** For every line, heading, bullet, bold label and table cell,
+   decide the Hebrew opener before the rest of the line. Fixing afterwards is where slips survive.
+4. **Verify mechanically** (next section) before sending or saving. Then send the checked text word for word.
 
-## High-risk spots (check these every time)
+## Files in this skill
 
-| Where it slips | Wrong | Right |
-|---|---|---|
-| Heading with a product name | `## Git Branching` | `## עבודה עם ענפים ב-Git` |
-| Bold term-of-art label in a list | `- **Train (10):** …` | `- **סט ה-Train (10):** …` |
-| Bold label | `**Note:** …` / `**Redis:** …` | `**הערה:** …` / `**השירות Redis:** …` |
-| List of tools/functions | `- pthread_create – …` | `- הפונקציה pthread_create – …` |
-| List item starting with code | ``- `ls -la` מציג…`` | ``- הפקודה `ls -la` מציגה…`` |
-| Table first column / header | `\| Command \| What it does \|` | `\| הפקודה \| מה היא עושה \|` |
-| Line after a code block | `Output: …` | `הפלט: …` |
-| Number or step at line start | `2 threads run…` | `שני חוטים רצים…` |
-| Path / URL / version at line start | `~/.bashrc is…` | `הקובץ `~/.bashrc` הוא…` |
-| Short follow-up reply | `Yes, use `--force`.` | `כן, צריך להשתמש בדגל `--force`.` |
-| Status line between tool calls | `Running tests…` | `מריץ את הבדיקות…` |
-
-## How to write it (habit, not afterthought)
-
-Choose each line's opening Hebrew word before writing the rest of the line. Fixing lines after the fact is
-where slips survive. Words that open technical lines naturally: הפקודה, הפונקציה, הקובץ, המשתנה, הספרייה,
-הכלי, השירות, הגרסה, השלב, הדגל, הפלט, הערך, השגיאה, התהליך, הנתיב, בקוד, כאן, למשל, כדי, אם, אחרי.
+- `references/chat-markdown.md` — the rules, the high-risk spots table, the list of natural Hebrew openers.
+- `references/docx.md`, `references/latex.md`, `references/pptx.md` — how direction works in each format and how to set it from code.
+- `references/glossary/README.md` + `references/glossary/<family>.md` — Hebrew ⇄ English term pairs per discipline family.
+- `scripts/check_rtl.py` — checks Markdown/chat text; `--fix` prints a suggested rewrite per failing line (never edits); `--json`.
+- `scripts/check_docx_rtl.py` — lists Hebrew paragraphs in a `.docx` that lack `w:bidi` (resolves style inheritance); `--json`.
 
 ## Verify before sending (mandatory)
 
-A mental read-through is not enough. Slips survive it, especially bold labels in lists, because the eye
-reads the content of the line and skips over its first word. So the check is mechanical:
+A mental read-through is not enough; the eye reads the content of a line and skips its first word. The check is
+mechanical:
 
-**When a shell or code-execution tool is available** (Claude Code, Claude Desktop with tools) and the reply
-has any list, table, heading or bold label, or is longer than about 8 lines:
-1. Write the full draft reply to a scratch file (for example `rtl_draft.md` in the scratch/temp directory).
-2. Run the checker on it:
-   ```bash
-   python3 <this-skill-dir>/scripts/check_rtl.py rtl_draft.md
-   ```
-3. Fix every ERROR and every WARNING in the draft, and run the checker again until it reports `0 errors, 0 warnings`.
-4. Send the corrected draft as your reply, word for word. Don't re-type it from memory, which brings back the
-   slips you just fixed.
+**When a shell is available** and the reply has any list, table, heading or bold label, or is longer than about
+eight lines:
+1. Write the full draft to a scratch file (`rtl_draft.md` in the scratch directory).
+2. Run `python3 scripts/check_rtl.py rtl_draft.md --fix` (path relative to this skill folder).
+3. Fix every ERROR and WARNING — the `→` suggestions are first candidates, not final wording — and re-run until
+   it reports `0 errors, 0 warnings`.
+4. Send the corrected draft word for word. Do not retype it from memory.
 
-Don't skip this because the reply "looks fine". The failures this skill exists to stop all looked fine to
-the writer. The step costs a few seconds; skip it only for a short reply of plain sentences with no list,
-table, heading or label.
+For a Word file: `python3 scripts/check_docx_rtl.py out.docx` must report 0 paragraphs without RTL.
+For LaTeX: compile with XeLaTeX/LuaLaTeX; "Missing character" warnings mean a font without Hebrew glyphs.
 
-**When no tool is available**, list to yourself the first word of every line (each heading, bullet, bold label,
-table cell, the lines around each code block and the last line) and confirm each is Hebrew. Do the same for
-the last token before each line's final punctuation. Fix any line that fails, using rule 2.
+**When no shell is available**, list to yourself the first word of every line (each heading, bullet, bold label,
+table cell, the lines around each code block, and the last line) and confirm each is Hebrew; do the same for the
+last token before each line's final punctuation. Fix any line that fails using rule 2 of the chat reference.
 
-The same check applies to Hebrew prose you write into files: run the checker on the file itself.
+Skip the check only for a short reply of plain sentences with no list, table, heading or label.
