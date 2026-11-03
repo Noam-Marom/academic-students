@@ -4,7 +4,6 @@ import json
 import pathlib
 import subprocess
 import sys
-import zipfile
 
 import pytest
 
@@ -156,31 +155,10 @@ def test_cli_json_and_exit_codes(tmp_path):
     assert r.returncode == 0 and json.loads(r.stdout)["ok"] is True
 
 
-def _minimal_docx(path: pathlib.Path, paragraphs: list[str]) -> None:
-    body = "".join(f"<w:p><w:r><w:t xml:space=\"preserve\">{p}</w:t></w:r></w:p>" for p in paragraphs)
-    document = ('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
-                '<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">'
-                f'<w:body>{body}<w:sectPr/></w:body></w:document>')
-    content_types = ('<?xml version="1.0" encoding="UTF-8"?>'
-                     '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">'
-                     '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>'
-                     '<Default Extension="xml" ContentType="application/xml"/>'
-                     '<Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>'
-                     '</Types>')
-    rels = ('<?xml version="1.0" encoding="UTF-8"?>'
-            '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
-            '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/>'
-            '</Relationships>')
-    with zipfile.ZipFile(path, "w") as z:
-        z.writestr("[Content_Types].xml", content_types)
-        z.writestr("_rels/.rels", rels)
-        z.writestr("word/document.xml", document)
-
-
-def test_docx_input_is_read_with_python_docx(cc, tmp_path):
+def test_docx_input_is_read_with_python_docx(cc, tmp_path, minimal_docx):
     pytest.importorskip("docx")
     f = tmp_path / "paper.docx"
-    _minimal_docx(f, ["See (Smith, 2020) and (Lee, 2019).", "References", "Smith, J. (2020). C. J, 1, 3."])
+    minimal_docx(f, ["See (Smith, 2020) and (Lee, 2019).", "References", "Smith, J. (2020). C. J, 1, 3."])
     text = cc.read_document(f)
     out = cc.check(text)
     assert [c["key"] for c in out["orphans_in_text"]] == ["lee|2019"]
