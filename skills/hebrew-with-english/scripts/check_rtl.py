@@ -137,7 +137,14 @@ EN_THEN_NUMBER_PARENS = re.compile(r"[A-Za-z0-9][\w:'’.!?&+-]*[*_`]*\s*\(\s*\d
 CODE_CALL_EMPTY_PARENS = re.compile(r"`[^`]*\(\)`")
 
 
+# "**סשן ה-Transformer:** Transformer קטן": the colon and both English words merge into one LTR run, so the bold
+# label lands on the wrong side. The word after a label that ends in English must be Hebrew.
+LABEL_EN_THEN_EN = re.compile(r"(\*\*|__)[^*_\n]*[A-Za-z0-9][^*_\n]*:\s*(\*\*|__)\s*[A-Za-z`]")
+
+
 def midline_issue(text: str):
+    if HEB.search(text) and LABEL_EN_THEN_EN.search(text):
+        return "bold label ending in English is followed by English; start the text after the label with a Hebrew word ('**סשן ה-Transformer:** מודל Transformer…')"
     if HEB.search(text) and CODE_CALL_EMPTY_PARENS.search(text):
         return "inline code ending in empty parentheses inside Hebrew renders as '( )fork'; write `fork` (the noun 'הקריאה' already says it is a call)"
     if HEB.search(text) and EN_THEN_NUMBER_PARENS.search(text):

@@ -131,3 +131,16 @@ def test_hebrew_inside_a_code_block_is_error(rtl):
 def test_english_comments_in_code_block_are_clean(rtl):
     text = "הקוד:\n```c\nperror(\"execlp\");   /* reached only if exec failed */\n```\nהסבר קצר אחרי הקוד.\n"
     assert rtl.check(text)[0] == []
+
+
+def test_label_ending_in_english_followed_by_english_is_error(rtl):
+    errors, _ = rtl.check("3. **סשן ה-Transformer:** Transformer קטן על רצף הפקודות.\n")
+    assert any("label" in e["issue"] for e in errors), errors
+
+
+@pytest.mark.parametrize("line", [
+    "3. **סשן ה-Transformer:** מודל Transformer קטן על רצף הפקודות.",
+    "2. **סשן ה-hierarchical:** ניסוי נפרד, קודם משפחה.",
+])
+def test_label_ending_in_english_followed_by_hebrew_is_clean(rtl, line):
+    assert rtl.check(line + "\n")[0] == []
