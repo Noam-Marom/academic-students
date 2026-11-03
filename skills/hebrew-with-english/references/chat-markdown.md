@@ -59,7 +59,10 @@ reader sees, and is it Hebrew?**
 5. **Tables.** Each cell is its own line for direction purposes. Start every cell, header included, with
    Hebrew: "| הכלי | יתרון |", "| הכלי Docker | נפוץ מאוד |". A cell that holds only a name can use
    "אDocker", or carry a Hebrew noun ("הכלי Docker", "הפקודה `ls`").
-6. **Code.** Code blocks are exempt (they render LTR in their own block), but the line introducing a code
+6. **Code.** Comments and strings inside a code block are written in **English**: a code block is laid out
+   left-to-right, so a Hebrew comment such as `/* מגיעים לכאן רק אם exec נכשל */` comes out scrambled. Put the
+   Hebrew explanation in the prose right before or after the block. Code blocks are otherwise exempt (they render
+   LTR in their own block), but the line introducing a code
    block must start in Hebrew, and so must the line right after it. Inline code (`like_this`) must not be the
    first token of a line.
 
@@ -80,6 +83,7 @@ reader sees, and is it Hebrew?**
 | Status line between tool calls | `Running tests…` | `מריץ את הבדיקות…` |
 | First paragraph after a heading, opening with a name | `Marvel היא חברת קומיקס…` | `החברה Marvel היא חברת קומיקס…` |
 | English name followed by a number in parentheses | `נפתחת ב-*Iron Man* (2008)` | `נפתחת בסרט *Iron Man* משנת 2008` |
+| Hebrew comment inside a code block | `/* מגיעים לכאן רק אם exec נכשל */` | `/* reached only if exec failed */` + Hebrew explanation after the block |
 | Function call with `()` in inline code | ``הקריאה `fork()` יוצרת…`` | ``הקריאה `fork` יוצרת…`` |
 | English title with a colon, then a comma | `ב-*Avengers: Endgame* (2019), עם…` | `בסרט *Avengers: Endgame* משנת 2019, עם…` |
 

@@ -161,7 +161,14 @@ def check(text: str):
         if FENCE.match(line):
             in_code = not in_code
             continue
-        if in_code or not line.strip():
+        if in_code:
+            if HEB.search(line):
+                errors.append({"line": n, "where": "code block",
+                               "issue": "Hebrew inside a code block renders reversed (code is laid out left-to-right); "
+                                        "write the comment or string in English and explain in Hebrew outside the block",
+                               "text": line.strip()})
+            continue
+        if not line.strip():
             continue
         if line.startswith("    ") and not strip_prefix(line).startswith(("-", "*")) and n > 1 and \
                 (not lines[n - 2].strip() or lines[n - 2].startswith("    ")) and not HEB.search(line):

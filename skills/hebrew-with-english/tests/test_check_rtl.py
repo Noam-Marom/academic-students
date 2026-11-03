@@ -120,3 +120,14 @@ def test_inline_code_call_with_empty_parens_in_hebrew_is_error(rtl):
 def test_inline_code_without_parens_is_clean(rtl):
     errors, _ = rtl.check("הקריאה `fork` יוצרת תהליך חדש.\n")
     assert errors == []
+
+
+def test_hebrew_inside_a_code_block_is_error(rtl):
+    text = "הקוד:\n```c\nperror(\"execlp\");   /* מגיעים לכאן רק אם exec נכשל */\n```\nהסבר קצר אחרי הקוד.\n"
+    errors, _ = rtl.check(text)
+    assert [(e["line"], e["where"]) for e in errors] == [(3, "code block")]
+
+
+def test_english_comments_in_code_block_are_clean(rtl):
+    text = "הקוד:\n```c\nperror(\"execlp\");   /* reached only if exec failed */\n```\nהסבר קצר אחרי הקוד.\n"
+    assert rtl.check(text)[0] == []

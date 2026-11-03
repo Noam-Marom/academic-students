@@ -72,6 +72,8 @@ last token before each line's final punctuation. Fix any line that fails using r
 Two slips survive this check most often, so look for them by name:
 - **The first sentence after a heading that opens with a name** (`Marvel היא…`, `Python היא…`). Put a Hebrew
   noun first: `החברה Marvel היא…`, `השפה Python היא…`.
+- **Hebrew inside a code block** (comments, strings): it renders reversed. Comments in code are English;
+  the Hebrew explanation goes in the prose after the block.
 - **An English name followed by a number in parentheses** (`*Iron Man* (2008)`): the number renders on the wrong
   side of the name. Write the number in Hebrew words around it: `הסרט *Iron Man* משנת 2008`.
 
