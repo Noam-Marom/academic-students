@@ -1,0 +1,22 @@
+[
+  {"query": "תעשה לי סדר בהגשות של כל הקורסים, הנה הייצוא מהמודל", "should_trigger": true},
+  {"query": "מתי יש לי הגשות החודש?", "should_trigger": true},
+  {"query": "תבנה לי תוכנית למידה לשבוע הבא, אני פנוי רק בערבים", "should_trigger": true},
+  {"query": "אני לא מספיק כלום השבוע, יש לי שתי עבודות ובוחן. איך אני מתחלק?", "should_trigger": true},
+  {"query": "תכניס לי את כל המבחנים של הסמסטר ליומן גוגל", "should_trigger": true},
+  {"query": "אני במילואים עד רביעי, תנסח לי בקשת הארכה למתרגל", "should_trigger": true},
+  {"query": "What's due this week across my three courses?", "should_trigger": true},
+  {"query": "Make me a study plan around my work shifts on Monday and Wednesday", "should_trigger": true},
+  {"query": "Turn exam-prep's review-dates.json into study sessions in my week", "should_trigger": true},
+  {"query": "Export my deadlines as an .ics so I can import them into Outlook", "should_trigger": true},
+  {"query": "Is next week going to be too much? Here are my deadlines and free hours", "should_trigger": true},
+  {"query": "Merge the syllabus dates with the Moodle calendar and tell me where they disagree", "should_trigger": true},
+  {"query": "תפרק לי את המטלה הזאת לחלקים ותגיד מאיפה להתחיל", "should_trigger": false},
+  {"query": "תכין לי מבחן דמה לפי המבחנים הקודמים", "should_trigger": false},
+  {"query": "תוריד לי את כל החומר החדש מהמודל של הקורס", "should_trigger": false},
+  {"query": "תבדוק לי את הפתרון של תרגיל 2", "should_trigger": false},
+  {"query": "Help me write the introduction of my seminar paper", "should_trigger": false},
+  {"query": "Summarise last week's lecture slides", "should_trigger": false},
+  {"query": "What does the late-submission policy in this syllabus actually say about AI use?", "should_trigger": false},
+  {"query": "Make flashcards for the formulas I need for the probability final", "should_trigger": false}
+]

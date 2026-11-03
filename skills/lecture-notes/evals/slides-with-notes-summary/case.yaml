@@ -1,0 +1,10 @@
+schema_version: "1.1"
+name: slides-with-notes-summary
+expected_outcome: >
+  The assistant scans lecture5.pptx first, extracts it with slides_extract.py (four slides, one hidden, three
+  with speaker notes), uses COURSE.md silently, and writes a Hebrew summary in the five fixed sections in which
+  the speaker note "זה יופיע במבחן" puts the three conditions under "sounds like exam material" citing slide 1's
+  notes, the hidden Peterson slide is identified as hidden rather than summarised as lecture content, and
+  semaphore wait/signal appear as definitions.
+context:
+  scaffold_script: place-files.sh

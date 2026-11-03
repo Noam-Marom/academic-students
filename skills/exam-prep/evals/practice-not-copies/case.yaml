@@ -1,0 +1,10 @@
+schema_version: "1.1"
+name: practice-not-copies
+expected_outcome: >
+  After scanning and classifying, the assistant writes three new practice questions on the heaviest topics
+  (Poisson / discrete distributions, normal approximation, combinatorial probability without replacement) that
+  share the skill but not the numbers or the story of any past-exam question, places the full solutions
+  separately (a separate file or a clearly separated section after all questions), recomputes the numeric
+  answers in code, and keeps every Hebrew line starting with a Hebrew word.
+context:
+  scaffold_script: place-files.sh

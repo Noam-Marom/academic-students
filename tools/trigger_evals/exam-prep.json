@@ -1,0 +1,22 @@
+[
+  {"query": "יש לי מבחן במבוא להסתברות בעוד שבועיים, הנה שלושה מבחנים קודמים. מה הנושאים שחוזרים?", "should_trigger": true},
+  {"query": "תכין לי מבחן דמה באלגוריתמים לפי המועדים של השנים הקודמות", "should_trigger": true},
+  {"query": "תעשה לי דף נוסחאות למבחן בפיזיקה 1, מותר עמוד אחד", "should_trigger": true},
+  {"query": "תכין לי כרטיסיות אנקי על כל ההגדרות שהופיעו במבחנים הקודמים", "should_trigger": true},
+  {"query": "מה הכי חשוב ללמוד למבחן בחוקה לפי מועד א' ומועד ב' של שנה שעברה?", "should_trigger": true},
+  {"query": "פתרתי את מועד ב' 2023 בעצמי, תבדוק לי את הפתרון ותגיד כמה נקודות הייתי מקבל", "should_trigger": true},
+  {"query": "Here are the past exams for my OS course, folder exams/. What topics show up most and for how many points?", "should_trigger": true},
+  {"query": "Make me a mock exam in the style of the last three finals, timed, with solutions hidden until I finish", "should_trigger": true},
+  {"query": "I need a one-page formula sheet for my statistics final — the course allows one side of A4", "should_trigger": true},
+  {"query": "Write 30 flashcards from these two past exams in pharmacology so I can import them into Anki", "should_trigger": true},
+  {"query": "Which topics in the syllabus were never asked in the exams you can see in this folder?", "should_trigger": true},
+  {"query": "I have my anatomy exam on Feb 10. Go over the past papers and tell me when to review each topic", "should_trigger": true},
+  {"query": "תפתור לי את שאלה 3 בתרגיל בית 4 במערכות הפעלה, צריך להגיש מחר", "should_trigger": false},
+  {"query": "תעשה לי סיכום של הרצאה 7, המצגת מצורפת", "should_trigger": false},
+  {"query": "מתי יש לי הגשות החודש? תעשה לי סדר בכל הדדליינים", "should_trigger": false},
+  {"query": "תעזור לי לכתוב את העבודה הסמינריונית בתולדות האמנות, צריך מבנה ומקורות", "should_trigger": false},
+  {"query": "Break down this assignment into parts and tell me where to start, it's due Friday", "should_trigger": false},
+  {"query": "Download the new material from Moodle for my calculus course and tell me what changed", "should_trigger": false},
+  {"query": "Summarise this lecture recording and mark anything that sounds like exam material", "should_trigger": false},
+  {"query": "Explain what a semaphore is — no exam, I just didn't understand the lecture", "should_trigger": false}
+]

@@ -1,0 +1,22 @@
+[
+  {"query": "תסכם לי את ההרצאה של שבוע 5, המצגת מצורפת", "should_trigger": true},
+  {"query": "יש לי הקלטה של השיעור במערכות הפעלה, תתמלל ותעשה סיכום", "should_trigger": true},
+  {"query": "תוציא לי את כל ההגדרות מהמצגת הזאת כולל מה שכתוב בהערות של המרצה", "should_trigger": true},
+  {"query": "צילמתי את הלוח בסוף התרגול, תעשה מזה סיכום מסודר", "should_trigger": true},
+  {"query": "הנה קובץ vtt מהזום של ההרצאה, תסכם ותוסיף את המושגים למילון של הקורס", "should_trigger": true},
+  {"query": "לא הייתי בהרצאה, תגיד לי מה המרצה אמר על כל שקף", "should_trigger": true},
+  {"query": "Summarise this lecture deck for me, I missed class", "should_trigger": true},
+  {"query": "Transcribe lecture3.mp4 locally and turn it into notes with the formulas in LaTeX", "should_trigger": true},
+  {"query": "Here's the YouTube transcript (.srt) of the guest lecture, make structured notes", "should_trigger": true},
+  {"query": "Make me notes from these slides and mark anything the lecturer said will be on the exam", "should_trigger": true},
+  {"query": "What were the key definitions in this week's slides? Deck attached", "should_trigger": true},
+  {"query": "Align the recording with the slides so I know what was said on each one", "should_trigger": true},
+  {"query": "הנה שלושה מבחנים קודמים, תכין לי מבחן דמה", "should_trigger": false},
+  {"query": "תפתור לי את שאלה 2 מהתרגיל על זיכרון וירטואלי", "should_trigger": false},
+  {"query": "תוריד לי את המצגות החדשות מהמודל של הקורס", "should_trigger": false},
+  {"query": "תעזור לי לכתוב סקירת ספרות לעבודה הסמינריונית", "should_trigger": false},
+  {"query": "Make Anki flashcards from the past exams of this course", "should_trigger": false},
+  {"query": "When is my next assignment due? Put all my deadlines in a calendar", "should_trigger": false},
+  {"query": "Check my homework answer for question 4 about paging", "should_trigger": false},
+  {"query": "The Hebrew lines in my notes file come out flipped, fix the direction", "should_trigger": false}
+]

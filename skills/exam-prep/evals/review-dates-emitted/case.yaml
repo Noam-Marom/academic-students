@@ -1,0 +1,10 @@
+schema_version: "1.1"
+name: review-dates-emitted
+expected_outcome: >
+  The assistant scans and classifies the exams, produces the topic map, and writes review-dates.json in the
+  course folder with the exact hand-off shape — a JSON list of objects with "course" (string), "topic" (string)
+  and "dates" (list of ISO YYYY-MM-DD strings) — where every date is before the exam date 2026-02-10 and not
+  in the past, heavier topics get more review dates than lighter ones, and the reply tells the student in one
+  sentence that study-planner turns the file into one-hour blocks.
+context:
+  scaffold_script: place-files.sh
