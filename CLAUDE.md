@@ -6,8 +6,8 @@ anything; then read the spec and the plan for the area you touch.
 
 ## What this is
 
-- **Product:** eight skills + one local MCP server, installable in Claude Code and claude.ai.
-  Skills: `hebrew-with-english`, `prompt-injection-scanner`, `assignment-coach`, `academic-writing`,
+- **Product:** nine skills + one local MCP server, installable in Claude Code and claude.ai.
+  Skills: `hebrew-with-english`, `prompt-injection-scanner`, `assignment-coach`, `assignment-judge`, `academic-writing`,
   `exam-prep`, `lecture-notes`, `study-planner`, `moodle-sync`. Server: `servers/moodle-mcp/`.
 - **Stance:** remove friction around studying, never do the studying for the student behind the course's back.
   Read-only toward university systems. No passwords, no quiz answering, no submissions, no invented sources.

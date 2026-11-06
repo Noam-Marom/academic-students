@@ -1,7 +1,7 @@
 {
   "name": "academic-students",
   "version": "0.1.0",
-  "description": "Skills for university students in any degree, in Hebrew and English: break down and check assignments, academic writing with real citations, exam prep from past exams, lecture summaries, a study planner, a read-only Moodle sync, and a prompt-injection scanner that checks every course file before Claude works on it. Never submits, never answers quizzes, never stores a password.",
+  "description": "Skills for university students in any degree, in Hebrew and English: break down and check assignments, split group work, estimate the grade an expert professor would give, academic writing with real citations, exam prep from past exams, lecture summaries, a study planner, a read-only Moodle sync, and a prompt-injection scanner that checks every course file before Claude works on it. Never submits, never answers quizzes, never stores a password.",
   "author": {
     "name": "Noam Marom"
   },

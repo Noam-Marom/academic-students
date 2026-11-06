@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: instructions-are-the-contract
+expected_outcome: >
+  The judge applies the penalty the instructions state for exceeding the word limit, and only that penalty.
+context:
+  scaffold_script: place-files.sh

@@ -58,7 +58,8 @@ uv run --directory <plugin>/servers/moodle-mcp moodle-mcp login https://moodle.y
 
 | Skill | What it does | Try saying |
 |---|---|---|
-| `assignment-coach` | Scans the files, maps the assignment, plans the work; then **breaks down**, **guides** with hints one rung at a time, **checks** your solution, or — when the course allows it — **solves** with full verification. Any discipline: proofs, lab reports, legal problems, clinical cases, design briefs, code. | "יש לי מטלה בתורת הגרפים ואין לי מושג מאיפה להתחיל" |
+| `assignment-coach` | Scans the files, maps the assignment, plans the work; then **breaks down**, **guides** with hints one rung at a time, **checks** your solution, or — when the course allows it — **solves** with full verification. Group work: splits the parts among N people, in parallel or as a relay, with the critical path and hand-overs. Any discipline: proofs, lab reports, legal problems, clinical cases, design briefs, code. | "יש לי מטלה בתורת הגרפים ואין לי מושג מאיפה להתחיל" |
+| `assignment-judge` | "If the professor who teaches this course to year-x students of degree y graded this against the instructions, what would it get?" Per-criterion scores with quoted evidence, two blind grading passes, a grade range, the penalties the instructions state, and what would raise the grade most. An estimate, never a rewrite. | "מה הציון שהייתי מקבל על העבודה הזו?" |
 | `academic-writing` | Plan, feedback, edit, cite — Hebrew and English, seminar papers to lab reports. Never invents a source. | "תעבור על הפרק הראשון של הסמינריון" |
 | `exam-prep` | Past exams → topic frequency map → new practice questions with full solutions → mock exam under course conditions → formula sheet → spaced-repetition dates. | "יש לי מבחן בעוד שבועיים, הנה מבחנים קודמים" |
 | `lecture-notes` | Slides, recordings or transcripts → structured summary in the course's terminology; everything not in the source is marked. | "תסכם לי את הרצאה 3" |
@@ -80,7 +81,7 @@ Every skill reads an optional `COURSE.md` in your course folder (language, citat
 
 ## Status
 
-v0.1 — all eight skills and the Moodle server are built and tested (580 automated tests, CI green).
+v0.1 — all nine skills and the Moodle server are built and tested (640 automated tests, CI green).
 See the [roadmap](docs/superpowers/specs/2026-11-02-academic-students-plugin-design.md#7-roadmap-and-gates).
 
 | Area | State |
@@ -88,7 +89,7 @@ See the [roadmap](docs/superpowers/specs/2026-11-02-academic-students-plugin-des
 | Plugin skeleton, CI, 12 shared discipline packs | done |
 | `hebrew-with-english` (chat, Word, LaTeX, PowerPoint; 12 glossaries) | done |
 | `prompt-injection-scanner` (+ `--quick` gate, Hebrew patterns, benchmark) | done |
-| `assignment-coach`, `academic-writing` | done |
+| `assignment-coach` (incl. group-work split), `assignment-judge`, `academic-writing` | done |
 | `exam-prep`, `lecture-notes`, `study-planner` | done |
 | `moodle-mcp` server, `moodle-sync` skill | done; not yet tried against a live university Moodle |
 | Behaviour evals with real model runs (`claude plugin eval`) | written, not yet run |

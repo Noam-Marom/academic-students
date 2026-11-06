@@ -1,5 +1,21 @@
 {
-  "disciplines": ["assignment-coach", "academic-writing", "exam-prep"],
-  "course_template": ["assignment-coach", "academic-writing", "exam-prep", "study-planner"],
-  "ai_policy": ["assignment-coach", "academic-writing", "exam-prep"]
+  "disciplines": [
+    "assignment-coach",
+    "academic-writing",
+    "exam-prep",
+    "assignment-judge"
+  ],
+  "course_template": [
+    "assignment-coach",
+    "academic-writing",
+    "exam-prep",
+    "study-planner",
+    "assignment-judge"
+  ],
+  "ai_policy": [
+    "assignment-coach",
+    "academic-writing",
+    "exam-prep",
+    "assignment-judge"
+  ]
 }

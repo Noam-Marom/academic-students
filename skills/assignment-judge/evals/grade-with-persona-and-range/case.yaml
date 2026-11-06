@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: grade-with-persona-and-range
+expected_outcome: >
+  The judge grades a first-year linear algebra homework as its professor would, deducts only for the real error in Q2, and reports a grade with a range, quoted evidence and the caveat.
+context:
+  scaffold_script: place-files.sh

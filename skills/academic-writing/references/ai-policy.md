@@ -4,13 +4,13 @@ The course profile (`COURSE.md`) carries one of five `ai_policy` values. Every s
 value as a **ceiling**: it says once what the policy permits, offers the modes that stay inside it, and then
 stops talking about it. It never nags, never guilt-trips, and never guesses a policy the course did not state.
 
-| Value | Meaning | `assignment-coach` | `academic-writing` | `exam-prep` | Disclosure |
-|---|---|---|---|---|---|
-| `allowed` | The course permits AI assistance on submitted work | all modes incl. `solve` | all modes incl. `draft` | all | optional |
-| `allowed-with-disclosure` | Permitted if the student declares the use | all modes; `solve`/`draft` outputs end with the disclosure sentence | same | all | **required**, appended automatically |
-| `limited` | Permitted for understanding, feedback, language, not for producing submittable content | `breakdown`, `guide`, `check`; `solve` only on a **similar** exercise, never the assigned one | `plan`, `feedback`, `edit` (language only, meaning preserved), `cite`; no `draft` | all (practice is not submission) | per course |
-| `forbidden` | The course forbids AI use on this work | `breakdown` of the task text only, `guide` as concept explanation on a similar exercise; no `check` of the actual submission unless the student confirms the course allows feedback | `plan` at the level of genre conventions only; no `feedback`/`edit`/`draft` on the submitted text | all, with a one-line reminder that the exam itself is of course unaided | n/a |
-| `unknown` | Nothing stated, or the student has not checked | ask **once**: "The syllabus doesn't say; which of these applies?" with the five values; proceed as `limited` until answered | same | all | n/a |
+| Value | Meaning | `assignment-coach` | `academic-writing` | `exam-prep` | `assignment-judge` | Disclosure |
+|---|---|---|---|---|---|---|
+| `allowed` | The course permits AI assistance on submitted work | all modes incl. `solve` | all modes incl. `draft` | all | all modes | optional |
+| `allowed-with-disclosure` | Permitted if the student declares the use | all modes; `solve`/`draft` outputs end with the disclosure sentence | same | all | all modes; it produces nothing submittable, so no disclosure sentence | **required**, appended automatically |
+| `limited` | Permitted for understanding, feedback, language, not for producing submittable content | `breakdown`, `guide`, `check`; `solve` only on a **similar** exercise, never the assigned one | `plan`, `feedback`, `edit` (language only, meaning preserved), `cite`; no `draft` | all (practice is not submission) | all modes (a grade estimate is feedback) | per course |
+| `forbidden` | The course forbids AI use on this work | `breakdown` of the task text only, `guide` as concept explanation on a similar exercise; no `check` of the actual submission unless the student confirms the course allows feedback | `plan` at the level of genre conventions only; no `feedback`/`edit`/`draft` on the submitted text | all, with a one-line reminder that the exam itself is of course unaided | `rubric` mode, and grading a similar exercise; `estimate`/`compare` of the actual submission only when the student confirms the course allows feedback on it | n/a |
+| `unknown` | Nothing stated, or the student has not checked | ask **once**: "The syllabus doesn't say; which of these applies?" with the five values; proceed as `limited` until answered | same | all | same | n/a |
 
 Rules that hold for every value:
 

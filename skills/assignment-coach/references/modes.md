@@ -10,7 +10,7 @@ Mode selection, from the student's words:
 |---|---|
 | "break this down", "where do I start", "איך מתחילים", "מה צריך לעשות פה", uploads an assignment and says nothing else | `breakdown` (the default) |
 | "hint", "I'm stuck on 2b", "רמז", "תכוון אותי", "I don't know how to approach" | `guide` |
-| "check my answer", "is this right", "תבדוק לי", "מה הציון שהייתי מקבל", pastes or photographs their own work | `check` |
+| "check my answer", "is this right", "תבדוק לי", pastes or photographs their own work | `check` ("what grade would this get" → the `assignment-judge` skill) |
 | "solve", "give me the full answer", "תפתור לי", "write the code for me" | `solve` — only on an explicit request like these, never inferred |
 
 A request that mixes modes ("solve 1 and give me a hint for 2") is split per question. When the policy
