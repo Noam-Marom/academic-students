@@ -1,7 +1,7 @@
 {
   "name": "academic-students",
   "version": "0.3.0",
-  "description": "Claude skills for university students in any degree and any country: break down and check assignments, split group work, estimate the grade an expert professor would give, academic writing with real citations, exam prep from past exams, lecture summaries, a study planner, read-only sync from Moodle (Canvas and Blackboard through the browser), right-to-left writing (Hebrew, Arabic, Persian, Urdu), and a prompt-injection scanner that checks every course file first. Never submits, never answers quizzes, never stores a password.",
+  "description": "A complete study toolkit for Claude, for undergraduate, master's and PhD students in any degree: assignment coaching and group-work splitting, an honest professor-style grade estimate, academic writing with real citations, exam prep from past exams, lecture summaries, a study planner, read-only Moodle/Canvas/Blackboard sync, right-to-left writing, and a scanner for hidden AI traps in course files. Never submits, never answers quizzes, never stores a password.",
   "author": {
     "name": "Noam Marom"
   },

@@ -7,7 +7,7 @@ account (repo admin, money, or posting as yourself); the rest is already in the 
 
 Repo page → the ⚙ next to **About**:
 
-- **Description:** `Claude skills for university students in any degree: assignment coach, grade estimate, academic writing, exam prep, lecture notes, study planner, Moodle & Canvas sync. Any language; RTL for Hebrew, Arabic, Persian.`
+- **Description:** `A complete study toolkit for Claude: assignment coaching, honest grade estimates, academic writing, exam prep, lecture notes, study planning and Moodle/Canvas sync — for undergrad, master's and PhD students.`
 - **Website:** `https://github.com/Noam-Marom/academic-students#install`
 - **Topics:** `claude` `claude-code` `claude-skills` `claude-plugin` `anthropic` `ai-for-education` `students`
   `university` `academic-writing` `study-tools` `exam-prep` `moodle` `mcp` `prompt-injection` `rtl` `hebrew` `arabic`
@@ -25,8 +25,11 @@ approval. (Claude pushes to `main` directly today; with the rule on, it opens pu
 
 ## 2. Releases (owner, 1 minute)
 
-Releases → **Draft a new release** → tag `v0.3.0` on `main` → **Publish**. The release workflow attaches the
-plugin zip and one zip per skill; `INSTALL.md` links to them.
+Releases → **Draft a new release** → click **Tag: Select tag**, type `v0.3.0` in the box and choose
+**Create new tag: v0.3.0 on publish** (target `main`) → title `v0.3.0` → **Generate release notes** →
+**Publish release**. The release workflow then attaches the plugin zip and one zip per skill.
+
+The error *"tag name can't be blank"* means the tag box was left on "Select tag": the title is not the tag.
 
 ## 3. GitHub Sponsors (owner)
 
@@ -90,8 +93,6 @@ students", "claude assignment grader", "claude hebrew rtl") are winnable:
   3. **A post with a demo** (the before/after images, a 30-second screen recording of `/assignment-judge`):
      r/ClaudeAI, r/ClaudeCode, r/college or r/GradSchool (read each subreddit's self-promotion rule first),
      Hacker News "Show HN: Claude skills for university students", LinkedIn, X.
-  4. **Israel:** Facebook and WhatsApp groups of your faculty and other universities' student unions, the
-     BGU student union, Geektime / Calcalist Tech (a short pitch email: "a BGU student built…").
 - Every post links to the repo, not to a zip, so stars and links all point to one URL.
 
 ### Ready to paste
@@ -105,12 +106,3 @@ students", "claude assignment grader", "claude hebrew rtl") are winnable:
 > and pulls course material from Moodle read-only. It scans every course file for hidden "if you are an AI…"
 > traps first, and it never does the studying behind your course's back. Works in claude.ai, the desktop app
 > and Claude Code. Feedback welcome: https://github.com/Noam-Marom/academic-students
-
-**Hebrew (WhatsApp / Facebook):**
-
-> בניתי פלאגין חינמי וקוד פתוח ל-Claude לסטודנטים בכל תואר: הוא מפרק מטלות ומחלק עבודה בקבוצה, מעריך כמה
-> המטלה הייתה מקבלת אצל המרצה לפי ההוראות, נותן משוב על עבודות בלי להמציא מקורות, הופך מבחנים קודמים לתרגול,
-> מסכם הרצאות, מתכנן את השבוע ומוריד חומרים מהמודל (קריאה בלבד). הוא גם סורק כל קובץ אחרי "מלכודות AI"
-> נסתרות, וכותב עברית עם מונחים באנגלית בלי שהשורות יתהפכו. ההתקנה לוקחת דקה:
-> https://github.com/Noam-Marom/academic-students
-> אשמח לכוכב ⭐ ולפידבק!

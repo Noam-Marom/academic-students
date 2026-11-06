@@ -1,7 +1,8 @@
 # CLAUDE.md — working on the academic-students plugin
 
-You are helping build a Claude plugin for university students in any degree and any country (English and
-Hebrew docs; first-class right-to-left support for Hebrew, Arabic, Persian and Urdu).
+You are helping build a Claude plugin for university and college students at every level, in any degree and any
+country. The project targets a global audience: everything public is in English; skills still work in any
+language, with first-class right-to-left support for Hebrew, Arabic, Persian and Urdu.
 This file is the briefing for any Claude (and any human) who joins the repo. Read it fully before changing
 anything; then read the spec and the plan for the area you touch.
 
@@ -115,6 +116,6 @@ Optional libraries used by some scripts/tests (`pip install -e ".[extras]"` or i
 
 ## Language
 
-Code, SKILL.md and references are in English. User-facing examples, glossaries and READMEs exist in both
-languages. When you write Hebrew prose into a Markdown file, every line must start with a Hebrew word
+Code, SKILL.md, references, the README and every public doc are in English. Hebrew appears only where it is
+functional (trigger phrases in skill descriptions, the Hebrew glossaries, RTL test fixtures). When you write Hebrew prose into a Markdown file, every line must start with a Hebrew word
 (see `skills/rtl-writing/SKILL.md`); `tests/test_hebrew_docs.py` enforces it for Hebrew documents.

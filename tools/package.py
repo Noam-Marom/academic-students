@@ -25,7 +25,7 @@ import zipfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-TOP_LEVEL = [".claude-plugin", ".mcp.json", "skills", "servers", "README.md", "README.he.md", "LICENSE", "CHANGELOG.md"]
+TOP_LEVEL = [".claude-plugin", ".mcp.json", "skills", "servers", "README.md", "LICENSE", "CHANGELOG.md"]
 SKIP_PARTS = {"tests", "evals", "benchmark", "docs", "__pycache__", ".pytest_cache", ".venv", "node_modules"}
 SKIP_NAMES = {"uv.lock", ".DS_Store", "MANUAL_CHECKS.md"}
 EPOCH = (1980, 1, 1, 0, 0, 0)
