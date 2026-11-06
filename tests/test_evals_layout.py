@@ -98,3 +98,13 @@ def test_evals_live_outside_skills_and_case_names_are_unique():
     assert len(names) == len(set(names)), sorted({n for n in names if names.count(n) > 1})
     for c in eval_cases():
         assert (ROOT / "skills" / c.relative_to(ROOT / "evals").parts[0] / "SKILL.md").exists(), c
+
+
+@pytest.mark.parametrize("case", [c for c in eval_cases() if (c / "place-files.sh").exists()],
+                         ids=lambda p: str(p.relative_to(ROOT / "evals")))
+def test_scaffold_script_runs_and_places_files(case, tmp_path):
+    import subprocess
+    proc = subprocess.run(["bash", str(case / "place-files.sh"), str(tmp_path)], cwd=tmp_path,
+                          capture_output=True, text=True, timeout=120)
+    assert proc.returncode == 0, proc.stderr[-500:]
+    assert any(tmp_path.iterdir()), "the scaffold placed no files"

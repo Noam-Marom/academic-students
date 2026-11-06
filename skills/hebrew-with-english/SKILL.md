@@ -57,8 +57,10 @@ mechanical:
 
 **When a shell is available** and the reply has any list, table, heading or bold label, or is longer than about
 eight lines:
-1. Write the full draft to a scratch file (`rtl_draft.md` in the scratch directory).
-2. Run `python3 scripts/check_rtl.py rtl_draft.md --fix` (path relative to this skill folder).
+1. Pipe the full draft to the checker on stdin, so nothing has to be written:
+   `python3 scripts/check_rtl.py - --fix <<'EOF'` … `EOF` (path relative to this skill folder). A draft file in
+   the scratch directory (`rtl_draft.md`) works too.
+2. Read the report; a folder you cannot write to is never a reason to skip the check.
 3. Fix every ERROR and WARNING — the `→` suggestions are first candidates, not final wording — and re-run until
    it reports `0 errors, 0 warnings`.
 4. Send the corrected draft word for word. Do not retype it from memory.

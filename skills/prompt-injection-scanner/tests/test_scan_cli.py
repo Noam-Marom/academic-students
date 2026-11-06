@@ -81,3 +81,34 @@ def test_default_out_falls_back_to_a_temp_dir_when_cwd_is_not_writable(tmp_path)
         pass
     else:
         raise AssertionError("an explicit --out that cannot be created is an error, not a silent fallback")
+
+
+def _load_scan(name):
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(name, SCAN_PY)
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules[name] = mod
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def test_no_writable_dir_at_all_means_no_files_not_no_scan(tmp_path, monkeypatch):
+    mod = _load_scan("scanner_scan_nowrite")
+    import tempfile
+    monkeypatch.setattr(tempfile, "mkdtemp", lambda **kw: (_ for _ in ()).throw(OSError("read-only")))
+    blocker = tmp_path / "not-a-dir"
+    blocker.write_text("x")
+    out, note = mod.make_out_dir(blocker / "injection-scan", explicit=False)
+    assert out is None and "stdout" in note
+
+
+def test_quick_scan_without_output_dir_prints_findings_to_stdout(fixtures, tmp_path, monkeypatch, capsys):
+    dest, _ = fixtures
+    sub = _subset(fixtures, tmp_path, ["docx_hidden_run.docx", "plain_clean.md"])
+    mod = _load_scan("scanner_scan_nowrite_cli")
+    monkeypatch.setattr(mod, "make_out_dir", lambda out, explicit: (None, "note: nothing is writable; findings go to stdout"))
+    monkeypatch.setattr(sys, "argv", ["scan.py", str(sub), "--quick"])
+    rc = mod.main()
+    out = capsys.readouterr().out
+    assert rc == 1 and "QUICK:" in out and "escalate=true" in out
+    assert "[HIGH]" in out or "[CRITICAL]" in out

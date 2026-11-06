@@ -98,7 +98,7 @@ See the [roadmap](docs/superpowers/specs/2026-11-02-academic-students-plugin-des
 | `assignment-coach` (incl. group-work split), `assignment-judge`, `academic-writing` | done |
 | `exam-prep`, `lecture-notes`, `study-planner` | done |
 | `moodle-mcp` server, `moodle-sync` skill | done; not yet tried against a live university Moodle |
-| Behaviour evals with real model runs (`claude plugin eval`) | written, not yet run |
+| Behaviour evals with real model runs (`claude plugin eval`) | first full run done (51 cases, one run each) |
 
 Measured so far:
 
@@ -108,7 +108,25 @@ Measured so far:
   [`benchmark/README.md`](skills/prompt-injection-scanner/benchmark/README.md).
 - **Hebrew rendering:** see the before/after above (11 → 0 RTL errors on the same prompt).
 
-Eval pass rates will appear here once the evals have been run. Nothing is claimed before it is measured.
+- **Behaviour evals, first full run** (2026-11-06; 51 cases, one run per case, each also run without the plugin;
+  graded by an LLM judge; mean score 0–1):
+
+  | Skill | With the plugin | Without |
+  |---|---|---|
+  | `academic-writing` | 0.94 | 0.85 |
+  | `assignment-judge` | 0.94 | 0.67 |
+  | `moodle-sync` | 0.73 | 0.73 |
+  | `assignment-coach` | 0.72 | 0.42 |
+  | `hebrew-with-english` | 0.44 | 0.22 |
+  | `lecture-notes` | 0.38 | 0.19 |
+  | `study-planner` | 0.35 | 0.07 |
+  | `exam-prep` | 0.20 | 0.16 |
+  | `prompt-injection-scanner` | not measured (a broken case scaffold, since fixed) | |
+  | **All cases** | **0.59** | **0.42** |
+
+  Read with care: one run per case is noisy, and the run's sandbox was read-only, which hurt the skills that
+  write files (exam-prep, lecture-notes, study-planner) and the scanner gate. Those code paths now fall back to
+  stdin/stdout, and the findings went into fixes, but they have not been re-measured yet.
 
 ## Contributing
 

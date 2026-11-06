@@ -906,7 +906,7 @@ def scan_pdf(path: Path, data: bytes, display: str):
         except Exception:
             pass
     write_extracted(display, "\n".join(dump))
-    if flagged_pages and not OPTS.quick:
+    if flagged_pages and not OPTS.quick and OUT is not None:
         rd = OUT / "renders"
         rd.mkdir(parents=True, exist_ok=True)
         safe = re.sub(r"[^\w.-]+", "_", display)[:80]
@@ -1382,8 +1382,8 @@ def scan_zip_office(path: Path, data: bytes, display: str):
             add("MEDIUM", display, n, "Embedded OLE object", f"{len(raw)} bytes", "Open manually if relevant")
     if meta_lines:
         safe = re.sub(r"[^\w.\-]+", "_", display)[:150]
-        f = OUT / "extracted" / f"{safe}.txt"
-        prev = f.read_text(encoding="utf-8") if f.exists() else ""
+        f = OUT / "extracted" / f"{safe}.txt" if OUT is not None else None
+        prev = f.read_text(encoding="utf-8") if f is not None and f.exists() else ""
         write_extracted(display, "===== DOCUMENT PROPERTIES / METADATA =====\n" + "\n".join(meta_lines) + "\n\n" + prev)
 
 
@@ -1456,7 +1456,7 @@ def scan_image(path: Path, data: bytes, display: str):
 # --------------------------------------------------------------------------------------
 
 def write_extracted(display: str, text: str):
-    if OPTS.quick:
+    if OPTS.quick or OUT is None:
         return
     d = OUT / "extracted"
     d.mkdir(parents=True, exist_ok=True)
@@ -1698,6 +1698,8 @@ def render_report(targets):
     L.append("|---|------|-------|--------|----------------|")
     for i, inv in enumerate(INVENTORY, 1):
         L.append(f"| {i} | `{inv['file']}` | {inv['bytes']} | {inv['method']} | {inv.get('extracted', '')} |")
+    if OUT is None:
+        return uniq, counts
     (OUT / "report.md").write_text("\n".join(L), encoding="utf-8")
     (OUT / "findings.json").write_text(json.dumps({
         "counts": counts, "findings": [asdict(f) for f in uniq], "inventory": INVENTORY,
@@ -1715,7 +1717,10 @@ def make_out_dir(out: Path, explicit: bool) -> tuple[Path, str]:
         if explicit:
             raise
         import tempfile
-        alt = Path(tempfile.mkdtemp(prefix="injection-scan-"))
+        try:
+            alt = Path(tempfile.mkdtemp(prefix="injection-scan-"))
+        except OSError:
+            return None, "note: no writable directory (current folder and temp both read-only); findings go to stdout only"
         return alt, f"note: {out.parent} is not writable; writing the report to {alt}"
 
 
@@ -1756,7 +1761,7 @@ def main():
             continue
         base = t.parent if t.is_file() else t
         for f in walk(t):
-            if f.resolve().is_relative_to(OUT):
+            if OUT is not None and f.resolve().is_relative_to(OUT):
                 continue
             try:
                 data = f.read_bytes()
@@ -1774,15 +1779,24 @@ def main():
     max_sev = next((s for s in SEVERITY_ORDER if counts.get(s, 0)), "NONE")
     if OPTS.quick:
         print(f"QUICK: {len(INVENTORY)} files, max severity {max_sev}, escalate={'true' if escalate else 'false'}")
-        print(f"Findings: {OUT / 'findings.json'}" + ("  (run the full scan without --quick before doing any work)" if escalate else ""))
+        if OUT is None:
+            for f in uniq[:25]:
+                if f.severity in ("CRITICAL", "HIGH", "MEDIUM"):
+                    print(f"  [{f.severity}] {f.file} @ {f.location}: {f.technique} :: {clip(f.text, 140)}")
+            print("Findings: not written to disk (no writable directory); the lines above are the findings")
+        else:
+            print(f"Findings: {OUT / 'findings.json'}" + ("  (run the full scan without --quick before doing any work)" if escalate else ""))
         return 1 if escalate else 0
     print(f"Scanned {len(INVENTORY)} files. Findings: " +
           ", ".join(f"{s}={counts.get(s, 0)}" for s in SEVERITY_ORDER))
     for f in uniq[:25]:
         if f.severity in ("CRITICAL", "HIGH"):
             print(f"  [{f.severity}] {f.file} @ {f.location}: {f.technique} :: {clip(f.text, 140)}")
-    print(f"Report: {OUT / 'report.md'}")
-    print(f"Extracted full text (incl. hidden layers): {OUT / 'extracted'}")
+    if OUT is None:
+        print("Report: not written (no writable directory); the lines above are the HIGH+ findings")
+    else:
+        print(f"Report: {OUT / 'report.md'}")
+        print(f"Extracted full text (incl. hidden layers): {OUT / 'extracted'}")
     if MANUAL:
         print(f"Manual checks needed: {len(set(MANUAL))} (see report)")
     return 1 if escalate else 0

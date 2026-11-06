@@ -35,7 +35,7 @@ Update this table in the same commit that finishes a plan.
       first, then a rule, then a row in `references/chat-markdown.md` (pattern so far: brand name opening a
       paragraph, `Name (2008)`, `` `fork()` ``, Hebrew in code blocks, `**label ending in English:** English…`, a negative number `-1`).
 - [ ] Moodle: try `moodle-mcp login` against a real university Moodle (BGU first); record the result in `servers/moodle-mcp/MANUAL_CHECKS.md`.
-- [ ] Run `claude plugin eval` once (needs the `ANTHROPIC_API_KEY` secret) and put the pass rates in the README.
+- [ ] Re-measure the weak skills (exam-prep, lecture-notes, study-planner, scanner) after the read-only fixes — **only with Noam's explicit approval** (see below).
 
 ## How work is done here
 
@@ -75,6 +75,10 @@ docs/                    spec, plans, architecture, conventions
 - Never writes outside the course folder or the scratch directory; never deletes originals.
 
 ## Never
+
+- Run anything that consumes paid model/API usage (`claude plugin eval`, `claude -p` trials, the `evals.yml`
+  workflow) without the owner's explicit, unambiguous approval for that specific run. The first full eval run
+  (2026-11-06) cost about $18 in total; numbers are in the README.
 
 - Store, log, echo or accept a password anywhere (the Moodle login is a terminal command outside Claude; tokens only, in the keychain).
 - Call any Moodle function that writes: no quiz attempts, no submissions, no posts. The allowlist is in `servers/moodle-mcp/src/moodle_mcp/client.py` and a test pins it.
