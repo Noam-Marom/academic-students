@@ -172,3 +172,24 @@ def test_negative_number_in_hebrew_context_is_error(rtl, text):
 def test_safe_minus_signs_are_clean(rtl, text):
     errors, _ = rtl.check(text + "\n")
     assert not any("negative number" in e["issue"] for e in errors), errors
+
+
+# --- other right-to-left scripts: Arabic, Persian, Urdu follow the same bidi rules ------------------------------
+
+@pytest.mark.parametrize("line", [
+    "- `ls -la` يعرض الملفات",          # Arabic line opening with code
+    "Python زبان برنامه‌نویسی است",      # Persian line opening with a name
+    "| Command | ما تفعله |",
+])
+def test_rtl_scripts_other_than_hebrew_get_the_same_rules(rtl, line):
+    errors, _ = rtl.check(line + "\n")
+    assert errors, line
+
+
+@pytest.mark.parametrize("line", [
+    "- الأمر `ls -la` يعرض الملفات",
+    "زبان Python یک زبان برنامه‌نویسی است",
+    "| الأمر | ما يفعله |",
+])
+def test_rtl_lines_opening_with_their_own_script_are_clean(rtl, line):
+    assert rtl.check(line + "\n")[0] == [], line

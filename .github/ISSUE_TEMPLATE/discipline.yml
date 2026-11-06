@@ -1,0 +1,14 @@
+name: Make it fit my degree
+description: Your field grades or writes differently from what the plugin assumes
+labels: [discipline-pack]
+body:
+  - type: input
+    id: degree
+    attributes:
+      label: Degree / field and country
+    validations: {required: true}
+  - type: textarea
+    id: gap
+    attributes:
+      label: What graders in your field look for that the plugin misses
+    validations: {required: true}

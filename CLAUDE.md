@@ -78,7 +78,7 @@ docs/                    spec, plans, architecture, conventions
 
 - Run anything that consumes paid model/API usage (`claude plugin eval`, `claude -p` trials, the `evals.yml`
   workflow) without the owner's explicit, unambiguous approval for that specific run. The first full eval run
-  (2026-11-06) cost about $18 in total; numbers are in the README.
+  (2026-11-06) cost about $18 in total; its results are kept out of the README by the owner's choice.
 
 - Store, log, echo or accept a password anywhere (the Moodle login is a terminal command outside Claude; tokens only, in the keychain).
 - Call any Moodle function that writes: no quiz attempts, no submissions, no posts. The allowlist is in `servers/moodle-mcp/src/moodle_mcp/client.py` and a test pins it.

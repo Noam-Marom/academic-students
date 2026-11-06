@@ -1,10 +1,10 @@
-# academic-students
+# academic-students — Claude skills for university students
 
 [![ci](https://github.com/Noam-Marom/academic-students/actions/workflows/ci.yml/badge.svg)](https://github.com/Noam-Marom/academic-students/actions/workflows/ci.yml)
 [![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![plugin](https://img.shields.io/badge/Claude-plugin-6f42c1.svg)](#install)
 
-**A Claude plugin for university students in any degree — in Hebrew and English.**
+**Academic skills for Claude: a free, open-source plugin for university students in any degree — in English and Hebrew.**
 Break down assignments, get real feedback on your writing, turn past exams into practice, summarise lectures,
 plan your week, pull your course material from Moodle (read-only), and scan every course file for hidden
 "AI traps" before Claude touches it.
@@ -87,7 +87,7 @@ Every skill reads an optional `COURSE.md` in your course folder (language, citat
 
 ## Status
 
-v0.1 — all nine skills and the Moodle server are built and tested (640 automated tests, CI green).
+v0.2 — all nine skills and the Moodle server are built and tested (740+ automated tests, CI green).
 See the [roadmap](docs/superpowers/specs/2026-11-02-academic-students-plugin-design.md#7-roadmap-and-gates).
 
 | Area | State |
@@ -98,35 +98,12 @@ See the [roadmap](docs/superpowers/specs/2026-11-02-academic-students-plugin-des
 | `assignment-coach` (incl. group-work split), `assignment-judge`, `academic-writing` | done |
 | `exam-prep`, `lecture-notes`, `study-planner` | done |
 | `moodle-mcp` server, `moodle-sync` skill | done; not yet tried against a live university Moodle |
-| Behaviour evals with real model runs (`claude plugin eval`) | first full run done (51 cases, one run each) |
 
-Measured so far:
+## Support the project
 
-- **Scanner benchmark** (312 synthetic files, 13 hiding techniques, Hebrew and English): 100% of hidden
-  instructions reported at HIGH or above, 0 of 78 clean look-alikes flagged. The corpus was written by the same
-  project, so this is a regression check, not a claim about unknown attacks. Details and the reproduce command:
-  [`benchmark/README.md`](skills/prompt-injection-scanner/benchmark/README.md).
-- **Hebrew rendering:** see the before/after above (11 → 0 RTL errors on the same prompt).
-
-- **Behaviour evals, first full run** (2026-11-06; 51 cases, one run per case, each also run without the plugin;
-  graded by an LLM judge; mean score 0–1):
-
-  | Skill | With the plugin | Without |
-  |---|---|---|
-  | `academic-writing` | 0.94 | 0.85 |
-  | `assignment-judge` | 0.94 | 0.67 |
-  | `moodle-sync` | 0.73 | 0.73 |
-  | `assignment-coach` | 0.72 | 0.42 |
-  | `hebrew-with-english` | 0.44 | 0.22 |
-  | `lecture-notes` | 0.38 | 0.19 |
-  | `study-planner` | 0.35 | 0.07 |
-  | `exam-prep` | 0.20 | 0.16 |
-  | `prompt-injection-scanner` | not measured (a broken case scaffold, since fixed) | |
-  | **All cases** | **0.59** | **0.42** |
-
-  Read with care: one run per case is noisy, and the run's sandbox was read-only, which hurt the skills that
-  write files (exam-prep, lecture-notes, study-planner) and the scanner gate. Those code paths now fall back to
-  stdin/stdout, and the findings went into fixes, but they have not been re-measured yet.
+academic-students is free and MIT-licensed, built by a student for students. If it saves you time, a ⭐ on
+GitHub helps other students find it, and [sponsoring](https://github.com/sponsors/Noam-Marom) funds the next
+skills, more languages and the model runs that test every skill before a release.
 
 ## Contributing
 

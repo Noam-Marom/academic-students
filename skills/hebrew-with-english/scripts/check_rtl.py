@@ -17,7 +17,9 @@ import json
 import re
 import sys
 
-HEB = re.compile(r"[֐-׿יִ-ﭏ]")
+# Any right-to-left script: Hebrew, Arabic (incl. Persian and Urdu letters), Syriac, Thaana, NKo and their
+# presentation forms. The rules are the same for all of them; the name HEB is kept for history.
+HEB = re.compile(r"[\u0590-\u08FF\uFB1D-\uFDFF\uFE70-\uFEFF]")
 LATIN = re.compile(r"[A-Za-z]")
 FENCE = re.compile(r"^\s*(```|~~~)")
 TABLE_SEP = re.compile(r"^\s*\|?\s*:?-{2,}:?\s*(\|\s*:?-{2,}:?\s*)*\|?\s*$")

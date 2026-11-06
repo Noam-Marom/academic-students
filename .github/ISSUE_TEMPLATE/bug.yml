@@ -1,0 +1,22 @@
+name: Something went wrong
+description: A skill misbehaved, broke RTL text, missed a hidden instruction, or would not install
+labels: [bug]
+body:
+  - type: dropdown
+    id: skill
+    attributes:
+      label: Skill
+      options: [assignment-coach, assignment-judge, academic-writing, exam-prep, lecture-notes, study-planner, moodle-sync, hebrew-with-english, prompt-injection-scanner, installation]
+    validations: {required: true}
+  - type: dropdown
+    id: app
+    attributes:
+      label: Where
+      options: [claude.ai (web), Claude desktop app, Claude Code]
+    validations: {required: true}
+  - type: textarea
+    id: what
+    attributes:
+      label: What you asked and what happened
+      description: A screenshot helps. Remove names, grades and course material you are not allowed to share.
+    validations: {required: true}
