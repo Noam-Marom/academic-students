@@ -13,7 +13,7 @@ anything; then read the spec and the plan for the area you touch.
   `exam-prep`, `lecture-notes`, `study-planner`, `moodle-sync`. Server: `servers/moodle-mcp/`.
 - **Stance:** remove friction around studying, never do the studying for the student behind the course's back.
   Read-only toward university systems. No passwords, no quiz answering, no submissions, no invented sources.
-- **Home:** `https://github.com/Noam-Marom/academic-students` (the owner is `Noam-Marom`; marketplace id `academic-students@noam-academic`).
+- **Home:** `https://github.com/Noam-Marom/academic-students` (the owner is `Noam-Marom`; maintained by Noam Marom and Eyal Silbershtein; marketplace id `academic-students@noam-academic`).
 - **Spec (binding):** `docs/superpowers/specs/2026-11-02-academic-students-plugin-design.md`
 - **Plans (how to build, task by task):** `docs/superpowers/plans/2026-11-02-plan-{1..5}-*.md`
 - **Conventions (the design system):** `docs/skill-conventions.md`

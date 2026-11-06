@@ -133,7 +133,7 @@ See the [roadmap](docs/superpowers/specs/2026-11-02-academic-students-plugin-des
 
 ## Support the project
 
-academic-students is free and MIT-licensed, built by a student for students. If it saves you time, a ⭐ on
+academic-students is free and MIT-licensed, built by students for students. If it saves you time, a ⭐ on
 GitHub helps other students find it, and [sponsoring](https://github.com/sponsors/Noam-Marom) funds the next
 skills, more languages and the model runs that test every skill before a release.
 
@@ -143,6 +143,11 @@ Issues and PRs are welcome, especially from students in fields other than engine
 [`shared/disciplines/`](shared/disciplines) are where a law, nursing or dance student can make the plugin
 genuinely useful for their degree. See [CONTRIBUTING.md](CONTRIBUTING.md). If you use an AI agent to contribute,
 [`AGENTS.md`](AGENTS.md) and [`CLAUDE.md`](CLAUDE.md) brief it.
+
+## Authors
+
+academic-students is built and maintained by **Noam Marom** ([@Noam-Marom](https://github.com/Noam-Marom)) and
+**Eyal Silbershtein**.
 
 ## License
 
