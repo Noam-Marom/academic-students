@@ -38,6 +38,37 @@ Output, in this order, in the student's language:
 A breakdown contains no solution steps, no partial results and no "the answer should come out around…".
 It is available under every policy value because it produces nothing submittable.
 
+## Group work — splitting a breakdown among N people
+
+When the student says the assignment is done in a group ("we're 3", "עבודה בזוגות", "איך נחלק את העבודה
+בינינו", "who does what", "split this between 4 of us"), the breakdown gets one more part. It produces a
+plan, nothing submittable, so it is available under every policy value.
+
+1. **Effort per part.** Add `estimate_hours` to each question in the map (from weight, type and the
+   pack's sense of what is hard; ask the student only when a part is opaque). Re-run `validate_map.py`.
+2. **Ask what is still open, at most once:** how many people (if not said), and whether the group wants to
+   work side by side or hand over in turns. No preference → `auto`.
+3. **Run** `python3 scripts/split_work.py assignment-map.json --people N --mode auto|parallel|serial --json`.
+   - `parallel` — independent parts go to different members at once; a part never starts before the parts
+     it `depends_on`. Right for problem sets and multi-component projects.
+   - `serial` — a relay: the parts in dependency order cut into N contiguous stages of about equal hours
+     (research → draft → code → results). Right when the work is one chain; members wait for each other,
+     so hand-over dates matter more than anything else.
+   - `auto` — serial when the map is a single chain, parallel otherwise.
+4. **Present**, from the script's JSON: a table member → parts → hours; the order and hand-overs
+   (start/end per part); the **critical path** (the dependency chain that sets the finish time — the parts
+   to start first and to give the most reliable member); the **integration** review owned by the
+   least-loaded member (one person reads everything end to end: one notation, one style, one reference
+   list); and every warning (more people than parts → pair up or split a part; serial waits).
+5. **Interface agreements** for each `depends_on` edge that crosses members: what exactly is handed over
+   (a function signature, a dataset with named columns, a definitions section, a figure) and by when.
+6. **Every member understands every part.** Say it plainly once: in most courses every member is examined
+   on, or signs for, the whole submission. Suggest a short walk-through meeting before submitting where each
+   member explains their part to the others; offer `guide` for the parts a member did not write.
+
+Rebalance on request ("Dana can only do 4 hours") by editing the map's estimates or splitting a part
+into `3a`/`3b` and re-running; never hand-edit the script's output.
+
 ## `guide` — the hint ladder
 
 Three rungs per question, one rung per reply:

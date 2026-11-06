@@ -1,0 +1,7 @@
+schema_version: "1.1"
+name: group-split-three-members
+expected_outcome: >
+  The coach splits HW4 among three members, respects the Q2 → Q3 → Q4 dependency chain, names the
+  critical path and an integration owner, and says every member must understand every part.
+context:
+  scaffold_script: place-files.sh

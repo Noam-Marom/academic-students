@@ -52,7 +52,7 @@ def test_first_workflow_step_is_the_scanner_quick_gate():
 def test_body_routes_to_every_file_and_the_rtl_checker():
     _, body = _skill()
     for path in ["scripts/validate_map.py", "scripts/check_units.py", "scripts/render_solution.py",
-                 "schemas/assignment-map.schema.json", "references/modes.md", "references/answer-formats.md",
+                 "scripts/split_work.py", "schemas/assignment-map.schema.json", "references/modes.md", "references/answer-formats.md",
                  "references/environments.md", "references/course-profile.md", "references/ai-policy.md",
                  "references/disciplines/", "assets/COURSE.template.md"]:
         assert path in body, path
@@ -101,6 +101,14 @@ def test_modes_reference_has_the_three_protocols():
     assert "rung" in text and re.search(r"never two rungs|one rung", text)
     assert re.search(r"what you need to understand", text, re.I)
     assert re.search(r"no silent fix", text, re.I)
+
+
+def test_group_work_is_a_breakdown_extension_every_member_understands_every_part():
+    text = (SKILL_DIR / "references/modes.md").read_text(encoding="utf-8")
+    section = text.split("## Group work", 1)[1].split("\n## ", 1)[0]
+    for key in ["split_work.py", "parallel", "serial", "auto", "integration", "critical path", "every member"]:
+        assert key in section, key
+    assert re.search(r"every policy value", section)
 
 
 def test_answer_formats_cover_every_question_type_and_genre():

@@ -131,6 +131,11 @@ def _schema_errors_builtin(obj, schema: dict) -> list[str]:
                         errors.append(f"{p}.weight: {q['weight']!r} is not of type 'number'")
                     elif q["weight"] < 0:
                         errors.append(f"{p}.weight: {q['weight']} is less than the minimum of 0")
+                if "estimate_hours" in q:
+                    if not _is_number(q["estimate_hours"]):
+                        errors.append(f"{p}.estimate_hours: {q['estimate_hours']!r} is not of type 'number'")
+                    elif q["estimate_hours"] <= 0:
+                        errors.append(f"{p}.estimate_hours: {q['estimate_hours']} is less than or equal to the minimum of 0")
                 if "text" in q and not isinstance(q["text"], str):
                     errors.append(f"{p}.text: {q['text']!r} is not of type 'string'")
                 if "depends_on" in q:

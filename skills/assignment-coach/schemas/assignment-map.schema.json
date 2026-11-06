@@ -45,6 +45,7 @@
           },
           "weight": {"type": "number", "minimum": 0, "description": "Points or percent; 0 when unknown"},
           "text": {"type": "string"},
+          "estimate_hours": {"type": "number", "exclusiveMinimum": 0, "description": "Expected effort in hours; used by scripts/split_work.py for group work"},
           "depends_on": {
             "type": "array",
             "items": {"type": "string"},

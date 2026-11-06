@@ -113,6 +113,16 @@ def test_negative_weight_rejected(vm):
     assert any("questions[0].weight" in e for e in vm.validate_map(m))
 
 
+def test_estimate_hours_must_be_positive_number(vm):
+    m = minimal_map()
+    m["questions"][0]["estimate_hours"] = 2.5
+    assert vm.validate_map(m) == []
+    m["questions"][0]["estimate_hours"] = 0
+    assert any("questions[0].estimate_hours" in e for e in vm.validate_map(m))
+    m["questions"][0]["estimate_hours"] = "two"
+    assert any("questions[0].estimate_hours" in e for e in vm.validate_map(m))
+
+
 def test_due_must_be_iso_date(vm):
     m = minimal_map()
     m["due"] = "20-11-2026"
