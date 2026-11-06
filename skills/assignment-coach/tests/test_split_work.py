@@ -97,3 +97,22 @@ def test_cli_cycle_exits_2(tmp_path, skill_dir):
     proc = subprocess.run([sys.executable, str(skill_dir / "scripts" / "split_work.py"), str(f), "--people", "2"],
                           capture_output=True, text=True)
     assert proc.returncode == 2 and "cycle" in proc.stderr
+
+
+def test_interface_only_dependency_starts_after_a_joint_interface_agreement(sw):
+    hard = sw.split(amap(q("2", 4), q("3", 3, ["2"])), people=2, mode="parallel")
+    m = amap(q("2", 4), q("3", 3))
+    m["questions"][1]["depends_on_interface"] = ["2"]
+    soft = sw.split(m, people=2, mode="parallel")
+    agree = _slot(soft, "interface")
+    assert agree["member"] == "all" and agree["start"] == 0 and agree["end"] == 0.5
+    assert _slot(soft, "3")["start"] == 0.5 and _member_of(soft, "3") != _member_of(soft, "2")
+    assert soft["makespan_hours"] < hard["makespan_hours"]
+    assert soft["critical_path"] == ["2"]
+
+
+def test_interface_dependency_on_unknown_part_is_rejected(sw):
+    m = amap(q("1", 1))
+    m["questions"][0]["depends_on_interface"] = ["9"]
+    with pytest.raises(ValueError, match="unknown"):
+        sw.split(m, people=2)

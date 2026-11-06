@@ -1705,11 +1705,25 @@ def render_report(targets):
     return uniq, counts
 
 
+def make_out_dir(out: Path, explicit: bool) -> tuple[Path, str]:
+    """Create the output directory. The default (./injection-scan) falls back to a fresh temp directory when the
+    current folder is not writable (a read-only checkout, a sandbox); an explicit --out never falls back."""
+    try:
+        out.mkdir(parents=True)
+        return out, ""
+    except OSError:
+        if explicit:
+            raise
+        import tempfile
+        alt = Path(tempfile.mkdtemp(prefix="injection-scan-"))
+        return alt, f"note: {out.parent} is not writable; writing the report to {alt}"
+
+
 def main():
     global OUT, OPTS
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("paths", nargs="+")
-    ap.add_argument("--out", default="injection-scan")
+    ap.add_argument("--out", default=None, help="output directory (default ./injection-scan, or a temp dir when . is read-only)")
     ap.add_argument("--no-ocr", action="store_true")
     ap.add_argument("--include-vendor", action="store_true", help="also scan node_modules/.venv/build dirs")
     ap.add_argument("--max-pages", type=int, default=150)
@@ -1719,7 +1733,7 @@ def main():
     OPTS = ap.parse_args()
     if OPTS.quick:
         OPTS.no_ocr = True
-    OUT = Path(OPTS.out).resolve()
+    OUT = Path(OPTS.out or "injection-scan").resolve()
     if OUT.exists():
         ours = (OUT / "report.md").exists() or (OUT / "findings.json").exists() or not any(OUT.iterdir())
         if not ours and not OPTS.force:
@@ -1727,7 +1741,13 @@ def main():
                   file=sys.stderr)
             return 2
         shutil.rmtree(OUT)
-    OUT.mkdir(parents=True)
+    try:
+        OUT, note = make_out_dir(OUT, explicit=OPTS.out is not None)
+    except OSError as exc:
+        print(f"!! cannot create --out {OUT}: {exc}", file=sys.stderr)
+        return 2
+    if note:
+        print(note, file=sys.stderr)
     targets = [Path(p).resolve() for p in OPTS.paths]
     ROOTS.extend(targets)
     for t in targets:

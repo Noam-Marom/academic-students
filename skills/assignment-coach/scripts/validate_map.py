@@ -178,11 +178,14 @@ def _semantic_errors(obj) -> list[str]:
     if isinstance(qs, list):
         ids = {q.get("id") for q in qs if isinstance(q, dict) and isinstance(q.get("id"), str)}
         for i, q in enumerate(qs):
-            if not isinstance(q, dict) or not isinstance(q.get("depends_on"), list):
+            if not isinstance(q, dict):
                 continue
-            for dep in q["depends_on"]:
-                if isinstance(dep, str) and dep not in ids:
-                    errors.append(f"questions[{i}].depends_on: {dep!r} is not the id of any question")
+            for key in ("depends_on", "depends_on_interface"):
+                if not isinstance(q.get(key), list):
+                    continue
+                for dep in q[key]:
+                    if isinstance(dep, str) and dep not in ids:
+                        errors.append(f"questions[{i}].{key}: {dep!r} is not the id of any question")
     due = obj.get("due")
     if isinstance(due, str) and DATE_RE.match(due):
         try:

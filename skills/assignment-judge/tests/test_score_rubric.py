@@ -82,3 +82,11 @@ def test_cli_exit_codes(skill_dir, tmp_path):
     assert _run(skill_dir, tmp_path, rubric(("q1", 10, [2, 9]))).returncode == 1  # reconcile first
     bad = _run(skill_dir, tmp_path, rubric(("q1", 10, [11])))
     assert bad.returncode == 2 and "exceeds" in bad.stderr
+
+
+def test_cli_reads_stdin_so_no_file_has_to_be_written(skill_dir):
+    proc = subprocess.run([sys.executable, str(skill_dir / "scripts" / "score_rubric.py"), "-", "--json"],
+                          input=json.dumps(rubric(("q1", 40, [40, 40]), ("q2", 60, [30, 33]))),
+                          capture_output=True, text=True)
+    assert proc.returncode == 0, proc.stderr
+    assert json.loads(proc.stdout)["final"] == 71.5

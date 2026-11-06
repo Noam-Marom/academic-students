@@ -62,3 +62,22 @@ def test_out_reuses_its_own_previous_output(fixtures, tmp_path, scan):
                               capture_output=True, text=True)
         assert proc.returncode == 0, proc.stdout + proc.stderr
     assert (out / "report.md").exists()
+
+
+def test_default_out_falls_back_to_a_temp_dir_when_cwd_is_not_writable(tmp_path):
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("scanner_scan_out", SCAN_PY)
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules["scanner_scan_out"] = mod  # dataclasses in scan.py look their module up here
+    spec.loader.exec_module(mod)
+    blocker = tmp_path / "not-a-dir"
+    blocker.write_text("x")
+    out, note = mod.make_out_dir(blocker / "injection-scan", explicit=False)
+    assert out.is_dir() and not out.is_relative_to(tmp_path)
+    assert "not writable" in note
+    try:
+        mod.make_out_dir(blocker / "injection-scan", explicit=True)
+    except OSError:
+        pass
+    else:
+        raise AssertionError("an explicit --out that cannot be created is an error, not a silent fallback")

@@ -2,6 +2,9 @@
 """The arithmetic of a grade estimate, so no total is ever added up in prose.
 
     python3 score_rubric.py rubric-scores.json [--json]
+    python3 score_rubric.py - [--json] <<'EOF'      # the same JSON on stdin; nothing is written to disk
+    {...}
+    EOF
 
 Input:
     {"criteria": [{"id": "q1", "name": "Correctness", "max": 30, "passes": [22, 24]}, ...],
@@ -104,11 +107,12 @@ def _print(r: dict) -> None:
 
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("file")
+    ap.add_argument("file", help="scores JSON, or - for stdin")
     ap.add_argument("--json", action="store_true")
     a = ap.parse_args(argv)
     try:
-        r = score(json.loads(Path(a.file).read_text(encoding="utf-8")))
+        raw = sys.stdin.read() if a.file == "-" else Path(a.file).read_text(encoding="utf-8")
+        r = score(json.loads(raw))
     except (ValueError, TypeError, OSError, json.JSONDecodeError) as exc:
         print(f"score_rubric: {exc}", file=sys.stderr)
         return 2

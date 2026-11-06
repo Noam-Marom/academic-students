@@ -13,6 +13,10 @@ Modes:
             starts when member k-1 hands over. Right for work that is one long chain (an essay, a pipeline).
   auto      serial when the parts form a single chain, parallel otherwise.
 
+A part may instead list `depends_on_interface`: it needs only the other part's interface (a function
+signature, a data format), not the finished part. The plan then opens with a short joint interface agreement
+(0.5 h, everyone) and the dependent part starts right after it, against a stub.
+
 Every plan ends with an integration review (≥ 1 h, ~10% of the work) owned by the least-loaded member: one
 person reads everything end to end for consistency of notation, style and references.
 
@@ -26,6 +30,7 @@ import sys
 from pathlib import Path
 
 DEFAULT_HOURS = 2.0
+INTERFACE_HOURS = 0.5
 
 
 def _hours(questions: list[dict], total_hours: float | None) -> dict[str, float]:
@@ -102,6 +107,12 @@ def split(amap: dict, people: int, mode: str = "auto", total_hours: float | None
     questions = amap["questions"]
     order = _topo(questions)
     deps = {q["id"]: list(q.get("depends_on") or []) for q in questions}
+    iface = {q["id"]: list(q.get("depends_on_interface") or []) for q in questions}
+    for i, ds in iface.items():
+        for d in ds:
+            if d not in deps:
+                raise ValueError(f"part {i!r} depends on the interface of unknown part {d!r}")
+    agree = INTERFACE_HOURS if any(iface.values()) else 0.0
     hours = _hours(questions, total_hours)
     if mode == "auto":
         mode = "serial" if len(order) > 1 and _is_chain(order, deps) else "parallel"
@@ -109,7 +120,11 @@ def split(amap: dict, people: int, mode: str = "auto", total_hours: float | None
         raise ValueError(f"unknown mode {mode!r}")
 
     schedule: list[dict] = []
-    free = {m: 0.0 for m in range(1, people + 1)}
+    if agree:
+        schedule.append({"part": "interface", "member": "all", "start": 0.0, "end": agree,
+                         "task": "agree together on every interface a part is built against (signatures, data "
+                                 "formats, section headings); dependent parts start against a stub"})
+    free = {m: agree for m in range(1, people + 1)}
     if mode == "parallel":
         level = _bottom_levels(order, deps, hours)
         end_of: dict[str, float] = {}
@@ -127,7 +142,7 @@ def split(amap: dict, people: int, mode: str = "auto", total_hours: float | None
     else:
         total = sum(hours[n] for n in order)
         target = total / people
-        t, cum, member = 0.0, 0.0, 1
+        t, cum, member = agree, 0.0, 1
         for n in order:
             # move to the next member when this part's midpoint falls past the current member's share
             if member < people and cum + hours[n] / 2 > target * member:
@@ -170,6 +185,8 @@ def _print_plan(plan: dict) -> None:
     print(f"mode: {plan['mode']}, people: {plan['people']}, total {plan['total_hours']} h, "
           f"finished after {plan['makespan_hours']} h (critical path {' -> '.join(plan['critical_path'])}, "
           f"{plan['critical_path_hours']} h)")
+    if plan["schedule"] and plan["schedule"][0]["part"] == "interface":
+        print(f"  everyone, first {plan['schedule'][0]['end']} h: agree on the interfaces")
     for m in plan["members"]:
         print(f"  member {m['member']}: {', '.join(m['parts']) or '—'}  ({m['hours']} h)")
     i = plan["integration"]

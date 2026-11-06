@@ -1,5 +1,6 @@
 # Behaviour evals are real, billed model runs. They run on demand and weekly, never on every PR.
-# Requires the ANTHROPIC_API_KEY repository secret.
+# Requires the ANTHROPIC_API_KEY repository secret. Cases live in evals/<skill>/<case>/ (the default eval dir);
+# --scaffold places each case's files/, and the shell grant needs bubblewrap + socat for the sandbox.
 name: evals
 
 on:
@@ -33,6 +34,7 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: >
           claude plugin eval . --trust-plugin --threshold 0.8 --max-cost-usd 20
+          --scaffold --allow-tools Bash Write Edit Agent
           --no-publish --json results.json --case "${{ github.event.inputs.case || '*' }}"
       - uses: actions/upload-artifact@v4
         if: always()

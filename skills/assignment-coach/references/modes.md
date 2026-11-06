@@ -55,11 +55,17 @@ plan, nothing submittable, so it is available under every policy value.
      (research → draft → code → results). Right when the work is one chain; members wait for each other,
      so hand-over dates matter more than anything else.
    - `auto` — serial when the map is a single chain, parallel otherwise.
-4. **Present**, from the script's JSON: a table member → parts → hours; the order and hand-overs
+4. **Present**, from the script's JSON: a table member → parts → hours, with the integration review as its
+   own row naming its owner; the order and hand-overs
    (start/end per part); the **critical path** (the dependency chain that sets the finish time — the parts
    to start first and to give the most reliable member); the **integration** review owned by the
    least-loaded member (one person reads everything end to end: one notation, one style, one reference
    list); and every warning (more people than parts → pair up or split a part; serial waits).
+   When a part needs only another part's *interface* (the harness needs the queue's signatures, not a
+   working queue; the discussion needs the results table's columns), list it in `depends_on_interface`
+   instead of `depends_on`: the plan opens with a 30-minute joint agreement and the part starts against a
+   stub. This is usually the biggest speed-up a group has; look for it on every code and pipeline edge.
+   The integration owner is one named member, never "whoever finishes first".
 5. **Interface agreements** for each `depends_on` edge that crosses members: what exactly is handed over
    (a function signature, a dataset with named columns, a definitions section, a figure) and by when.
 6. **Every member understands every part.** Say it plainly once: in most courses every member is examined

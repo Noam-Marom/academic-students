@@ -173,3 +173,9 @@ def test_cli_unreadable_file_is_usage_error(tmp_path):
     assert r.returncode == 2
     out = json.loads(r.stdout)
     assert out["ok"] is False and any("nope.json" in e for e in out["errors"])
+
+
+def test_depends_on_interface_must_name_existing_ids(vm):
+    m = minimal_map()
+    m["questions"][0]["depends_on_interface"] = ["nope"]
+    assert any("depends_on_interface" in e for e in vm.validate_map(m))

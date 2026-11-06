@@ -27,6 +27,7 @@ How the judge turns instructions and a piece of work into a grade it can defend 
 - **evidence**: a quote of at most 25 words from the work with its location (page, question, line), or the
   element that is missing ("no justification for step 3");
 - the reason, tied to a requirement (`R4`) or a pack rule;
+  phrased as the rule that was broken, never as the corrected value or line;
 - for numeric and code answers, the verification you ran (recomputed value, test that failed).
 
 Grade what is on the page. Do not give credit for what the student "probably meant", and do not deduct for a
@@ -41,7 +42,7 @@ maximum (exit 1). For each flag: put the two pieces of evidence side by side, de
 work and the requirement is right, replace the outlier with the reconciled score, and run the script again.
 Report the final range from the passes that remain.
 
-`scores.json`:
+The scores, piped to `scripts/score_rubric.py -` on stdin (or saved as `scores.json` in the scratch directory):
 
 ```json
 {"criteria": [{"id": "Q1", "name": "Q1 proof", "max": 30, "passes": [24, 26]}],
@@ -51,6 +52,8 @@ Report the final range from the passes that remain.
 
 ## Deductions
 
+- No named rule, no deduction. A correct answer that meets every requirement gets full marks; a nitpick a
+  stricter grader *might* raise is listed under risks with no points.
 - One fault, one deduction: an error carried forward into later steps costs once unless the rubric says
   otherwise ("follow-through" marking is the default in calculation courses).
 - A correct answer reached by an unjustified step loses the justification points, not the answer points.
