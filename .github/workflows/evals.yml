@@ -1,4 +1,4 @@
-# Behaviour evals are real, billed model runs. They run on demand and weekly, never on every PR.
+# Behaviour evals are real, billed model runs. They run only when the owner starts them by hand (no schedule).
 # Requires the ANTHROPIC_API_KEY repository secret. Cases live in evals/<skill>/<case>/ (the default eval dir);
 # --scaffold places each case's files/, and the shell grant needs bubblewrap + socat for the sandbox.
 name: evals
@@ -10,8 +10,6 @@ on:
         description: "Glob of eval cases to run (default: all)"
         required: false
         default: "*"
-  schedule:
-    - cron: "0 4 * * 0"
 
 jobs:
   plugin-eval:

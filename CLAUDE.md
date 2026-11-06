@@ -59,7 +59,7 @@ shared/                  SOURCE OF TRUTH: disciplines/*.md, COURSE.template.md, 
 tools/                   sync_shared.py, check_portability.py, trigger_evals/<skill>.json
 tests/                   repo-level guards: manifest, portability, shared sync, RTL of Hebrew docs
 docs/                    spec, plans, architecture, conventions
-.github/workflows/       ci.yml (every PR), evals.yml (manual + weekly, billed)
+.github/workflows/       ci.yml (every PR), evals.yml (manual only, billed: needs the owner's approval)
 ```
 
 ## Invariants every skill keeps (from the spec §3.3)
