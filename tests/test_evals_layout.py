@@ -29,10 +29,10 @@ def _frontmatter(path: pathlib.Path) -> tuple[dict, str]:
 
 
 def eval_cases() -> list[pathlib.Path]:
-    return sorted(p.parent for p in (ROOT / "skills").glob("*/evals/*/prompt.md"))
+    return sorted(p.parent for p in (ROOT / "evals").glob("**/prompt.md") if "results" not in p.parts)
 
 
-@pytest.mark.parametrize("case", eval_cases(), ids=lambda p: f"{p.parents[1].name}/{p.name}")
+@pytest.mark.parametrize("case", eval_cases(), ids=lambda p: str(p.relative_to(ROOT / "evals")))
 def test_eval_case_layout(case: pathlib.Path):
     rel = case.relative_to(ROOT)
     assert re.fullmatch(r"[a-z0-9]+(-[a-z0-9]+)*", case.name), f"{rel}: case name must be lowercase-with-hyphens"
@@ -88,3 +88,13 @@ def test_trigger_evals_have_twenty_queries_and_eight_near_misses(path: pathlib.P
     negatives = [i for i in data if not i["should_trigger"]]
     assert len(negatives) >= NEAR_MISS_MIN, f"{path.name}: at least {NEAR_MISS_MIN} near-miss negatives"
     assert len({i["query"] for i in data}) == QUERIES_PER_SKILL, f"{path.name}: duplicate queries"
+
+
+def test_evals_live_outside_skills_and_case_names_are_unique():
+    # `claude plugin eval` refuses an --eval-dir inside skills/ (a loaded component directory), and filters
+    # cases by name, so every case lives under evals/<skill>/ with a name used once.
+    assert not list((ROOT / "skills").glob("*/evals")), "move skills/<name>/evals to evals/<name>"
+    names = [c.name for c in eval_cases()]
+    assert len(names) == len(set(names)), sorted({n for n in names if names.count(n) > 1})
+    for c in eval_cases():
+        assert (ROOT / "skills" / c.relative_to(ROOT / "evals").parts[0] / "SKILL.md").exists(), c

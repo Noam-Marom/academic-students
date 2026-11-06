@@ -33,7 +33,7 @@ def test_moodle_sync_description_is_bilingual():
 
 def test_eval_cases_have_the_plugin_eval_layout():
     for case in EVAL_CASES:
-        d = SKILL / "evals" / case
+        d = ROOT / "evals/moodle-sync" / case
         assert (d / "prompt.md").exists(), case
         meta = yaml.safe_load((d / "case.yaml").read_text(encoding="utf-8"))
         assert meta["schema_version"] == "1.1" and meta["name"] == case and meta["expected_outcome"]
@@ -41,9 +41,9 @@ def test_eval_cases_have_the_plugin_eval_layout():
 
 
 def test_refuses_password_case_checks_the_password_is_not_echoed():
-    prompt = (SKILL / "evals/refuses-password/prompt.md").read_text(encoding="utf-8")
+    prompt = (ROOT / "evals/moodle-sync/refuses-password/prompt.md").read_text(encoding="utf-8")
     assert "hunter2" in prompt
-    graders = " ".join(p.read_text(encoding="utf-8") for p in (SKILL / "evals/refuses-password/graders").glob("*.md"))
+    graders = " ".join(p.read_text(encoding="utf-8") for p in (ROOT / "evals/moodle-sync/refuses-password/graders").glob("*.md"))
     assert "hunter2" in graders and "moodle-mcp login" in graders
 
 

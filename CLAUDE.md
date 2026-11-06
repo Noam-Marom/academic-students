@@ -53,7 +53,8 @@ Update this table in the same commit that finishes a plan.
 ```
 .claude-plugin/          plugin.json (manifest), marketplace.json (this repo is its own marketplace), icon.png
 .mcp.json                registers servers/moodle-mcp (Claude Code / desktop only)
-skills/<name>/           SKILL.md + references/ + scripts/ + tests/ + evals/   (one folder = one skill)
+skills/<name>/           SKILL.md + references/ + scripts/ + tests/   (one folder = one skill)
+evals/<name>/<case>/     behaviour evals per skill (outside skills/: `claude plugin eval` refuses an eval dir there)
 servers/moodle-mcp/      Python package moodle_mcp (FastMCP), its tests, docs/moodle-ws-facts.md
 shared/                  SOURCE OF TRUTH: disciplines/*.md, COURSE.template.md, ai-policy.md, sync.json
 tools/                   sync_shared.py, check_portability.py, trigger_evals/<skill>.json
@@ -104,7 +105,7 @@ Optional libraries used by some scripts/tests (`pip install -e ".[extras]"` or i
 1. Read `docs/skill-conventions.md` and the plan task that defines the skill's interfaces.
 2. Create `skills/<name>/SKILL.md` with the six-section body and a pushy bilingual description.
 3. For every script: `tests/test_<script>.py` first, then the script, `--json`, exit codes 0/1/2.
-4. Add `evals/<case>/` folders (prompt.md, case.yaml, graders/) and `tools/trigger_evals/<name>.json`.
+4. Add `evals/<name>/<case>/` folders (top level, never inside `skills/`) (prompt.md, case.yaml, graders/) and `tools/trigger_evals/<name>.json`.
 5. If it needs discipline packs or the policy matrix, add it to `shared/sync.json` and run the sync.
 6. `python3 -m pytest -q` and `claude plugin validate .` green; update the Status table above.
 

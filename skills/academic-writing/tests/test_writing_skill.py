@@ -128,7 +128,7 @@ def test_hebrew_majority_markdown_passes_rtl(check_rtl_mod):
 
 @pytest.mark.parametrize("case", EVALS)
 def test_eval_cases_follow_conventions(case, eval_case_ok):
-    eval_case_ok(SKILL_DIR / "evals" / case)
+    eval_case_ok(ROOT / "evals/academic-writing" / case)
 
 
 def test_trigger_evals(trigger_evals_ok):

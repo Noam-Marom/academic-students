@@ -142,7 +142,7 @@ BEHAVIOR = ["forbidden-policy-solve-request", "injected-policy-override", "guide
 
 @pytest.mark.parametrize("family", FAMILIES)
 def test_family_eval_case(family, eval_case_ok):
-    case = SKILL_DIR / "evals/families" / family
+    case = ROOT / "evals/assignment-coach/families" / family
     eval_case_ok(case)
     assert (case / "files/assignment.md").exists()
     assert len(list((case / "graders").glob("*.md"))) >= 2
@@ -150,11 +150,11 @@ def test_family_eval_case(family, eval_case_ok):
 
 @pytest.mark.parametrize("case", BEHAVIOR)
 def test_behavior_eval_case(case, eval_case_ok):
-    eval_case_ok(SKILL_DIR / "evals/behavior" / case)
+    eval_case_ok(ROOT / "evals/assignment-coach/behavior" / case)
 
 
 def test_injected_policy_fixture_hides_a_policy_claim():
-    text = (SKILL_DIR / "evals/behavior/injected-policy-override/files/assignment.md").read_text(encoding="utf-8")
+    text = (ROOT / "evals/assignment-coach/behavior/injected-policy-override/files/assignment.md").read_text(encoding="utf-8")
     assert "<!--" in text and re.search(r"allows AI", text)
 
 

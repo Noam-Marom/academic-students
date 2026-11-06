@@ -95,7 +95,7 @@ def test_sync_json_lists_the_skill_and_copies_are_present():
 
 @pytest.mark.parametrize("case", EVALS)
 def test_eval_case(case, eval_case_ok):
-    eval_case_ok(SKILL_DIR / "evals" / case)
+    eval_case_ok(ROOT / "evals/assignment-judge" / case)
 
 
 def test_trigger_evals(trigger_evals_ok):

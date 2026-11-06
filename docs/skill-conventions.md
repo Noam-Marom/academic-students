@@ -71,10 +71,12 @@ to `sys.path`.
 
 ### 2.5 `evals/`
 
-Behaviour tests for `claude plugin eval`, one folder per case:
+Behaviour tests for `claude plugin eval`, one folder per case, at the repo root under `evals/<skill>/` (never
+inside `skills/`: the eval runner refuses an eval directory inside a loaded component directory). Case names
+are unique across the repo, because `--case` filters by name.
 
 ```
-evals/<case-name>/
+evals/<skill>/<case-name>/
 ├── prompt.md        # frontmatter (tags, max_turns, timeout_seconds, allowed_tools) + the student's message verbatim
 ├── case.yaml        # schema_version: "1.1", name, expected_outcome, context.scaffold_script when files are needed
 ├── place-files.sh   # copies files/ into the run directory

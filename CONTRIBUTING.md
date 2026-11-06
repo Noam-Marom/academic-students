@@ -41,7 +41,7 @@ classmates make, what the grader in your department rewards. Hebrew terms inside
 
 ## Adding an eval case
 
-`skills/<skill>/evals/<case-name>/` with `prompt.md` (a realistic student message), `case.yaml`
+`evals/<skill>/<case-name>/` (top level: `claude plugin eval` refuses eval dirs inside `skills/`) with `prompt.md` (a realistic student message), `case.yaml`
 (`schema_version: "1.1"`), `graders/NN-*.md` (one verifiable statement each) and, if the case needs files,
 `files/` plus `place-files.sh`. Evals run real models and cost money; they run on demand (`evals.yml`), not on PRs.
 
