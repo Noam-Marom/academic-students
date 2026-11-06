@@ -1,0 +1,18 @@
+{
+  "name": "academic-students",
+  "version": "0.3.0",
+  "description": "A complete study toolkit: assignment coaching, honest professor-style grade estimates, academic writing, exam prep, lecture notes, study planning and read-only Moodle/Canvas sync.",
+  "contextFileName": "GEMINI.md",
+  "mcpServers": {
+    "moodle": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--directory",
+        "${extensionPath}/servers/moodle-mcp",
+        "moodle-mcp",
+        "serve"
+      ]
+    }
+  }
+}

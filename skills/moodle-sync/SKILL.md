@@ -78,7 +78,7 @@ it covers (from the course material), and practice questions through `exam-prep`
 - `references/via-browser.md` — using Moodle in the student's signed-in browser, read-only, when the server cannot run.
 - `references/other-lms.md` — Canvas and Blackboard: the same read-only workflow through the browser and their exports. Read it when the course is not on Moodle.
 - `references/without-mcp.md` — the fallback without the server: Moodle's "Download course content" zip,
-  the calendar `.ics` export, saved pages; plus how to install the server in Claude Code. Read it in step 1.
+  the calendar `.ics` export, saved pages; plus how to install the server. Read it in step 1.
 
 ## Verify before sending
 

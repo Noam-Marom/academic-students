@@ -1,5 +1,32 @@
 # Installing academic-students
 
+The skills follow the open Agent Skills format (`skills/<name>/SKILL.md`), so they install in Claude and in other
+agents. Pick your tool below.
+
+## Codex, Cursor, GitHub Copilot, OpenCode and other agents
+
+```
+npx skills add Noam-Marom/academic-students        # this project
+npx skills add Noam-Marom/academic-students -g     # every project
+```
+
+The [`skills`](https://github.com/vercel-labs/skills) installer (Node.js 22+) detects the agents on your machine
+and copies the skills where each one looks for them. Add `-a <agent>` to choose one.
+
+## Gemini CLI
+
+```
+gemini extensions install https://github.com/Noam-Marom/academic-students
+```
+
+Installs the skills, the read-only Moodle server and `GEMINI.md` (the rules every skill keeps).
+
+## ChatGPT and the Gemini app
+
+Neither installs skills yet. Create a custom GPT or a Gem and paste the `SKILL.md` of the skill you want as its
+instructions (its `references/` files can go in as knowledge files). Scripts do not run there.
+
+
 The plugin works in Claude Code, in the Claude desktop app and on claude.ai (paid plans). Pick the
 section for the app you use. Every step can also be done by Claude on your behalf where it has the means:
 in Claude Code it runs the commands below in your terminal after you agree; in the desktop app or the

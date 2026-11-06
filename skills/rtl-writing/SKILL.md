@@ -18,7 +18,7 @@ terms of art stay in English inside Hebrew sentences.
 
 ## When this triggers
 
-- The user invokes it (`/rtl-writing`, `/academic-students:rtl-writing`) — then it stays on for
+- The user invokes it (`/rtl-writing`, or the agent's namespaced form of it) — then it stays on for
   the whole conversation until they say to stop.
 - The user complains about direction: "השורות יוצאות הפוכות", "הנקודה קופצת לצד השני", "the Hebrew is mirrored".
 - The user asks for Hebrew output that will contain English terms: a summary, a report, a `.docx`, a LaTeX

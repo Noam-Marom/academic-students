@@ -7,9 +7,9 @@ Try each way in order and stop at the first one that works. Never ask for the Mo
 The `moodle_status` tool exists → call it and continue with the SKILL.md workflow. `logged_in: false` →
 the login step below, then reconnect.
 
-## 2. Set the server up (Claude Code, or the desktop app linked to the student's computer)
+## 2. Set the server up (a coding agent or desktop app with a shell on the student's computer)
 
-Needs a shell on the student's own computer (the Claude Code terminal, or the desktop app's link to the
+Needs a shell on the student's own computer (a coding agent's terminal — Claude Code, Codex, Gemini CLI — or a desktop app linked to the
 computer). Run, from this skill folder:
 
 ```
@@ -24,15 +24,15 @@ python3 scripts/setup_check.py --url <the student's Moodle URL> --json
 - **login** (`run_by: student`): give the command exactly as printed for the student to run in **their own
   terminal**. Never run it yourself and never type into it: it asks for the password (or opens the
   university's SSO page) and keeps only a token in the keychain.
-- **reconnect** (`run_by: student`): `/mcp` in Claude Code, or restarting the desktop app; then back to 1.
+- **reconnect** (`run_by: student`): reload the agent's MCP servers (`/mcp` in Claude Code) or restart the app; then back to 1.
 
 The login fails with "web services are not enabled" or "service not available" → the university has not
 enabled Moodle's mobile service; go to 3.
 
 ## 3. Moodle in the student's browser
 
-When the server cannot run (claude.ai on the web, a skill uploaded alone, uv declined, mobile service off)
-and a browser tool is available (Claude in Chrome, or the desktop app's built-in browser) → follow
+When the server cannot run (a chat app on the web, a skill uploaded alone, uv declined, mobile service off)
+and a browser tool is available (a browser extension or the app's built-in browser) → follow
 `via-browser.md`.
 
 ## 4. Moodle's own exports

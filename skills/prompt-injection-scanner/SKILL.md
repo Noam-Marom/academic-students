@@ -29,8 +29,8 @@ Create a task list with these steps when your environment has one, so the user c
 
 ### 1. Collect the inputs
 
-Identify every path the user gave: uploaded files (in Claude Desktop/claude.ai usually under
-`/mnt/user-data/uploads/`), a folder or repo path in Claude Code, archives. Don't modify the originals — the
+Identify every path the user gave: uploaded files (in chat apps often under an uploads
+folder such as `/mnt/user-data/uploads/`), a folder or repo path in a coding agent, archives. Don't modify the originals — the
 scanner only reads.
 
 ### 2. Run the automated scan

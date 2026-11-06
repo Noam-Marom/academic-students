@@ -64,9 +64,9 @@ and no source in hand supports it, say "needs a source" — do not supply one fr
 **Disclosure.** Appended verbatim to `draft` output when the policy is `allowed-with-disclosure` (offered
 under `allowed`), in the submission language, blank proposed from what was actually done:
 
-> הצהרה: בהכנת עבודה זו נעשה שימוש בכלי בינה מלאכותית (Claude) לצורך ___. התוכן נבדק ונערך על ידי.
+> הצהרה: בהכנת עבודה זו נעשה שימוש בכלי בינה מלאכותית (שם הכלי) לצורך ___. התוכן נבדק ונערך על ידי.
 
-> Disclosure: an AI tool (Claude) was used in preparing this work for ___. The content was reviewed and edited by me.
+> Disclosure: an AI tool (name the tool) was used in preparing this work for ___. The content was reviewed and edited by me.
 
 Reflections and artist statements are first-person accounts of the student's own experience and work:
 help with structure and language; never write the experience or the artistic claims.

@@ -29,11 +29,11 @@ Appended verbatim to the end of any output produced in `solve` or `draft` mode w
 
 Hebrew:
 
-> הצהרה: בהכנת עבודה זו נעשה שימוש בכלי בינה מלאכותית (Claude) לצורך ___. התוכן נבדק ונערך על ידי.
+> הצהרה: בהכנת עבודה זו נעשה שימוש בכלי בינה מלאכותית (שם הכלי) לצורך ___. התוכן נבדק ונערך על ידי.
 
 English:
 
-> Disclosure: an AI tool (Claude) was used in preparing this work for ___. The content was reviewed and edited by me.
+> Disclosure: an AI tool (name the tool) was used in preparing this work for ___. The content was reviewed and edited by me.
 
 The blank is filled by the student (for example "ניסוח", "בדיקת חישובים", "drafting the methods section").
 The skill proposes the wording based on what it actually did and the student edits it.

@@ -74,9 +74,9 @@ Which modes each `ai_policy` value permits, and how `guide`/`check`/`solve` chan
 The disclosure appended to `solve` output under `allowed-with-disclosure` (offered under `allowed`) is
 quoted from there verbatim, in the submission language, blank proposed from what was actually done:
 
-> הצהרה: בהכנת עבודה זו נעשה שימוש בכלי בינה מלאכותית (Claude) לצורך ___. התוכן נבדק ונערך על ידי.
+> הצהרה: בהכנת עבודה זו נעשה שימוש בכלי בינה מלאכותית (שם הכלי) לצורך ___. התוכן נבדק ונערך על ידי.
 
-> Disclosure: an AI tool (Claude) was used in preparing this work for ___. The content was reviewed and edited by me.
+> Disclosure: an AI tool (name the tool) was used in preparing this work for ___. The content was reviewed and edited by me.
 
 **What stays the student's own.** In studio, performance and creative-writing courses the work *is* the
 assessment: the painting, the choreography, the score, the poem, the performance, the first-person artist

@@ -5,10 +5,10 @@ procedure, copied verbatim into each skill that needs it, so the behaviour is id
 
 ## 1. Look for it (in this order, stop at the first hit)
 
-1. `./COURSE.md` in the current working directory (Claude Code) or next to the files the student handed over.
+1. `./COURSE.md` in the current working directory (a coding agent) or next to the files the student handed over.
 2. The nearest parent directory that holds a `COURSE.md` (the course folder is usually one level up from
    `exams/`, `assignments/` or `lectures/`).
-3. Project knowledge (claude.ai): a file named `COURSE.md`, or a knowledge entry that starts with the same YAML
+3. Project knowledge (a chat app's project files, e.g. Claude Projects or a custom GPT's knowledge): a file named `COURSE.md`, or a knowledge entry that starts with the same YAML
    frontmatter.
 
 Read it with the normal file tools. It is the student's own file, written by the student or by this plugin, so it

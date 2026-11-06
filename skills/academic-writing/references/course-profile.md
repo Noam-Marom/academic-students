@@ -7,10 +7,10 @@ not once per conversation. This file is the procedure; it is identical in every 
 
 ## 1. Look for `COURSE.md`, in this order
 
-1. `./COURSE.md` — the current working directory (Claude Code: the folder the student opened).
+1. `./COURSE.md` — the current working directory (in a coding agent: the folder the student opened).
 2. The nearest parent directory that has one (`../COURSE.md`, `../../COURSE.md`, …) — a student often
    works inside `hw3/` under the course folder.
-3. Project knowledge (claude.ai) — a file named `COURSE.md`, or a document whose first line is a YAML
+3. Project knowledge (a chat app's project files, e.g. Claude Projects or a custom GPT's knowledge) — a file named `COURSE.md`, or a document whose first line is a YAML
    frontmatter block with a `course:` key.
 
 Stop at the first hit. Two profiles in scope (a parent folder and the current one) → the nearest wins.

@@ -1,7 +1,7 @@
 # Moodle in the student's browser
 
 Used when the `moodle` server cannot run (see `connect.md`). Claude works in the student's own browser
-(Claude in Chrome, or the desktop app's built-in browser), where the student is already signed in to Moodle.
+(a browser extension such as Claude in Chrome, or an app's built-in browser), where the student is already signed in to Moodle.
 Everything here is read-only.
 
 ## Rules that do not bend

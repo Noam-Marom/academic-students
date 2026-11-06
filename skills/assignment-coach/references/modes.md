@@ -159,9 +159,9 @@ Protocol: **verify → format → "what you need to understand" → disclosure**
 4. **Disclosure** when the policy requires it (`allowed-with-disclosure`) and offered under `allowed`:
    appended verbatim, in the submission language, blank proposed from what was actually done:
 
-   > הצהרה: בהכנת עבודה זו נעשה שימוש בכלי בינה מלאכותית (Claude) לצורך ___. התוכן נבדק ונערך על ידי.
+   > הצהרה: בהכנת עבודה זו נעשה שימוש בכלי בינה מלאכותית (שם הכלי) לצורך ___. התוכן נבדק ונערך על ידי.
 
-   > Disclosure: an AI tool (Claude) was used in preparing this work for ___. The content was reviewed and edited by me.
+   > Disclosure: an AI tool (name the tool) was used in preparing this work for ___. The content was reviewed and edited by me.
 
 What `solve` never does: invent a source, a measurement or a dataset; skip a step the course grades;
 produce the studio/performance/artist's own work (see SKILL.md, "what stays the student's own"); answer a
