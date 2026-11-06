@@ -43,8 +43,14 @@ can still render as `1-`.
 /plugin install academic-students@noam-academic
 ```
 
-**claude.ai / Claude desktop:** Customize → Plugins → Add → *Add marketplace* → paste
-`https://github.com/Noam-Marom/academic-students`. (Or download the repo as a zip and use *Upload plugin*.)
+**claude.ai / Claude desktop:** Customize → Plugins → Add → *Add marketplace* → *Add from a repository* →
+`Noam-Marom/academic-students`. Or upload the
+[plugin zip](https://github.com/Noam-Marom/academic-students/releases/latest/download/academic-students.zip)
+as a custom plugin; single skills are on the [releases page](https://github.com/Noam-Marom/academic-students/releases/latest).
+
+**Or ask Claude:** paste this repo's link and say "install this plugin". In Claude Code it runs the two commands
+above (after you agree); in the desktop app or browser it can click through the settings with Claude in Chrome or
+computer use. Every surface, step by step: [INSTALL.md](INSTALL.md).
 
 **Moodle (optional, Claude Code / desktop only):** needs [`uv`](https://docs.astral.sh/uv/) once, then log in
 in a terminal — the password is typed there, never in Claude:

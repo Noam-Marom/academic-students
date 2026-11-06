@@ -37,8 +37,13 @@
 /plugin install academic-students@noam-academic
 ```
 
-התקנה ב-claude.ai או באפליקציית הדסקטופ: Customize ← Plugins ← Add ← בחירה ב-Add marketplace והדבקת הכתובת
-של הריפו, `https://github.com/Noam-Marom/academic-students` (או הורדת הריפו כ-zip ושימוש ב-Upload plugin בתוך האפליקציה).
+התקנה ב-claude.ai או באפליקציית הדסקטופ: Customize ← Plugins ← Add ← בחירה ב-Add marketplace ואז ב-Add from a repository, ושם
+והקלדת `Noam-Marom/academic-students`. אפשר גם להעלות את [קובץ ה-zip של הפלאגין](https://github.com/Noam-Marom/academic-students/releases/latest/download/academic-students.zip)
+כפלאגין מותאם אישית; קבצי zip של סקילים בודדים נמצאים ב[דף הגרסאות](https://github.com/Noam-Marom/academic-students/releases/latest) של הפרויקט.
+
+אפשר גם לבקש מ-Claude: מדביקים את הקישור לריפו ואומרים "תתקין את הפלאגין הזה". ב-Claude Code הוא מריץ את שתי הפקודות
+שלמעלה (אחרי שמאשרים לו); באפליקציית הדסקטופ או בדפדפן הוא יכול לעבור על ההגדרות בעזרת Claude in Chrome או computer use, וכל צעד באישור שלך.
+כל האפשרויות, צעד אחר צעד, נמצאות בקובץ [INSTALL.md](INSTALL.md) באנגלית.
 
 חיבור למודל (אופציונלי, רק ב-Claude Code ובדסקטופ): צריך את הכלי [uv](https://docs.astral.sh/uv/) פעם אחת, ואז
 מתחברים בטרמינל. הסיסמה מוקלדת שם, ולא בתוך השיחה:
@@ -89,7 +94,7 @@ uv run --directory <plugin>/servers/moodle-mcp moodle-mcp login https://moodle.y
 
 מה נמדד עד עכשיו:
 
-- הסורק: על 312 קבצים סינתטיים ב-13 טכניקות הסתרה, בעברית ובאנגלית, דווחו 100% מההוראות הנסתרות ברמה HIGH ומעלה, ואף אחד מ-78 הקבצים הנקיים לא סומן. את הקבצים כתבנו בעצמנו, ולכן זו בדיקת רגרסיה ולא הבטחה מול התקפות לא מוכרות. הפרטים נמצאים בקובץ [benchmark/README.md](skills/prompt-injection-scanner/benchmark/README.md).
+- הסורק: על 312 קבצים סינתטיים ב-13 טכניקות הסתרה, בעברית ובאנגלית, דווחו 100% מההוראות הנסתרות ברמה HIGH ומעלה, ואף אחד מ-78 הקבצים הנקיים לא סומן. את הקבצים כתבנו בעצמנו, ולכן זו בדיקת רגרסיה ולא הבטחה מול התקפות לא מוכרות. הפרטים נמצאים [בתיעוד של ה-benchmark](skills/prompt-injection-scanner/benchmark/README.md) של הסורק.
 - העברית: ראו את ההשוואה למעלה, מ-11 שגיאות RTL ל-0 על אותה בקשה.
 
 שיעורי המעבר של בדיקות ההתנהגות יופיעו כאן אחרי שירוצו. שום דבר לא נטען לפני שנמדד.

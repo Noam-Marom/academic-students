@@ -1,5 +1,6 @@
 """Repo-level checks for the plugin manifest and marketplace."""
 import json
+import re
 import pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -8,7 +9,8 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 def test_plugin_manifest_fields():
     m = json.loads((ROOT / ".claude-plugin/plugin.json").read_text(encoding="utf-8"))
     assert m["name"] == "academic-students"
-    assert m["version"] == "0.1.0"
+    assert re.fullmatch(r"\d+\.\d+\.\d+", m["version"])
+    assert f"## [{m['version']}]" in (ROOT / "CHANGELOG.md").read_text(encoding="utf-8"), "every version has a changelog entry"
     assert m["license"] == "MIT"
     assert m["author"]["name"]
     assert 40 <= len(m["description"]) <= 1024
