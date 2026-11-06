@@ -32,6 +32,11 @@ with the zip from https://github.com/Noam-Marom/academic-students/releases/lates
 2. Enter `Noam-Marom/academic-students` and confirm.
 3. Find **academic-students** in the list and add it.
 
+In claude.ai and the desktop app the skills appear in the `/` menu under their own names, without the plugin
+prefix: `/assignment-coach`, `/assignment-judge`, `/hebrew-with-english` and so on (the menu shows "Academic
+students" next to each). In Claude Code they are `/academic-students:assignment-coach` and so on. Start a new
+chat after installing; a chat that was already open does not load them.
+
 No marketplace access (for example an organisation that restricts marketplaces)? Download
 https://github.com/Noam-Marom/academic-students/releases/latest/download/academic-students.zip and upload it
 as a custom plugin from the same **Plugins** screen. On Team and Enterprise plans an admin may have to allow it.
