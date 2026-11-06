@@ -1,22 +1,24 @@
 ---
-name: hebrew-with-english
-description: "Write Hebrew with English technical terms so it renders right-to-left correctly, in chat and in files (Markdown, Word, LaTeX, PowerPoint). Use when the user types /hebrew-with-english or /academic-students:hebrew-with-english, when they complain that lines come out flipped, mirrored or with punctuation on the wrong side (\"השורות יוצאות הפוכות\", \"הנקודה קופצת\", \"הטקסט מתהפך\"), when they ask for a Hebrew document/summary/slide deck that contains English terms, or when another skill in this plugin is about to write Hebrew prose into a file. Once invoked, keep applying it to every later reply until the user says to stop. Do not trigger just because the user wrote in Hebrew, and not for translation requests."
+name: rtl-writing
+description: "Write right-to-left languages — Hebrew (עברית), Arabic (العربية), Persian (فارسی), Urdu — mixed with English technical terms so they render correctly, in chat and in files (Markdown, Word, LaTeX, PowerPoint). Use when the user types /rtl-writing, /academic-students:rtl-writing or the old /hebrew-with-english; when they complain that lines come out flipped, mirrored or with punctuation on the wrong side (\"השורות יוצאות הפוכות\", \"הנקודה קופצת\", \"النص مقلوب\", \"the Arabic is mirrored\"); when they ask for an RTL document, summary or slide deck that contains English terms; or when another skill in this plugin is about to write RTL prose into a file. Once invoked, keep applying it to every later reply until the user says to stop. Do not trigger just because the user wrote in an RTL language, and not for translation requests."
 license: MIT
 ---
 
-# Hebrew with English (RTL-safe writing)
+# RTL writing (Hebrew, Arabic, Persian, Urdu with English terms)
 
 ## Purpose
 
-Mix Hebrew prose with English technical terms without breaking right-to-left rendering — in the chat UI, in
+Mix right-to-left prose (Hebrew, Arabic, Persian, Urdu) with English technical terms without breaking
+right-to-left rendering — in the chat UI, in
 Markdown files, and in Word, LaTeX and PowerPoint documents. The failure this skill prevents looks small (a line
 that starts with an English word flips to left-to-right, punctuation jumps to the wrong side) and reads as broken
-to every Hebrew reader. The skill never translates technical terms: commands, identifiers, product names and
+to every RTL reader. The rules and the checker are the same for every RTL script; the examples are Hebrew,
+and `references/arabic-persian-urdu.md` adds what differs for the other languages. The skill never translates technical terms: commands, identifiers, product names and
 terms of art stay in English inside Hebrew sentences.
 
 ## When this triggers
 
-- The user invokes it (`/hebrew-with-english`, `/academic-students:hebrew-with-english`) — then it stays on for
+- The user invokes it (`/rtl-writing`, `/academic-students:rtl-writing`) — then it stays on for
   the whole conversation until they say to stop.
 - The user complains about direction: "השורות יוצאות הפוכות", "הנקודה קופצת לצד השני", "the Hebrew is mirrored".
 - The user asks for Hebrew output that will contain English terms: a summary, a report, a `.docx`, a LaTeX
@@ -35,6 +37,8 @@ special handling (plain prose with no English tokens renders fine on its own).
    - Word document → `references/docx.md` (`w:bidi` on paragraphs, `w:rtl` on runs, styles, fonts).
    - LaTeX → `references/latex.md` (`polyglossia`, `\textenglish`, fonts, math inside Hebrew).
    - PowerPoint → `references/pptx.md` (`rtl="1"`, `rtlCol`, complex-script fonts).
+   - Arabic, Persian or Urdu (any format) → also `references/arabic-persian-urdu.md` (openers, fonts, ZWNJ,
+     Arabic-Indic digits).
 2. **Terminology.** Look up the course's discipline family in `references/glossary/` (12 families; rule set in
    `references/glossary/README.md`): first mention = Hebrew term with the English in parentheses, afterwards
    whichever the course uses. A `COURSE.md` in the course folder may override individual terms.
@@ -47,7 +51,8 @@ special handling (plain prose with no English tokens renders fine on its own).
 - `references/chat-markdown.md` — the rules, the high-risk spots table, the list of natural Hebrew openers.
 - `references/docx.md`, `references/latex.md`, `references/pptx.md` — how direction works in each format and how to set it from code.
 - `references/glossary/README.md` + `references/glossary/<family>.md` — Hebrew ⇄ English term pairs per discipline family.
-- `scripts/check_rtl.py` — checks Markdown/chat text; `--fix` prints a suggested rewrite per failing line (never edits); `--json`.
+- `references/arabic-persian-urdu.md` — what changes for Arabic-script languages: natural openers, fonts, LaTeX and Word settings, digits, ZWNJ.
+- `scripts/check_rtl.py` — any RTL script; checks Markdown/chat text; `--fix` prints a suggested rewrite per failing line (never edits); `--json`.
 - `scripts/check_docx_rtl.py` — lists Hebrew paragraphs in a `.docx` that lack `w:bidi` (resolves style inheritance); `--json`.
 
 ## Verify before sending (mandatory)

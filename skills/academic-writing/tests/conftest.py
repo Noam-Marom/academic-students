@@ -61,7 +61,7 @@ _CONTRACT = SKILL_DIR.parents[1] / "tests" / "eval_contract.py"
 
 @pytest.fixture(scope="session")
 def check_rtl_mod():
-    return _load_module(SKILL_DIR.parents[1] / "skills/hebrew-with-english/scripts/check_rtl.py", "writing_check_rtl")
+    return _load_module(SKILL_DIR.parents[1] / "skills/rtl-writing/scripts/check_rtl.py", "writing_check_rtl")
 
 
 @pytest.fixture(scope="session")

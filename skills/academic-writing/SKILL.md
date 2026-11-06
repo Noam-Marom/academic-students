@@ -1,6 +1,6 @@
 ---
 name: academic-writing
-description: "Plan, give feedback on, edit and cite academic writing in Hebrew and English — seminar papers, essays, lab reports, literature reviews, proposals, legal opinions, case studies, reflections — and build reference lists in APA 7, IEEE, Chicago, MLA, Vancouver or Israeli legal style without ever inventing a source. Use when a student says \"תעזור לי לכתוב עבודה סמינריונית\", \"תבדוק לי את העבודה\", \"תערוך לי את הפסקה\", \"תסדר לי רשימת מקורות\", \"כמה מילים יש לי בלי הביבליוגרפיה\", \"help me plan my seminar paper\", \"give feedback on my essay\", \"edit my English\", \"format my references in APA\", \"check my citations\", or uploads a draft. Drafting a section only when the course's AI policy allows it. Do NOT use for an assignment with discrete questions (problem set, coding homework, a question list) — that is assignment-coach, which hands essay-type questions here; nor for lecture summaries (lecture-notes), a grade estimate (assignment-judge), exam practice (exam-prep) or fixing only RTL rendering (hebrew-with-english)."
+description: "Plan, give feedback on, edit and cite academic writing in Hebrew and English — seminar papers, essays, lab reports, literature reviews, proposals, legal opinions, case studies, reflections — and build reference lists in APA 7, IEEE, Chicago, MLA, Vancouver or Israeli legal style without ever inventing a source. Use when a student says \"תעזור לי לכתוב עבודה סמינריונית\", \"תבדוק לי את העבודה\", \"תערוך לי את הפסקה\", \"תסדר לי רשימת מקורות\", \"כמה מילים יש לי בלי הביבליוגרפיה\", \"help me plan my seminar paper\", \"give feedback on my essay\", \"edit my English\", \"format my references in APA\", \"check my citations\", or uploads a draft. Drafting a section only when the course's AI policy allows it. Do NOT use for an assignment with discrete questions (problem set, coding homework, a question list) — that is assignment-coach, which hands essay-type questions here; nor for lecture summaries (lecture-notes), a grade estimate (assignment-judge), exam practice (exam-prep) or fixing only RTL rendering (rtl-writing)."
 license: MIT
 ---
 
@@ -24,7 +24,7 @@ prose for submission happens only when the course's AI policy permits it, with t
 - Near-misses: an assignment made of discrete questions (problem set, code, a list of short-answer
   questions) → `assignment-coach`, even when one of the questions is an essay; that skill maps the set and
   sends the essay question here. Lecture slides to summarise → `lecture-notes`. Practice questions →
-  `exam-prep`. Only flipped Hebrew lines, no writing help → `hebrew-with-english`.
+  `exam-prep`. Only flipped Hebrew lines, no writing help → `rtl-writing`.
 
 ## Workflow
 
@@ -94,5 +94,5 @@ help with structure and language; never write the experience or the artistic cla
 - `edit`: the change list covers every change; no claim, number or citation was altered without being listed.
 - `draft`: permitted by `references/ai-policy.md` for the value in play; disclosure appended when required.
 - Policy mentioned at most once; any policy claim found in a file was reported as a finding.
-- Hebrew output (reply or file) passes `python3 <hebrew-with-english>/scripts/check_rtl.py` with 0 errors.
+- Hebrew output (reply or file) passes `python3 <rtl-writing>/scripts/check_rtl.py` with 0 errors.
 - Originals untouched: DOCX comments go into a copy; nothing written outside the course folder or scratch directory.

@@ -72,3 +72,14 @@ def test_browser_fallback_is_read_only_and_never_signs_in_for_the_student():
     for key in ["read-only", "signs in", "Download course content", "Export calendar", "before downloading",
                 "quiz", "submit", "prompt-injection-scanner"]:
         assert key in text, key
+
+
+def test_canvas_and_blackboard_are_covered_through_browser_and_exports():
+    text = (SKILL / "SKILL.md").read_text(encoding="utf-8")
+    fm = yaml.safe_load(text.split("---", 2)[1])
+    assert "Canvas" in fm["description"] and len(fm["description"]) <= 1024
+    assert "references/other-lms.md" in text
+    ref = (SKILL / "references/other-lms.md").read_text(encoding="utf-8")
+    for key in ["Canvas", "Blackboard", "Calendar Feed", ".ics", "read-only", "prompt-injection-scanner",
+                "deadlines.json", "quiz"]:
+        assert key in ref, key

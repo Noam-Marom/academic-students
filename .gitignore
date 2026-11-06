@@ -9,7 +9,7 @@ dist/
 build/
 
 # Plugin evals and skill-creator workspaces (results are billed model runs, never committed)
-evals/results/
+evals/**/results/
 *-workspace/
 .superpowers/
 

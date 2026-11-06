@@ -22,7 +22,7 @@ from pathlib import Path
 
 W = "http://schemas.openxmlformats.org/wordprocessingml/2006/main"
 NS = {"w": W}
-HEB = re.compile(r"[א-ת]")
+HEB = re.compile(r"[\u05D0-\u05EA\u0620-\u064A\u066E-\u06D3\u06FA-\u06FF\u0750-\u077F]")  # letters of any RTL script (Hebrew, Arabic, Persian, Urdu)
 MIN_HEBREW_LETTERS = 3
 
 

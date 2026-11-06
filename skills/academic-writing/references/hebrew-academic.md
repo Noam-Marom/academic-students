@@ -24,7 +24,7 @@ papers in every discipline; the discipline pack's "Answer conventions" adds fiel
 - Mixed tense in the methods section; use past tense for what was done.
 - Overlong sentences joined with "ו-" — split them.
 - Punctuation around English terms and numbers that breaks RTL rendering in Word: fix with the
-  hebrew-with-english rules and check the DOCX for `w:bidi` (that skill's `check_docx_rtl.py` when present).
+  rtl-writing rules and check the DOCX for `w:bidi` (that skill's `check_docx_rtl.py` when present).
 
 ## Citations in Hebrew text
 
@@ -34,5 +34,5 @@ course says. Legal writing: the uniform citation rules (`citation-styles/hebrew-
 
 ## Before sending
 
-Hebrew output (reply, Markdown, or text for a DOCX) passes `check_rtl.py` from the hebrew-with-english
+Hebrew output (reply, Markdown, or text for a DOCX) passes `check_rtl.py` from the rtl-writing
 skill with 0 errors.

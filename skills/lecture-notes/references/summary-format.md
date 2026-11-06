@@ -30,7 +30,7 @@ way and so `exam-prep` can mine them later. Headings in the course's teaching la
 ## 2. Sections
 
 **Concepts and definitions.** One bullet per term: the term in the course's language, the English term in
-parentheses at first mention (the `hebrew-with-english` glossary rule), then the definition as the lecturer
+parentheses at first mention (the `rtl-writing` glossary rule), then the definition as the lecturer
 gave it. Keep the lecturer's wording for definitions; it is what the exam will expect.
 
 **Formulas.** LaTeX in `$...$` or `$$...$$`, each with a Hebrew/English label line, the meaning of every symbol,
@@ -60,7 +60,7 @@ line at the end: "slides 7–9 were not discussed in the lecture".
 New terms go to the course glossary file next to the summaries: `<course>/glossary.md`, a table
 `| עברית | English | הגדרה קצרה | הרצאה |` (or the English column order for English courses). Append only terms
 that are not already there (compare case- and nikud-insensitively); never rewrite existing rows. Every row
-starts with the Hebrew term so the table passes the RTL check. The `hebrew-with-english` skill reads this file
+starts with the Hebrew term so the table passes the RTL check. The `rtl-writing` skill reads this file
 to keep the course's term choices consistent.
 
 ## 5. Length

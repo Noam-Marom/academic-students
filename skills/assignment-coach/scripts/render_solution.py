@@ -3,7 +3,7 @@
 
 Markdown subset: `#`–`######` headings, paragraphs, `-`/`*` bullets, `1.` numbered items, fenced code
 blocks, `>` quotes, pipe tables, and inline **bold**, *italic*, `code`. Every paragraph or table cell that
-contains Hebrew gets `w:bidi` and right alignment (the hebrew-with-english DOCX rules); code blocks stay
+contains Hebrew gets `w:bidi` and right alignment (the rtl-writing DOCX rules); code blocks stay
 left-to-right in Consolas with no bidi, so identifiers and output read as written.
 
 PDF goes through LibreOffice (`soffice --headless --convert-to pdf`) when it is installed; otherwise the

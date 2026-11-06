@@ -43,7 +43,7 @@ Layout that survives printing and reading under time pressure:
   order of weight, heaviest first.
 - Every formula labelled with its name and when it applies ("Bayes — when P(B) > 0"); symbols defined once at
   the top in a two-line legend.
-- Hebrew blocks: start every line with a Hebrew word (the `hebrew-with-english` rules); formulas themselves are
+- Hebrew blocks: start every line with a Hebrew word (the `rtl-writing` rules); formulas themselves are
   LTR and sit on their own line or after a Hebrew label.
 - No colour dependence (it will be photocopied), no tiny subscripts in a smaller font than the floor.
 
@@ -52,7 +52,7 @@ Layout that survives printing and reading under time pressure:
 - **Markdown** (default): headings per topic, formulas in `$...$`, a note on the page limit. The student pastes
   it into a document or prints it.
 - **LaTeX** when the student works in LaTeX or the course requires a typeset sheet: `multicol` two columns,
-  `\small`, `geometry` margins 1 cm, Hebrew via `polyglossia` — see `hebrew-with-english/references/latex.md`.
+  `\small`, `geometry` margins 1 cm, Hebrew via `polyglossia` — see `rtl-writing/references/latex.md`.
   Compile locally and count pages before sending; a sheet that spills onto a second page breaks the rule.
 - **DOCX** when the student says Word: build it as Markdown first, then render via `assignment-coach`'s
   `render_solution.py` when available; RTL paragraphs need `w:bidi`.

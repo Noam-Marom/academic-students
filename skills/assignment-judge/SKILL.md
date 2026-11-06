@@ -97,4 +97,4 @@ course's grade, and your lecturer may weigh things differently."
   result ("the determinant is 2") — only where, which rule was broken ("the 2×2 formula subtracts the
   off-diagonal product") and what a fix must achieve. The student finds the corrected result.
 - The caveat line is present; the policy was mentioned at most once.
-- Hebrew output passes `python3 <hebrew-with-english>/scripts/check_rtl.py` with 0 errors before it is sent.
+- Hebrew output passes `python3 <rtl-writing>/scripts/check_rtl.py` with 0 errors before it is sent.

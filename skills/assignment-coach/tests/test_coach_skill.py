@@ -163,7 +163,7 @@ def test_trigger_evals(trigger_evals_ok):
 
 
 def test_hebrew_majority_markdown_passes_rtl(load_module):
-    check_rtl = load_module(ROOT / "skills/hebrew-with-english/scripts/check_rtl.py", "coach_check_rtl")
+    check_rtl = load_module(ROOT / "skills/rtl-writing/scripts/check_rtl.py", "coach_check_rtl")
     for p in SKILL_DIR.rglob("*.md"):
         t = p.read_text(encoding="utf-8")
         if p.name != "prompt.md" and len(re.findall(r"[֐-׿]", t)) > len(re.findall(r"[A-Za-z]", t)):

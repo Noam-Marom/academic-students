@@ -17,7 +17,7 @@ can be read, tested and trusted by someone who has never seen it. `tests/` enfor
 | Dependencies | stdlib first; optional libraries degrade gracefully (say what was skipped, keep the exit code meaningful) | students run this on laptops with nothing installed |
 | Python floor | 3.10 | `match`, `zoneinfo`, `X | Y` types; still common on student machines |
 | Language of docs | SKILL.md and references in English; glossaries and user-facing examples bilingual | contributors worldwide; users in Hebrew |
-| Hebrew output | passes `skills/hebrew-with-english/scripts/check_rtl.py` before it is sent or written | the whole reason that skill exists |
+| Hebrew output | passes `skills/rtl-writing/scripts/check_rtl.py` before it is sent or written | the whole reason that skill exists |
 | Timezone | `Asia/Jerusalem` default, times stored timezone-aware, `.ics` in UTC | DST changes twice a year |
 | Policy ceiling | `shared/ai-policy.md` is the only definition of what each `ai_policy` value permits | one table, copied into skills, never paraphrased |
 

@@ -64,7 +64,7 @@ Cards go to `scripts/anki_export.py` as `[{"front", "back", "tags"}]`.
   known. Example: `["תזמון_CPU", "202-1-3031"]`.
 - Cloze-style cards are fine as plain front/back pairs ("The time complexity of heap-sort is …" / "O(n log n)").
 - Hebrew cards need no special handling; Anki renders each field's direction on its own. Mixed Hebrew–English
-  fields still follow the `hebrew-with-english` rule inside the field: start with the Hebrew word.
+  fields still follow the `rtl-writing` rule inside the field: start with the Hebrew word.
 - Aim for 20–40 cards per topic that the map ranks high, 5–10 for the rest. More than ~150 cards for one exam is
   a sign of copying the notes rather than extracting what is tested.
 
@@ -91,4 +91,4 @@ Cards go to `scripts/anki_export.py` as `[{"front", "back", "tags"}]`.
 
 Practice questions and solutions are in the course's teaching language (`COURSE.md: language`), the exam's
 language when the two differ. Hebrew output starts every line with a Hebrew word and is checked with
-`hebrew-with-english/scripts/check_rtl.py` before it is sent (see SKILL.md, "Verify before sending").
+`rtl-writing/scripts/check_rtl.py` before it is sent (see SKILL.md, "Verify before sending").

@@ -45,3 +45,10 @@ def test_cli_json_and_exit_code(tmp_path):
     assert len(data[str(f)]) == 1
     ok = b.write(tmp_path / "g.docx", [b.para(HEB, bidi=True)])
     assert subprocess.run([sys.executable, str(SCRIPT), str(ok)], capture_output=True).returncode == 0
+
+
+def test_arabic_and_persian_paragraphs_without_bidi_are_reported(tmp_path, docx_rtl):
+    f = b.write(tmp_path / "ar.docx", [b.para("هذه جملة باللغة العربية مع مصطلح Docker في الوسط."),
+                                       b.para("این یک جمله فارسی با اصطلاح Docker است.", bidi=True)])
+    issues = docx_rtl.check_docx(f)
+    assert [i["paragraph"] for i in issues] == [1]

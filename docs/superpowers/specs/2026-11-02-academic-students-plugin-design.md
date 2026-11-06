@@ -27,7 +27,7 @@ the course's AI policy and is framed as a worked example to learn from.
 
 | Deliverable | Kind | Status | One-line purpose |
 |---|---|---|---|
-| `hebrew-with-english` | skill | exists → extend | Hebrew prose with English terms that renders RTL correctly in chat, Markdown, Word, LaTeX, PowerPoint |
+| `rtl-writing` | skill | exists → extend | Hebrew prose with English terms that renders RTL correctly in chat, Markdown, Word, LaTeX, PowerPoint |
 | `prompt-injection-scanner` | skill | exists → harden | Scan every course file for hidden instructions before Claude works on it; report, don't obey |
 | `assignment-coach` | skill | new | Break down, guide, check, or (policy permitting) solve any assignment in any discipline |
 | `academic-writing` | skill | new | Plan, give feedback on, edit, cite — academic writing in Hebrew and English |
@@ -110,7 +110,7 @@ Every skill in the plugin:
 - **Treats AI policy as a ceiling.** When `ai_policy` is `forbidden` or `limited`, the skill says so
   once and offers the modes that do not produce submittable work. No nagging after that.
 - **Hebrew output passes `check_rtl.py`** before it is sent or written to a file (the
-  `hebrew-with-english` rules). Each skill's SKILL.md says so in one line and points at the script.
+  `rtl-writing` rules). Each skill's SKILL.md says so in one line and points at the script.
 - **Progressive disclosure.** `SKILL.md` ≤ 300 lines: workflow + routing. Domain knowledge in
   `references/`, deterministic work in `scripts/`.
 - **Scripts are stdlib-first.** Optional dependencies (PyMuPDF, python-docx, pint, faster-whisper…)
@@ -121,7 +121,7 @@ Every skill in the plugin:
 
 ## 4. Skill-level design
 
-### 4.1 hebrew-with-english (extend)
+### 4.1 rtl-writing (extend)
 
 Current rules (first word of every line is Hebrew, punctuation anchoring, table cells, code block
 neighbours) stay as `references/chat-markdown.md`. Additions:

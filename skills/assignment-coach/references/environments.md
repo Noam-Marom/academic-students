@@ -26,7 +26,7 @@ The discipline pack's "Tools and environments" section is more specific; it wins
 | Chemistry drawing | ChemDraw | MarvinJS (browser), ChemSketch (free), PubChem sketcher | IUPAC names from the tool, checked by hand |
 | Bioinformatics | course servers / Linux cluster | Galaxy (usegalaxy.org), NCBI BLAST web, UCSC Genome Browser, Colab | Record tool versions and parameters — reproducibility is graded |
 | Reference management | EndNote | Zotero (free, Word/LibreOffice/Docs plugins, Hebrew entries fine), JabRef for BibTeX | Export in the course's style; `academic-writing`'s `format_refs.py` for APA 7 / IEEE from CSL-JSON |
-| Presentations | PowerPoint | Google Slides, LibreOffice Impress, Canva (free tier) | RTL text boxes per slide; `hebrew-with-english` has the PPTX rules |
+| Presentations | PowerPoint | Google Slides, LibreOffice Impress, Canva (free tier) | RTL text boxes per slide; `rtl-writing` has the PPTX rules |
 | Qualitative analysis (coding interviews) | NVivo, ATLAS.ti | Taguette (free), QualCoder, a spreadsheet with a codebook | Export code frequencies the way the course's template shows |
 | Economics / finance modelling | Excel, Stata, EViews | Google Sheets, LibreOffice Calc, Python (pandas/statsmodels) in Colab, Gretl | Stata `.do` files if required: write them, run on the lab machine |
 | Music notation / audio | Sibelius, Finale, Pro Tools | MuseScore (free desktop), Flat.io (browser), Audacity, Reaper (evaluation) | Export MusicXML/PDF/WAV as asked; the student makes the music |

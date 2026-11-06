@@ -1,5 +1,5 @@
 ---
-tags: [hebrew-with-english]
+tags: [rtl-writing]
 max_turns: 25
 timeout_seconds: 900
 allowed_tools: [Read, Glob, Grep, Bash, Write, Edit, Skill]

@@ -10,7 +10,7 @@ test cases** written for the tests, not copied from courses.
 - Nothing that helps a student cheat: no quiz answering, no submission automation, no "make it look human".
 - No passwords anywhere. The Moodle server stores a revocable token in the OS keychain and nothing else.
 - Scripts stay stdlib-first and degrade gracefully when an optional library is missing.
-- Hebrew documents follow the RTL rules in `skills/hebrew-with-english/SKILL.md`; `tests/test_hebrew_docs.py` checks them.
+- Hebrew documents follow the RTL rules in `skills/rtl-writing/SKILL.md`; `tests/test_hebrew_docs.py` checks them.
 
 ## Setup
 

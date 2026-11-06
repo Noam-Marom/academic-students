@@ -6,7 +6,7 @@ body:
     id: skill
     attributes:
       label: Skill
-      options: [assignment-coach, assignment-judge, academic-writing, exam-prep, lecture-notes, study-planner, moodle-sync, hebrew-with-english, prompt-injection-scanner, installation]
+      options: [assignment-coach, assignment-judge, academic-writing, exam-prep, lecture-notes, study-planner, moodle-sync, rtl-writing, prompt-injection-scanner, installation]
     validations: {required: true}
   - type: dropdown
     id: app

@@ -77,5 +77,5 @@ From `assets/COURSE.template.md`; every field is optional.
 | `grading` | percentages | which part deserves the time |
 | `deadlines` | list of `{title, due, kind}` | planning |
 
-Language of the two questions: the student's. Hebrew replies follow the hebrew-with-english rules and pass
+Language of the two questions: the student's. Hebrew replies follow the rtl-writing rules and pass
 `check_rtl.py` before they are sent.

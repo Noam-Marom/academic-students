@@ -22,4 +22,4 @@ def load_module(path: pathlib.Path, name: str):
 
 @pytest.fixture(scope="session")
 def check_rtl():
-    return load_module(ROOT / "skills/hebrew-with-english/scripts/check_rtl.py", "check_rtl_mod")
+    return load_module(ROOT / "skills/rtl-writing/scripts/check_rtl.py", "check_rtl_mod")

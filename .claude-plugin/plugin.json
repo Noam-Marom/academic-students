@@ -1,7 +1,7 @@
 {
   "name": "academic-students",
-  "version": "0.2.1",
-  "description": "Skills for university students in any degree, in Hebrew and English: break down and check assignments, split group work, estimate the grade an expert professor would give, academic writing with real citations, exam prep from past exams, lecture summaries, a study planner, a read-only Moodle sync, and a prompt-injection scanner that checks every course file before Claude works on it. Never submits, never answers quizzes, never stores a password.",
+  "version": "0.3.0",
+  "description": "Claude skills for university students in any degree and any country: break down and check assignments, split group work, estimate the grade an expert professor would give, academic writing with real citations, exam prep from past exams, lecture summaries, a study planner, read-only sync from Moodle (Canvas and Blackboard through the browser), right-to-left writing (Hebrew, Arabic, Persian, Urdu), and a prompt-injection scanner that checks every course file first. Never submits, never answers quizzes, never stores a password.",
   "author": {
     "name": "Noam Marom"
   },
@@ -9,11 +9,19 @@
   "keywords": [
     "students",
     "university",
-    "hebrew",
+    "academic",
+    "study",
+    "assignments",
+    "grading",
     "academic-writing",
     "exam-prep",
+    "lecture-notes",
     "moodle",
-    "security",
+    "canvas",
+    "rtl",
+    "hebrew",
+    "arabic",
+    "persian",
     "prompt-injection"
   ]
 }

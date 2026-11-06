@@ -124,5 +124,5 @@ the two weakest topics" is one request.
   **[unverified]**.
 - `review-dates.json` parses, every entry has `course`, `topic` and ISO dates, no date is before today.
 - Any Hebrew text, in the reply or in a written file, passes
-  `python3 <hebrew-with-english>/scripts/check_rtl.py <file>` with 0 errors before it leaves.
+  `python3 <rtl-writing>/scripts/check_rtl.py <file>` with 0 errors before it leaves.
 - No sentence predicts the exam. Search the draft for "will be on", "יהיה במבחן", "בטוח ש" and rewrite as frequency.

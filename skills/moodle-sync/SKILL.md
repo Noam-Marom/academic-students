@@ -1,6 +1,6 @@
 ---
 name: moodle-sync
-description: "Pull the student's course material from Moodle into an organised folder, read-only, and report what is new — files, assignments with due dates, announcements, grades, upcoming deadlines — then hand the deadlines to study-planner. Uses the plugin's moodle MCP server (moodle_status, sync_course, list_assignments, get_upcoming_events, …) when it is connected; otherwise sets the server up (uv after a yes; the student logs in in their own terminal) or reads Moodle in the student's own browser. Use it whenever the student says \"תוריד לי את החומר מהמודל\", \"מה חדש במודל\", \"תסנכרן את הקורס\", \"מה ההגשות שלי במודל\", \"הגשות מהמודל\", \"מתי הבוחן נסגר\", \"sync moodle\", \"download my course files\", \"what's new on Moodle\", \"Moodle deadlines\", or pastes a Moodle course link. Never answers quizzes, never submits, never asks for or accepts a password (login is a terminal command). Not for: how to submit on Moodle, answering a quiz (refuse), solving the downloaded assignment (assignment-coach), planning the week (study-planner)."
+description: "Pull the student's course material from Moodle (or Canvas / Blackboard, through the browser) into an organised folder, read-only, and report what is new — files, assignments with due dates, announcements, grades, upcoming deadlines — then hand the deadlines to study-planner. Uses the plugin's moodle MCP server when connected; otherwise sets the server up (uv after a yes; the student logs in in their own terminal) or reads Moodle in the student's own browser. Use it whenever the student says \"תוריד לי את החומר מהמודל\", \"מה חדש במודל\", \"תסנכרן את הקורס\", \"מה ההגשות שלי במודל\", \"הגשות מהמודל\", \"מתי הבוחן נסגר\", \"sync moodle\", \"download my course files\", \"what's new on Moodle\", \"Moodle deadlines\", \"sync Canvas\", or pastes a Moodle or Canvas link. Never answers quizzes, never submits, never asks for or accepts a password (login is a terminal command). Not for: how to submit on Moodle, answering a quiz (refuse), solving the downloaded assignment (assignment-coach), planning the week (study-planner)."
 license: MIT
 ---
 
@@ -28,7 +28,7 @@ never submits, never posts, and never sees the student's password — the login 
    on the student's computer, `scripts/setup_check.py` lists what is missing and the assistant installs `uv`
    after a yes, while the student runs the login in their own terminal; else Moodle in the student's own
    signed-in browser (`references/via-browser.md`, read-only); else Moodle's exports
-   (`references/without-mcp.md`).
+   (`references/without-mcp.md`). A course on Canvas or Blackboard → `references/other-lms.md`.
 2. **Status first.** Call `moodle_status`. If `logged_in` is false or `error` is `auth`, give the student the
    `how_to_login` command verbatim to run in their own terminal, and wait. Never ask for the password in chat;
    if they paste one anyway, do not repeat it, tell them it was not used, suggest changing it if it was a
@@ -76,6 +76,7 @@ it covers (from the course material), and practice questions through `exam-prep`
 - `scripts/setup_check.py` — which setup steps remain on this machine (install uv with consent, the student's terminal login, reconnect), per OS; `--json`; exit 0 ready / 1 steps remain.
 - `references/connect.md` — the order to try: server, automatic setup, browser, exports. Read it in step 1.
 - `references/via-browser.md` — using Moodle in the student's signed-in browser, read-only, when the server cannot run.
+- `references/other-lms.md` — Canvas and Blackboard: the same read-only workflow through the browser and their exports. Read it when the course is not on Moodle.
 - `references/without-mcp.md` — the fallback without the server: Moodle's "Download course content" zip,
   the calendar `.ics` export, saved pages; plus how to install the server in Claude Code. Read it in step 1.
 
@@ -84,4 +85,4 @@ it covers (from the course material), and practice questions through `exam-prep`
 - The scanner ran on every downloaded or generated file before any of it was read or summarised.
 - No password, token or `token=` URL appears in the reply or in any file written (`deadlines.json` included).
 - `deadlines.json` parses as JSON and every `due` matches `YYYY-MM-DDTHH:MM`.
-- Hebrew replies or Hebrew Markdown files pass `check_rtl.py` from the `hebrew-with-english` skill.
+- Hebrew replies or Hebrew Markdown files pass `check_rtl.py` from the `rtl-writing` skill.

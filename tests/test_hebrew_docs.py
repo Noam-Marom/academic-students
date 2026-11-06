@@ -1,4 +1,4 @@
-"""Every Hebrew Markdown document in the repo must render RTL correctly (the hebrew-with-english rules)."""
+"""Every Hebrew Markdown document in the repo must render RTL correctly (the rtl-writing rules)."""
 import pathlib
 import re
 

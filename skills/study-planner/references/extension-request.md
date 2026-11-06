@@ -13,7 +13,7 @@ invents a reason.
 - **Specific and short**: course and assignment name, the original due date, the date asked for, the reason in
   one sentence, what is already done, an offer of an alternative (partial submission on time, a shorter extension).
 - **Language** of the course's administration (`COURSE.md: language`; Hebrew by default in Israeli universities).
-  Hebrew drafts follow the `hebrew-with-english` rules and pass `check_rtl.py`.
+  Hebrew drafts follow the `rtl-writing` rules and pass `check_rtl.py`.
 - **Polite, not apologetic**: no grovelling, no excessive thanks, no emojis.
 - Reserve duty (מילואים) in Israel usually carries formal rights; say once that the student can attach the
   approval (אישור מילואים) and that the university's dean-of-students office handles these requests.

@@ -4,6 +4,17 @@ All notable changes to this plugin are recorded here. Format: [Keep a Changelog]
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-11-06
+
+### Changed
+- **Breaking:** `hebrew-with-english` is now `rtl-writing` and covers Hebrew, Arabic, Persian and Urdu
+  (`check_rtl.py` and `check_docx_rtl.py` handle every RTL script; new `references/arabic-persian-urdu.md`).
+  The old command still triggers it.
+- README in both languages: positioned for students in any country, language, grading system and platform.
+
+### Added
+- `moodle-sync`: Canvas and Blackboard through the student's browser and their exports (`references/other-lms.md`).
+
 ## [0.2.1] - 2026-11-06
 
 ### Added

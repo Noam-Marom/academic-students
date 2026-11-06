@@ -33,7 +33,7 @@ with the zip from https://github.com/Noam-Marom/academic-students/releases/lates
 3. Find **academic-students** in the list and add it.
 
 In claude.ai and the desktop app the skills appear in the `/` menu under their own names, without the plugin
-prefix: `/assignment-coach`, `/assignment-judge`, `/hebrew-with-english` and so on (the menu shows "Academic
+prefix: `/assignment-coach`, `/assignment-judge`, `/rtl-writing` and so on (the menu shows "Academic
 students" next to each). In Claude Code they are `/academic-students:assignment-coach` and so on. Start a new
 chat after installing; a chat that was already open does not load them.
 
@@ -51,7 +51,7 @@ https://github.com/Noam-Marom/academic-students/releases/latest/download/skill-<
 ```
 
 `<name>` is one of the folders under `skills/` (for example `skill-assignment-coach.zip`). Most skills hand
-work to `prompt-injection-scanner` and `hebrew-with-english`, so upload those two as well. The full plugin is
+work to `prompt-injection-scanner` and `rtl-writing`, so upload those two as well. The full plugin is
 the better choice whenever your app supports plugins.
 
 ## Moodle (optional; Claude Code and the desktop app only)

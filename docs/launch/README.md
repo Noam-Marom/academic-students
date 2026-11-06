@@ -7,11 +7,11 @@ account (repo admin, money, or posting as yourself); the rest is already in the 
 
 Repo page → the ⚙ next to **About**:
 
-- **Description:** `Claude skills for university students in any degree: assignment coach, grade estimate, academic writing, exam prep, lecture notes, study planner, Moodle sync. English + Hebrew (RTL).`
+- **Description:** `Claude skills for university students in any degree: assignment coach, grade estimate, academic writing, exam prep, lecture notes, study planner, Moodle & Canvas sync. Any language; RTL for Hebrew, Arabic, Persian.`
 - **Website:** `https://github.com/Noam-Marom/academic-students#install`
 - **Topics:** `claude` `claude-code` `claude-skills` `claude-plugin` `anthropic` `ai-for-education` `students`
-  `university` `academic-writing` `study-tools` `exam-prep` `moodle` `mcp` `prompt-injection` `rtl` `hebrew`
-  `edtech` `agent-skills`
+  `university` `academic-writing` `study-tools` `exam-prep` `moodle` `mcp` `prompt-injection` `rtl` `hebrew` `arabic`
+  `canvas-lms` `edtech` `agent-skills`
 
 Settings → General:
 
@@ -25,7 +25,7 @@ approval. (Claude pushes to `main` directly today; with the rule on, it opens pu
 
 ## 2. Releases (owner, 1 minute)
 
-Releases → **Draft a new release** → tag `v0.2.1` on `main` → **Publish**. The release workflow attaches the
+Releases → **Draft a new release** → tag `v0.3.0` on `main` → **Publish**. The release workflow attaches the
 plugin zip and one zip per skill; `INSTALL.md` links to them.
 
 ## 3. GitHub Sponsors (owner)

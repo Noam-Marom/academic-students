@@ -29,7 +29,7 @@ Near-misses that belong elsewhere:
 - A homework question that happens to be about the lecture → `assignment-coach`.
 - "Download this week's slides from Moodle" → `moodle-sync`, then come back here.
 - A literature summary for a paper → `academic-writing`.
-- Only fixing flipped Hebrew in an existing file → `hebrew-with-english`.
+- Only fixing flipped Hebrew in an existing file → `rtl-writing`.
 
 ## Workflow
 
@@ -100,4 +100,4 @@ If the student wants the summary handed in as coursework ("סיכום להגשה
 - "Sounds like exam material" items each cite a slide number or timestamp.
 - No audio or transcript was sent to any network service.
 - Hebrew text (summary file, glossary rows, reply) passes
-  `python3 <hebrew-with-english>/scripts/check_rtl.py <file>` with 0 errors before it is written or sent.
+  `python3 <rtl-writing>/scripts/check_rtl.py <file>` with 0 errors before it is written or sent.
