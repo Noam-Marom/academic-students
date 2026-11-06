@@ -144,3 +144,31 @@ def test_label_ending_in_english_followed_by_english_is_error(rtl):
 ])
 def test_label_ending_in_english_followed_by_hebrew_is_clean(rtl, line):
     assert rtl.check(line + "\n")[0] == []
+
+
+# --- negative numbers (CLAUDE.md TODO: `-1` at the end of a Hebrew table cell renders as `1-`) ---------------
+
+@pytest.mark.parametrize("text", [
+    "| השינוי | -1 |",
+    "| השינוי בציון | ירידה של -1 |",
+    "| השינוי | −2.5 |",
+    "הטמפרטורה ירדה ל -5 מעלות.",
+    "- המקדם הוא -3 בכל המקרים",
+])
+def test_negative_number_in_hebrew_context_is_error(rtl, text):
+    errors, _ = rtl.check(text + "\n")
+    assert any("negative number" in e["issue"] for e in errors), errors
+
+
+@pytest.mark.parametrize("text", [
+    "| השינוי | מינוס 1 |",
+    "| השינוי | ‎-1 |",
+    "| הטווח | 3-1 |",
+    "- הסרט יצא ב-2008 והצליח",
+    "- הפקודה `git log -1` מציגה את הקומיט האחרון",
+    "| Change | -1 |",
+    "| ציון | 85 |",
+])
+def test_safe_minus_signs_are_clean(rtl, text):
+    errors, _ = rtl.check(text + "\n")
+    assert not any("negative number" in e["issue"] for e in errors), errors

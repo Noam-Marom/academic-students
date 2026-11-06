@@ -31,10 +31,9 @@ Update this table in the same commit that finishes a plan.
 
 ## Open TODOs
 
-- [ ] RTL: a negative number at the end of a Hebrew table cell (`-1`) renders as `1-`. Add a `check_rtl.py` rule + test.
 - [ ] RTL: every slip seen in a real reply becomes a test in `skills/hebrew-with-english/tests/test_check_rtl.py`
       first, then a rule, then a row in `references/chat-markdown.md` (pattern so far: brand name opening a
-      paragraph, `Name (2008)`, `` `fork()` ``, Hebrew in code blocks, `**label ending in English:** English…`).
+      paragraph, `Name (2008)`, `` `fork()` ``, Hebrew in code blocks, `**label ending in English:** English…`, a negative number `-1`).
 - [ ] Moodle: try `moodle-mcp login` against a real university Moodle (BGU first); record the result in `servers/moodle-mcp/MANUAL_CHECKS.md`.
 - [ ] Run `claude plugin eval` once (needs the `ANTHROPIC_API_KEY` secret) and put the pass rates in the README.
 

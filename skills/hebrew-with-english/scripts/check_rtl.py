@@ -142,6 +142,20 @@ CODE_CALL_EMPTY_PARENS = re.compile(r"`[^`]*\(\)`")
 LABEL_EN_THEN_EN = re.compile(r"(\*\*|__)[^*_\n]*[A-Za-z0-9][^*_\n]*:\s*(\*\*|__)\s*[A-Za-z`]")
 
 
+# "ירידה של -1": a minus sign that opens a number has no direction of its own, so in a right-to-left line it lands
+# on the far side of the number and reads "1-". Not a hyphen after a Hebrew prefix (ב-2008), not a range (3-1),
+# not inside inline code, and not when a left-to-right mark (U+200E) already anchors it.
+NEGATIVE_NUMBER = re.compile(r"(?:^|(?<=[\s(|]))[-\u2212]\d")
+NEGATIVE_MSG = ("negative number in Hebrew text renders as '1-'; write 'מינוס 1', or put a left-to-right mark "
+                "(U+200E) right before the minus")
+
+
+def negative_issue(text: str, hebrew_context: bool | None = None):
+    if not (HEB.search(text) if hebrew_context is None else hebrew_context):
+        return None
+    return NEGATIVE_MSG if NEGATIVE_NUMBER.search(re.sub(r"`[^`]*`", "``", text)) else None
+
+
 def midline_issue(text: str):
     if HEB.search(text) and LABEL_EN_THEN_EN.search(text):
         return "bold label ending in English is followed by English; start the text after the label with a Hebrew word ('**סשן ה-Transformer:** מודל Transformer…')"
@@ -185,10 +199,11 @@ def check(text: str):
             if TABLE_SEP.match(stripped):
                 continue
             cells = [c for c in stripped.strip("|").split("|")]
+            row_is_hebrew = bool(HEB.search(stripped))
             for ci, cell in enumerate(cells, 1):
                 if not cell.strip():
                     continue
-                issue = first_issue(cell.strip())
+                issue = first_issue(cell.strip()) or negative_issue(cell.strip(), row_is_hebrew)
                 if issue:
                     errors.append({"line": n, "where": f"table cell {ci}", "issue": issue, "text": cell.strip()})
             continue
@@ -198,7 +213,7 @@ def check(text: str):
         issue = first_issue(line)
         if issue:
             errors.append({"line": n, "where": "line start", "issue": issue, "text": line.strip()})
-        mid = midline_issue(line)
+        mid = midline_issue(line) or negative_issue(strip_prefix(line))
         if mid:
             errors.append({"line": n, "where": "mid-line", "issue": mid, "text": line.strip()})
         end = ending_issue(line)

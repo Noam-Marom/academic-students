@@ -86,6 +86,7 @@ reader sees, and is it Hebrew?**
 | Bold label ending in English, then English | `**סשן ה-Transformer:** Transformer קטן` | `**סשן ה-Transformer:** מודל Transformer קטן` |
 | Hebrew comment inside a code block | `/* מגיעים לכאן רק אם exec נכשל */` | `/* reached only if exec failed */` + Hebrew explanation after the block |
 | Function call with `()` in inline code | ``הקריאה `fork()` יוצרת…`` | ``הקריאה `fork` יוצרת…`` |
+| Negative number (table cell or sentence) | `\| השינוי \| -1 \|` renders `1-` | `\| השינוי \| מינוס 1 \|`, or U+200E right before the minus |
 | English title with a colon, then a comma | `ב-*Avengers: Endgame* (2019), עם…` | `בסרט *Avengers: Endgame* משנת 2019, עם…` |
 
 ## How to write it (habit, not afterthought)

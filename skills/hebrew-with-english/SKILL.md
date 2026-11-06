@@ -69,7 +69,7 @@ For LaTeX: compile with XeLaTeX/LuaLaTeX; "Missing character" warnings mean a fo
 **When no shell is available**, list to yourself the first word of every line (each heading, bullet, bold label,
 table cell, the lines around each code block, and the last line) and confirm each is Hebrew; do the same for the
 last token before each line's final punctuation. Fix any line that fails using rule 2 of the chat reference.
-Two slips survive this check most often, so look for them by name:
+These slips survive this check most often, so look for them by name:
 - **The first sentence after a heading that opens with a name** (`Marvel היא…`, `Python היא…`). Put a Hebrew
   noun first: `החברה Marvel היא…`, `השפה Python היא…`.
 - **A bold label that ends in English followed by English text** (`**סשן ה-Transformer:** Transformer…`):
@@ -78,5 +78,8 @@ Two slips survive this check most often, so look for them by name:
   the Hebrew explanation goes in the prose after the block.
 - **An English name followed by a number in parentheses** (`*Iron Man* (2008)`): the number renders on the wrong
   side of the name. Write the number in Hebrew words around it: `הסרט *Iron Man* משנת 2008`.
+
+- **A negative number** (`ירידה של -1`, a cell `| -1 |`): it renders as `1-`. Write `מינוס 1`, or put a
+  left-to-right mark (U+200E) right before the minus.
 
 Skip the check only for a short reply of plain sentences with no list, table, heading or label.
