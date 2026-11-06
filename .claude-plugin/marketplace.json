@@ -1,8 +1,8 @@
 {
   "name": "noam-academic",
-  "description": "Noam Marom's plugins for university students: academic-students (assignments, writing, exams, Moodle, prompt-injection scanning) in Hebrew and English.",
+  "description": "Noam Marom and Eyal Silbershtein's plugins for university students: academic-students (assignments, writing, exams, Moodle, prompt-injection scanning) in Hebrew and English.",
   "owner": {
-    "name": "Noam Marom"
+    "name": "Noam Marom & Eyal Silbershtein"
   },
   "plugins": [
     {

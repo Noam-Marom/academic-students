@@ -8,7 +8,7 @@ version = "0.1.0"
 description = "Read-only MCP server for Moodle Web Services: login in a terminal, token in the OS keychain, no password ever in Claude's context."
 requires-python = ">=3.10"
 license = { text = "MIT" }
-authors = [{ name = "Noam Marom" }]
+authors = [{ name = "Noam Marom" }, { name = "Eyal Silbershtein" }]
 dependencies = [
   "mcp>=1.2",
   "httpx>=0.27",
