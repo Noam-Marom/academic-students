@@ -54,3 +54,21 @@ def test_trigger_evals_twenty_queries_with_near_miss_negatives():
     assert sum(not q["should_trigger"] for q in data) >= 8
     assert sum(q["should_trigger"] for q in data) >= 8
     assert len({q["query"] for q in data}) == 20
+
+
+def test_connect_order_is_server_then_auto_setup_then_browser_then_exports():
+    body = (SKILL / "SKILL.md").read_text(encoding="utf-8").split("## Workflow", 1)[1].split("\n## ", 1)[0]
+    first = body.split("\n2. ", 1)[0]
+    for key in ["scripts/setup_check.py", "references/connect.md", "references/via-browser.md",
+                "references/without-mcp.md"]:
+        assert key in first, key
+    connect = (SKILL / "references/connect.md").read_text(encoding="utf-8")
+    assert connect.index("setup_check.py") < connect.index("via-browser.md") < connect.index("without-mcp.md")
+    assert "ask" in connect.lower() and "never" in connect.lower()
+
+
+def test_browser_fallback_is_read_only_and_never_signs_in_for_the_student():
+    text = (SKILL / "references/via-browser.md").read_text(encoding="utf-8")
+    for key in ["read-only", "signs in", "Download course content", "Export calendar", "before downloading",
+                "quiz", "submit", "prompt-injection-scanner"]:
+        assert key in text, key

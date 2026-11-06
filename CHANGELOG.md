@@ -4,6 +4,14 @@ All notable changes to this plugin are recorded here. Format: [Keep a Changelog]
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-11-06
+
+### Added
+- `moodle-sync`: connects in order — the server; automatic setup (`setup_check.py`: installs uv after a yes, the student logs in in their own terminal); Moodle read-only in the student's signed-in browser; Moodle's exports.
+
+### Fixed
+- Scanner and RTL checker work in read-only folders; eval scaffolds; evals moved to `evals/<skill>/`.
+
 ## [0.2.0] - 2026-11-06
 
 ### Added
