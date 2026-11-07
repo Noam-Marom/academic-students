@@ -88,7 +88,7 @@ terminal (the password is typed there, never in Claude; only a revocable token i
 
 ```
 pip install uv
-uv run --directory <plugin folder>/servers/moodle-mcp moodle-mcp login https://moodle.your-university.ac.il
+uv run --frozen --directory <plugin folder>/servers/moodle-mcp moodle-mcp login https://moodle.your-university.ac.il
 ```
 
 ## Building the zips yourself

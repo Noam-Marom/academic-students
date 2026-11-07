@@ -31,7 +31,7 @@ def test_with_uv_only_login_and_reconnect_remain(sc):
     assert ids(p) == ["login", "reconnect"]
     login = p["steps"][0]
     assert login["run_by"] == "student"
-    assert login["command"] == f"uv run --directory {SERVER} moodle-mcp login https://moodle.example.ac.il"
+    assert login["command"] == f"uv run --frozen --directory {SERVER} moodle-mcp login https://moodle.example.ac.il"
 
 
 @pytest.mark.parametrize("os_name,needle", [("windows", "install.ps1"), ("darwin", "install.sh"), ("linux", "install.sh")])

@@ -49,7 +49,7 @@ def plan(os_name: str, have_uv: bool, server_dir: Path | None, moodle_url: str |
                    "terminal is needed afterwards so uv is on PATH"})
     out["steps"].append({
         "id": "login", "run_by": "student", "needs_consent": False,
-        "command": f"uv run --directory {server_dir} moodle-mcp login {moodle_url or '<moodle-url>'}",
+        "command": f"uv run --frozen --directory {server_dir} moodle-mcp login {moodle_url or '<moodle-url>'}",
         "why": "Moodle asks for the password in that terminal; only a revocable token is kept, in the keychain"})
     out["steps"].append({
         "id": "reconnect", "run_by": "student", "needs_consent": False,

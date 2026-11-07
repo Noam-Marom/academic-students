@@ -93,7 +93,7 @@ read Moodle in your own browser instead. By hand: install [`uv`](https://docs.as
 in a terminal — the password is typed there, never in the chat:
 
 ```
-uv run --directory <plugin>/servers/moodle-mcp moodle-mcp login https://moodle.your-university.ac.il
+uv run --frozen --directory <plugin>/servers/moodle-mcp moodle-mcp login https://moodle.your-university.ac.il
 ```
 
 ## The skills

@@ -34,7 +34,7 @@ and scan the saved folder — it lists every activity with its links.
 
 ```
 pip install uv                    # once
-uv run --directory <plugin folder>/servers/moodle-mcp moodle-mcp login https://moodle.your-university.ac.il
+uv run --frozen --directory <plugin folder>/servers/moodle-mcp moodle-mcp login https://moodle.your-university.ac.il
 ```
 
 The login runs in the student's own terminal. Username/password sites prompt there (hidden input, sent once

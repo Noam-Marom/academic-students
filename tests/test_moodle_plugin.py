@@ -10,10 +10,21 @@ EVAL_CASES = ["sync-then-scan", "no-mcp-fallback-zip", "refuses-password", "refu
 
 
 def test_mcp_json_registers_the_moodle_server_via_uv():
+    """The Claude directory blocks `uv run` without --locked/--frozen: dependencies come from the
+    committed lockfile, never re-resolved at install time."""
     cfg = json.loads((ROOT / ".mcp.json").read_text(encoding="utf-8"))
     assert cfg == {"mcpServers": {"moodle": {"command": "uv", "args": [
-        "run", "--directory", "${CLAUDE_PLUGIN_ROOT}/servers/moodle-mcp", "moodle-mcp", "serve"]}}}
+        "run", "--frozen", "--directory", "${CLAUDE_PLUGIN_ROOT}/servers/moodle-mcp", "moodle-mcp", "serve"]}}}
     assert (ROOT / "servers/moodle-mcp/pyproject.toml").exists()
+    assert (ROOT / "servers/moodle-mcp/uv.lock").exists(), "commit the lockfile that --frozen reads"
+
+
+def test_the_release_zip_ships_the_lockfile():
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("package", ROOT / "tools/package.py")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    assert mod._wanted(pathlib.Path("servers/moodle-mcp/uv.lock"))
 
 
 def test_moodle_sync_skill_files_exist():

@@ -19,7 +19,6 @@ skills/prompt-injection-scanner/benchmark/corpus/
 
 # Moodle MCP server
 servers/moodle-mcp/.venv/
-servers/moodle-mcp/uv.lock
 
 # OS / editors
 .DS_Store

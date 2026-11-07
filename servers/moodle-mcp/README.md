@@ -8,7 +8,7 @@ mirror a course into a folder. It never answers quizzes, never submits, never po
 
 ```
 pip install uv                                   # once
-uv run --directory servers/moodle-mcp moodle-mcp login https://moodle.your-university.ac.il
+uv run --frozen --directory servers/moodle-mcp moodle-mcp login https://moodle.your-university.ac.il
 ```
 
 - Username/password sites: the password is typed in that terminal (hidden), sent once to `login/token.php`
@@ -21,7 +21,7 @@ uv run --directory servers/moodle-mcp moodle-mcp login https://moodle.your-unive
 - `moodle-mcp status` checks every stored token; `moodle-mcp logout <site>` forgets one.
 - With several sites logged in, set `MOODLE_MCP_SITE` to the one the server should use.
 
-The plugin's `.mcp.json` starts it with `uv run --directory ${CLAUDE_PLUGIN_ROOT}/servers/moodle-mcp moodle-mcp serve`.
+The plugin's `.mcp.json` starts it with `uv run --frozen --directory ${CLAUDE_PLUGIN_ROOT}/servers/moodle-mcp moodle-mcp serve`.
 
 ## Tools
 

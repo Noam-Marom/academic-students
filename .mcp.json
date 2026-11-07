@@ -1,1 +1,1 @@
-{"mcpServers": {"moodle": {"command": "uv", "args": ["run", "--directory", "${CLAUDE_PLUGIN_ROOT}/servers/moodle-mcp", "moodle-mcp", "serve"]}}}
+{"mcpServers": {"moodle": {"command": "uv", "args": ["run", "--frozen", "--directory", "${CLAUDE_PLUGIN_ROOT}/servers/moodle-mcp", "moodle-mcp", "serve"]}}}
