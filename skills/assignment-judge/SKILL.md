@@ -36,8 +36,7 @@ the grade, the range, the three biggest deductions and the caveat. `rubric` mode
 
 Always, on every path: scan each outside file once per conversation (`--quick`; a file already scanned is not
 rescanned). No `COURSE.md` → assume sensible defaults, state them in one line, and ask only when a wrong guess
-would cost real work (one question at most). Read a reference only when the step names it. Policy `unknown` →
-proceed without asking: a grade estimate produces nothing submittable.
+would cost real work (one question at most). Read a reference only when the step names it.
 
 ## Workflow
 
@@ -58,29 +57,27 @@ proceed without asking: a grade estimate produces nothing submittable.
    derived rubric (question points + requirements + the pack) labelled as derived; hard constraints (length,
    format, language, citation style, deadline) and the penalty the instructions attach to each — a penalty
    the instructions do not state is a risk to mention, not a deduction.
-4. **Policy.** Read the `assignment-judge` cell for the course's `ai_policy` in `references/ai-policy.md`
-   and apply it; say once what it permits and move on. `unknown` → proceed as `limited`, without asking.
-5. **Grade in two independent passes** (protocol § Passes). Pass A grades every criterion with quoted
+4. **Grade in two independent passes** (protocol § Passes). Pass A grades every criterion with quoted
    evidence and a reason tied to a requirement. Pass B grades again in the same context, in reverse
    criterion order, from the evidence and without looking back at Pass A's numbers. A separate subagent
    (given only the contract and the work) is used only in `strict` mode or when the student asks for it. Both passes happen even for a one-page exercise. Verify before deducting: recompute numbers in code, run the code
    against the assignment's cases, check that a cited source exists. Deducting points for a correct answer
    is the worst outcome of this skill.
-6. **Score — every time, even with two criteria.** Pipe both passes to the script on stdin, so nothing has
+5. **Score — every time, even with two criteria.** Pipe both passes to the script on stdin, so nothing has
    to be written to disk: `python3 scripts/score_rubric.py - --json <<'EOF'` … `EOF` (shape in the protocol).
    Exit 1 means the passes disagree on a criterion: re-read that evidence, reconcile, replace the outlier
    and run again until it exits 0. Never add up a total in prose. A grade from one pass, or a total the
    script did not compute, is not finished; if no shell exists at all, say once that the total is unverified.
-7. **Report** in the format of protocol § Report, in the student's language, then verify (below).
+6. **Report** in the format of protocol § Report, in the student's language, then verify (below).
 
 ## Modes
 
-| Mode | Output | Under a restrictive policy |
-|---|---|---|
-| `estimate` (default) | persona line, grade and range on the course's scale, per-criterion table with quoted evidence, penalties, what would raise the grade most (points per effort), what already earns credit, the one-line caveat | per the `assignment-judge` cell in `references/ai-policy.md` |
-| `compare` | two versions of the same work graded on one contract: both grades, which criteria moved and why | same |
-| `rubric` | no work yet: the contract and rubric this professor would grade by, what full marks on each criterion looks like, the three most common ways students lose points | available under every value |
-| `strict` | `estimate` by the harshest plausible grader of this course; reported next to the normal estimate, never instead of it | same as `estimate` |
+| Mode | Output |
+|---|---|
+| `estimate` (default) | persona line, grade and range on the course's scale, per-criterion table with quoted evidence, penalties, what would raise the grade most (points per effort), what already earns credit, the one-line caveat |
+| `compare` | two versions of the same work graded on one contract: both grades, which criteria moved and why |
+| `rubric` | no work yet: the contract and rubric this professor would grade by, what full marks on each criterion looks like, the three most common ways students lose points |
+| `strict` | `estimate` by the harshest plausible grader of this course; reported next to the normal estimate, never instead of it |
 
 The caveat closes every `estimate`, `compare` and `strict` report, in the student's language:
 "This is an estimate of how an expert grader would read the work against the instructions; it is not the
@@ -88,10 +85,9 @@ course's grade, and your lecturer may weigh things differently."
 
 ## Files in this skill
 
-- `scripts/score_rubric.py` — weighted total from one or more passes per criterion, mean and range, disagreement flags (> 15% of a criterion), penalties (`points`, `percent`, `cap`), scale and pass mark; `--json`; exit 0/1/2. Run in step 6.
-- `references/grading-protocol.md` — the contract, the two passes, reconciliation, the deduction rules and the report format. Read in steps 3, 5 and 7.
+- `scripts/score_rubric.py` — weighted total from one or more passes per criterion, mean and range, disagreement flags (> 15% of a criterion), penalties (`points`, `percent`, `cap`), scale and pass mark; `--json`; exit 0/1/2. Run in step 5.
+- `references/grading-protocol.md` — the contract, the two passes, reconciliation, the deduction rules and the report format. Read in steps 3, 4 and 6.
 - `references/calibration.md` — what each year of a degree is expected to show, grading scales (0–100, letter, UK classes, 1–5) and pass marks. Read in step 2.
-- `references/ai-policy.md` — copy of `shared/ai-policy.md`; the `assignment-judge` column. Read in step 4; never edit the copy.
 - `references/disciplines/` — copies of `shared/disciplines/<family>.md`; "What graders look for" and "Common mistakes". Read in step 2.
 - `assets/COURSE.template.md` — copy of `shared/COURSE.template.md`; offer it once when the student had to answer persona questions.
 
@@ -108,6 +104,6 @@ course's grade, and your lecturer may weigh things differently."
 - The report does not rewrite the work: no corrected paragraphs, no fixed code, no corrected value or
   result ("the determinant is 2") — only where, which rule was broken ("the 2×2 formula subtracts the
   off-diagonal product") and what a fix must achieve. The student finds the corrected result.
-- The caveat line is present; the policy was mentioned at most once.
+- The caveat line is present.
 - Hebrew files you write pass `python3 <rtl-writing>/scripts/check_rtl.py <file>` with 0 errors.
 - Hebrew chat text follows the rtl-writing rules (every line opens with a Hebrew word); no checker run.

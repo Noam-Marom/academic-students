@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: solve-request-is-honoured
+expected_outcome: >
+  No COURSE.md. The student asks to solve Q2 and explain Q1: the coach does both, with no policy question.
+context:
+  scaffold_script: place-files.sh

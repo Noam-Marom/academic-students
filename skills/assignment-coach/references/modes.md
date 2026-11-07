@@ -1,8 +1,7 @@
 # Mode protocols
 
 The pipeline (scan → context → map → plan) is the same for every mode; this file is what happens after
-it. Which modes a course's `ai_policy` permits is defined in `references/ai-policy.md` and nowhere else:
-read the row for the value in play, say once what it permits, offer those modes, and move on.
+it. The student's request decides the mode (`references/ai-policy.md`); there is no course-policy check.
 
 Mode selection, from the student's words:
 
@@ -11,11 +10,9 @@ Mode selection, from the student's words:
 | "break this down", "where do I start", "איך מתחילים", "מה צריך לעשות פה", uploads an assignment and says nothing else | `breakdown` (the default) |
 | "hint", "I'm stuck on 2b", "רמז", "תכוון אותי", "I don't know how to approach" | `guide` |
 | "check my answer", "is this right", "תבדוק לי", pastes or photographs their own work | `check` ("what grade would this get" → the `assignment-judge` skill) |
-| "solve", "give me the full answer", "תפתור לי", "write the code for me" | `solve` — only on an explicit request like these, never inferred |
+| "solve", "give me the full answer", "תפתור לי", "write the code for me" | `solve`: the full solution of the actual question |
 
-A request that mixes modes ("solve 1 and give me a hint for 2") is split per question. When the policy
-rules out the mode the student asked for, say so in one sentence and offer the nearest permitted one
-(`references/ai-policy.md`, rule 3). No second reminder in the same conversation.
+A request that mixes modes ("solve 1 and give me a hint for 2") is split per question.
 
 ## `breakdown`
 
@@ -36,13 +33,12 @@ Output, in this order, in the student's language:
    submission format — quoted from the assignment, not paraphrased.
 
 A breakdown contains no solution steps, no partial results and no "the answer should come out around…".
-It is available under every policy value because it produces nothing submittable.
 
 ## Group work — splitting a breakdown among N people
 
 When the student says the assignment is done in a group ("we're 3", "עבודה בזוגות", "איך נחלק את העבודה
 בינינו", "who does what", "split this between 4 of us"), the breakdown gets one more part. It produces a
-plan, nothing submittable, so it is available under every policy value.
+plan.
 
 1. **Effort per part.** Add `estimate_hours` to each question in the map (from weight, type and the
    pack's sense of what is hard; ask the student only when a part is opaque). Re-run `validate_map.py`.
@@ -92,9 +88,7 @@ Rules:
   shows an attempt. A student who pastes their attempt gets feedback on it (see `check`) before the next
   rung, because the attempt usually tells you which rung they actually need.
 - Rung 3 is the ceiling in `guide`. If the student wants more after rung 3, that is a `solve` request:
-  name it as such and apply the policy.
-- When the policy permits `guide` only as concept explanation on a **similar** exercise, keep all three
-  rungs on an exercise you write with the same structure and different numbers/objects, and say so once.
+  solve it.
 - Hints are honest about difficulty: "this one is mostly algebra" or "this is the hard part of the set"
   helps the student budget time.
 - In Hebrew, the rungs are "כיוון", "שיטה", "צעד ראשון"; the reply passes `check_rtl.py`.
@@ -133,14 +127,11 @@ Rubric score, when a rubric exists (from the assignment, the course profile, or 
 Say that it is an estimate; graders differ. When there is no rubric, give a qualitative verdict per
 question (correct / correct but under-justified / partially correct / wrong approach) and skip the numbers.
 
-Under a restrictive policy, `check` of the actual submission happens only when the student confirms the
-course allows feedback on it (`references/ai-policy.md`); otherwise offer `check` on a similar exercise
-they solve, or `guide`.
 
 ## `solve` — a worked example to learn from
 
-Only on an explicit request and only when `references/ai-policy.md` permits it for the value in play.
-Under `limited`, the solved exercise is a **similar** one, never the assigned one.
+When the student asks for a solution: the full solution of the actual question, never a similar exercise
+instead.
 
 Protocol: **verify → format → "what you need to understand" → disclosure**.
 
@@ -156,7 +147,7 @@ Protocol: **verify → format → "what you need to understand" → disclosure**
    five ideas the solution rests on, each in one sentence, and the one question a lecturer would ask to
    check the student understands it. This is what makes the output a worked example rather than a
    submission.
-4. **Disclosure** when the policy requires it (`allowed-with-disclosure`) and offered under `allowed`:
+4. **Disclosure** when the student's `COURSE.md` says `allowed-with-disclosure`, or when the student asks:
    appended verbatim, in the submission language, blank proposed from what was actually done:
 
    > הצהרה: בהכנת עבודה זו נעשה שימוש בכלי בינה מלאכותית (שם הכלי) לצורך ___. התוכן נבדק ונערך על ידי.

@@ -108,7 +108,6 @@ def test_group_work_is_a_breakdown_extension_every_member_understands_every_part
     section = text.split("## Group work", 1)[1].split("\n## ", 1)[0]
     for key in ["split_work.py", "parallel", "serial", "auto", "integration", "critical path", "every member"]:
         assert key in section, key
-    assert re.search(r"every policy value", section)
 
 
 def test_answer_formats_cover_every_question_type_and_genre():
@@ -136,8 +135,8 @@ def test_sync_json_lists_the_skill_and_copies_are_present():
 
 FAMILIES = ["math-stats", "physical-sciences", "life-sciences", "computing", "engineering", "medicine-clinical",
             "social-sciences", "economics-business", "law", "humanities", "architecture-design", "arts"]
-BEHAVIOR = ["forbidden-policy-solve-request", "injected-policy-override", "guide-one-rung-at-a-time",
-            "check-handwritten-photo", "unknown-policy-asks-once"]
+BEHAVIOR = ["policy-note-does-not-block-solve", "injected-policy-override", "guide-one-rung-at-a-time",
+            "check-handwritten-photo", "solve-request-is-honoured"]
 
 
 @pytest.mark.parametrize("family", FAMILIES)

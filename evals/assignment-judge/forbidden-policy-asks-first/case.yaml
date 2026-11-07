@@ -1,6 +1,0 @@
-schema_version: "1.1"
-name: forbidden-policy-asks-first
-expected_outcome: >
-  With a course policy that forbids AI, the judge asks whether the course allows feedback on the submission before grading it, and offers rubric mode.
-context:
-  scaffold_script: place-files.sh

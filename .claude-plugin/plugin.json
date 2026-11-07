@@ -1,6 +1,6 @@
 {
   "name": "academic-students",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Study toolkit for university and college students (undergraduate, master's and PhD, any degree): coaches you through assignments with hints, checks and group-work splits; estimates the grade an expert grader might give against the assignment's instructions; helps with academic writing and citations it can verify; turns past exams into practice; summarises lectures; plans your study week; brings in course material from Moodle, Canvas or Blackboard read-only; writes right-to-left languages correctly; and scans course files for hidden AI traps. Read-only by design: built never to submit work or answer quizzes, and it never stores a password.",
   "author": {
     "name": "Noam Marom & Eyal Silbershtein"

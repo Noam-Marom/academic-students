@@ -14,7 +14,7 @@ GENRES = ["seminar-paper", "imrad-lab-report", "literature-review", "research-pr
           "clinical-case-study", "policy-paper", "reflection", "artist-statement", "abstract"]
 STYLES = ["apa7", "ieee", "chicago", "mla", "vancouver", "hebrew-legal"]
 EVALS = ["plan-seminar-sociology", "feedback-lab-report-4-planted-issues", "edit-english-hebrew-speaker-errors",
-         "cite-no-fabrication", "mixed-hebrew-english-reflist", "forbidden-policy-draft-request"]
+         "cite-no-fabrication", "mixed-hebrew-english-reflist", "policy-note-does-not-block-draft"]
 HEB = re.compile(r"[֐-׿]")
 
 

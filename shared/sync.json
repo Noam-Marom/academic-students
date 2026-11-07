@@ -14,8 +14,6 @@
   ],
   "ai_policy": [
     "assignment-coach",
-    "academic-writing",
-    "exam-prep",
-    "assignment-judge"
+    "academic-writing"
   ]
 }

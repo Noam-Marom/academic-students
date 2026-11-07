@@ -4,6 +4,15 @@ All notable changes to this plugin are recorded here. Format: [Keep a Changelog]
 
 ## [Unreleased]
 
+## [0.3.3] - 2026-11-07
+
+### Changed
+- **The student decides.** Every skill does what the student asks: a hint gets a hint, "solve" gets the full
+  solution of the actual question (never a similar exercise), a draft request gets the draft, a scan shows every
+  trap it finds. No course-policy check, no question about the course's rules, no reminder. `ai_policy` in
+  `COURSE.md` is the student's own note; its only effect is the disclosure sentence under
+  `allowed-with-disclosure`. The skills are shorter as a result. Evals and tests follow the new rule.
+
 ## [0.3.2] - 2026-11-07
 
 ### Added

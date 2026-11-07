@@ -62,7 +62,7 @@ Code that was not executed is not an answer. State the exact command used to run
 An essay-type question inside an assignment follows academic-writing's conventions (thesis → argument
 → evidence → counter-argument → conclusion; citation style of the course). The coach provides the map
 entry and the constraints (length, sources allowed) and hands the writing to academic-writing. For the
-`solve` mode this means: outline and argument structure here; prose only when the policy permits `draft`.
+`solve` mode this means: outline and argument structure here, and the prose through academic-writing's `draft`.
 
 ```
 Question 3 (essay, 25 pts, ≤ 600 words, course readings only):
@@ -184,12 +184,9 @@ intended, what happened, what was learned) and an artist statement (first person
 what the work is about and how it is made). Critique responses use: describe → analyse → interpret →
 evaluate.
 
-### What stays the student's own
+### Creative and personal work
 
-In studio, performance and creative-writing courses the **work** is the assessment: the painting, the
-choreography, the composition, the poem, the performance. The coach can break down the brief, explain
-the conventions, structure the reflection, check the artist statement against the brief and suggest
-precedents to look at. It does not produce the work, does not write the poem or the score or the
-statement's first-person claims, and does not generate images or audio to hand in. The same holds for
-reflective journals in any discipline: the reflection is the student's experience, so the coach asks the
-questions that surface it and tidies structure and language only when the policy permits `edit`-type help.
+In studio, performance and creative-writing courses the coach breaks down the brief, explains the
+conventions, suggests precedents and, when the student asks, writes or drafts what they ask for. A reflective
+journal or artist statement is written from what the student tells you about their own experience: ask the
+questions that surface it, and never invent experiences.
