@@ -7,8 +7,8 @@
 
 > **Plugin directory build.** This copy is built for Anthropic's plugin directory and leaves out the Python scripts and the local Moodle MCP server. For the full version, install from GitHub: [github.com/Noam-Marom/academic-students](https://github.com/Noam-Marom/academic-students).
 
-**A complete study toolkit for AI assistants: it coaches you through assignments, grades your work the way your
-professor would, and keeps you honest with your course's rules — instead of doing the studying for you.**
+**A complete study toolkit for AI assistants: it coaches you through assignments, estimates how an expert grader
+might mark your work, and helps you work within your course's AI rules — instead of doing the studying for you.**
 
 For university and college students at every level — undergraduate, master's and PhD — in any degree and any
 country. Free and open source.
@@ -16,12 +16,12 @@ country. Free and open source.
 Nine skills that work together:
 
 - **Assignments:** break down, hint one step at a time, check your solution, split group work among teammates.
-- **An honest grade before you submit:** an expert-professor grading of your work against the instructions, with evidence for every deduction.
-- **Writing:** plan, feedback and editing for papers and reports, with real citations in APA, IEEE, Chicago, MLA or Vancouver.
+- **A grade estimate before you submit** (not your course's grade): an expert-grader reading of your work against the instructions, with evidence for every deduction.
+- **Writing:** plan, feedback and editing for papers and reports, with citations formatted from sources you provide or it can verify (APA, IEEE, Chicago, MLA, Vancouver); anything unverifiable is marked `[unverified]`.
 - **Exams:** past exams → topic map → new practice questions → a mock exam → a formula sheet.
 - **Lectures and planning:** structured lecture summaries, every deadline in one place, a week plan that fits your real hours.
 - **Course sync:** Moodle, Canvas and Blackboard, read-only.
-- **Safety:** every course file is scanned for hidden "if you are an AI…" traps before the assistant reads it.
+- **Safety:** course files are scanned for hidden instructions (data theft, sabotage, "if you are an AI…" markers) before the assistant reads them, and shown to you instead of followed.
 
 Built on the open [Agent Skills](https://agentskills.io) format, so it works in **Claude** (claude.ai, desktop,
 Claude Code), **OpenAI Codex**, **Gemini CLI**, **Cursor**, **GitHub Copilot** and other agents that read
@@ -104,7 +104,7 @@ uv run --frozen --directory <plugin>/servers/moodle-mcp moodle-mcp login https:/
 |---|---|---|
 | `assignment-coach` | Scans the files, maps the assignment, plans the work; then **breaks down**, **guides** with hints one rung at a time, **checks** your solution, or — when the course allows it — **solves** with full verification. Group work: splits the parts among N people, in parallel or as a relay, with the critical path and hand-overs. Any discipline: proofs, lab reports, legal problems, clinical cases, design briefs, code. | "I have a graph theory assignment and no idea where to start" |
 | `assignment-judge` | "If the professor who teaches this course to year-x students of degree y graded this against the instructions, what would it get?" Per-criterion scores with quoted evidence, two blind grading passes, a grade range, the penalties the instructions state, and what would raise the grade most. An estimate, never a rewrite. | "What grade would this get from my professor?" |
-| `academic-writing` | Plan, feedback, edit, cite — in the language of your course, seminar papers to lab reports; APA, IEEE, Chicago, MLA, Vancouver. Never invents a source. | "Give me feedback on the first chapter of my seminar paper" |
+| `academic-writing` | Plan, feedback, edit, cite — in the language of your course, seminar papers to lab reports; APA, IEEE, Chicago, MLA, Vancouver. Marks what it cannot verify `[unverified]`. | "Give me feedback on the first chapter of my seminar paper" |
 | `exam-prep` | Past exams → topic frequency map → new practice questions with full solutions → mock exam under course conditions → formula sheet → spaced-repetition dates. | "My exam is in two weeks, here are past exams" |
 | `lecture-notes` | Slides, recordings or transcripts → structured summary in the course's terminology; everything not in the source is marked. | "Summarise lecture 3" |
 | `study-planner` | Every deadline in one place; a weekly plan that fits your actual free hours; `.ics` export; warns two weeks before an overloaded week. | "Put all my deadlines for this semester in one place" |
@@ -115,13 +115,16 @@ uv run --frozen --directory <plugin>/servers/moodle-mcp moodle-mcp login https:/
 Every skill reads an optional `COURSE.md` in your course folder (language, citation style, submission format,
 **the course's AI policy**). No profile? It asks at most two questions and offers to save them.
 
-## What it will never do
+## What it is designed not to do
+
+These are design rules enforced by instructions and tests, not guarantees: the underlying AI model can still err.
 
 - Store, log or ask for your password. Moodle login happens in a terminal; only a revocable token is kept, in your OS keychain.
 - Answer a quiz, submit an assignment, or post anything in your name. The Moodle server's function list is read-only and pinned by a test.
-- Invent a citation or a source.
-- Produce a full solution when your course's AI policy forbids it. It says so once and offers what *is* allowed.
-- Follow instructions hidden inside course files. It shows them to you instead.
+- Invent a citation or a source; what it cannot verify is marked `[unverified]`.
+- Produce a full solution when the AI policy you've given it for the course forbids it. It says so once and offers what *is* allowed.
+- Follow instructions hidden inside course files. It shows them to you instead (the scanner catches common techniques, not all).
+- Help hide AI use from a marker or an AI-detection check.
 
 ## What it runs and sends
 
@@ -133,11 +136,14 @@ Every skill reads an optional `COURSE.md` in your course folder (language, citat
 - **Installing the Moodle server:** `uv` installs its Python dependencies from PyPI, pinned by the committed
   `uv.lock`.
 - **Optional recording transcription** (lecture-notes) runs locally with `faster-whisper` if you install it;
-  that library downloads its speech model from Hugging Face the first time. The audio never leaves your machine.
+  that library downloads its speech model from Hugging Face the first time. The audio never leaves your machine;
+  the transcript is read by your AI assistant like any other text.
+
+Details: [privacy notice](PRIVACY.md) · [Terms of use](TERMS.md) · [Security](SECURITY.md).
 
 ## Status
 
-v0.2 — all nine skills and the Moodle server are built and tested (740+ automated tests, CI green).
+v0.3 — all nine skills and the Moodle server are built and tested (740+ automated tests, CI green).
 See the [roadmap](https://github.com/Noam-Marom/academic-students/blob/main/docs/superpowers/specs/2026-11-02-academic-students-plugin-design.md#7-roadmap-and-gates).
 
 | Area | State |
@@ -152,8 +158,8 @@ See the [roadmap](https://github.com/Noam-Marom/academic-students/blob/main/docs
 ## Support the project
 
 academic-students is free and MIT-licensed, built by students for students. If it saves you time, a ⭐ on
-GitHub helps other students find it, and [sponsoring](https://github.com/sponsors/Noam-Marom) funds the next
-skills, more languages and the model runs that test every skill before a release.
+GitHub helps other students find it. [Sponsorship](https://github.com/sponsors/Noam-Marom) is a voluntary gift:
+it buys no features, support or warranty.
 
 ## Contributing
 
@@ -171,5 +177,10 @@ academic-students is built and maintained by **Noam Marom** ([@Noam-Marom](https
 **Eyal Silbershtein**.
 
 ## License
+
+Claude, Codex, Gemini, Copilot, Cursor, Moodle, Canvas and Blackboard are trademarks of their owners, named only to
+describe compatibility; no affiliation or endorsement. Sample assignments and fixtures in this repository are
+original, written for it, and contain no real course material.
+
 
 MIT © Noam Marom
