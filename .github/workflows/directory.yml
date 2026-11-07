@@ -1,0 +1,54 @@
+name: directory
+
+# Publish the clean plugin build (tools/build_directory.py) to the `directory` branch, which Anthropic's plugin
+# directory tracks. Runs on every release tag, or by hand: Actions → directory → Run workflow.
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: directory
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Tests
+        run: |
+          python -m pip install --upgrade pip pytest pyyaml pymupdf python-docx jsonschema pint mcp httpx keyring respx
+          python tools/sync_shared.py --check
+          python -m pytest -q
+      - name: Build and push the directory branch
+        run: |
+          src=$(git rev-parse --short HEAD)
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git ls-remote --exit-code --heads origin directory >/dev/null; then
+            git worktree add ../directory-branch origin/directory
+            git -C ../directory-branch checkout -B directory
+          else
+            git worktree add --detach ../directory-branch
+            git -C ../directory-branch checkout --orphan directory
+            git -C ../directory-branch rm -rfq .
+          fi
+          python tools/build_directory.py --out ../directory-branch
+          cd ../directory-branch
+          git add -A
+          if git diff --cached --quiet; then
+            echo "directory branch already up to date"
+          else
+            git commit -q -m "directory build from main @ $src"
+            git push origin directory
+          fi

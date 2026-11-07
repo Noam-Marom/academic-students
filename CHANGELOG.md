@@ -21,6 +21,9 @@ All notable changes to this plugin are recorded here. Format: [Keep a Changelog]
 - The Moodle server starts from a committed `uv.lock` (`uv run --frozen`), as the Claude directory requires.
 
 ### Added
+- A `directory` branch for Anthropic's plugin directory, built by `tools/build_directory.py` and published by
+  `.github/workflows/directory.yml` on every release: the skills, manifest, README and license only, without the
+  local Moodle server (claude.ai cannot run it) and without dev files.
 - README: a scanner demo (a white-on-white trap in a sample assignment) and "What it runs and sends".
 - The release workflow attaches its zips to a release published on github.com and can be re-run by hand.
 
