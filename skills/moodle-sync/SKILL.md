@@ -22,6 +22,17 @@ never submits, never posts, and never sees the student's password — the login 
   "answer the Moodle quiz for me" (refuse, see below); "solve HW1" after the sync (`assignment-coach`);
   "plan my week" (`study-planner`, which reads the `deadlines.json` this skill writes).
 
+## Fast path
+
+Tools connected → `moodle_status`, the course, `sync_course`, the quick scan of what changed, a short
+report: no reference file is needed. `deadlines.json` is written only when the course has assignments or
+events. Read `references/connect.md` and the other references only when the tools are missing or fail.
+
+Always, on every path: scan each outside file once per conversation (`--quick`; a file already scanned is not
+rescanned). No `COURSE.md` → assume sensible defaults, state them in one line, and ask only when a wrong guess
+would cost real work (one question at most). Read a reference only when the step names it. Policy `unknown` →
+proceed as `limited`; ask about the policy only when the request needs more than `limited` permits.
+
 ## Workflow
 
 1. **Connect** — in the order of `references/connect.md`: the `moodle` tools if present; else, with a shell
