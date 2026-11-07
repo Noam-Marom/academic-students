@@ -6,6 +6,11 @@
     "name": "Noam Marom & Eyal Silbershtein"
   },
   "license": "MIT",
+  "homepage": "https://github.com/Noam-Marom/academic-students",
+  "repository": "https://github.com/Noam-Marom/academic-students",
+  "documentationUrl": "https://github.com/Noam-Marom/academic-students#readme",
+  "supportUrl": "https://github.com/Noam-Marom/academic-students/discussions",
+  "privacyPolicyUrl": "https://github.com/Noam-Marom/academic-students/blob/main/PRIVACY.md",
   "keywords": [
     "students",
     "university",
