@@ -33,3 +33,10 @@ def test_readme_installs_in_every_agent():
     for key in ["npx skills add Noam-Marom/academic-students", "gemini extensions install", "Codex", "Gemini CLI",
                 "Cursor", "Copilot", "ChatGPT"]:
         assert key in text, key
+
+
+def test_discussions_are_linked_for_questions_and_improvement_ideas():
+    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    assert "github.com/Noam-Marom/academic-students/discussions" in readme
+    cfg = (ROOT / ".github/ISSUE_TEMPLATE/config.yml").read_text(encoding="utf-8")
+    assert "/discussions" in cfg and "improve" in cfg.lower()

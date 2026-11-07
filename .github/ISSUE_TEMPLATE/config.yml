@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Question or how-to
+    url: https://github.com/Noam-Marom/academic-students/discussions/categories/q-a
+    about: Installing, using a skill, connecting your university's Moodle.
+  - name: Idea to improve a skill (not a bug)
+    url: https://github.com/Noam-Marom/academic-students/discussions/categories/ideas
+    about: Too slow, too chatty, a missing format or discipline? Suggest an improvement here.

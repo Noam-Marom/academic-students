@@ -29,7 +29,7 @@ Claude Code), **OpenAI Codex**, **Gemini CLI**, **Cursor**, **GitHub Copilot** a
 
 <p align="center"><sub>A real run on <a href="docs/examples/scanner/assignment.docx">this sample assignment</a>: the trap is invisible in Word, plain text to the AI, and caught before the assistant reads it.</sub></p>
 
-[Install](#install) · [Architecture](docs/architecture/c4.md) · [Design spec](docs/superpowers/specs/2026-11-02-academic-students-plugin-design.md) · [Contributing](CONTRIBUTING.md) · [Sponsor](https://github.com/sponsors/Noam-Marom)
+[Install](#install) · [Architecture](docs/architecture/c4.md) · [Design spec](docs/superpowers/specs/2026-11-02-academic-students-plugin-design.md) · [Discussions](https://github.com/Noam-Marom/academic-students/discussions) · [Contributing](CONTRIBUTING.md) · [Sponsor](https://github.com/sponsors/Noam-Marom)
 
 ## Why
 
@@ -154,6 +154,9 @@ GitHub helps other students find it, and [sponsoring](https://github.com/sponsor
 skills, more languages and the model runs that test every skill before a release.
 
 ## Contributing
+
+Questions, ideas, and suggestions to make a skill work better (not a bug, just better) go to
+[Discussions](https://github.com/Noam-Marom/academic-students/discussions); bugs go to issues.
 
 Issues and PRs are welcome, especially from students in fields other than engineering: the discipline packs in
 [`shared/disciplines/`](shared/disciplines) are where a law, nursing or dance student can make the plugin
