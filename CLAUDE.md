@@ -35,7 +35,7 @@ Update this table in the same commit that finishes a plan.
 
 - [ ] RTL: every slip seen in a real reply becomes a test in `skills/rtl-writing/tests/test_check_rtl.py`
       first, then a rule, then a row in `references/chat-markdown.md` (pattern so far: brand name opening a
-      paragraph, `Name (2008)`, `` `fork()` ``, Hebrew in code blocks, `**label ending in English:** English…`, a negative number `-1`, a prefix glued to English as the first word `ה-DC משמש…`).
+      paragraph, `Name (2008)`, `` `fork()` ``, Hebrew in code blocks, `**label ending in English:** English…`, a negative number `-1`).
 - [ ] Moodle: try `moodle-mcp login` against a real university Moodle (BGU first); record the result in `servers/moodle-mcp/MANUAL_CHECKS.md`.
 - [ ] Re-measure the weak skills (exam-prep, lecture-notes, study-planner, scanner) after the read-only fixes — **only with Noam's explicit approval** (see below).
 

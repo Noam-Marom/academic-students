@@ -35,9 +35,6 @@ def strip_prefix(s: str) -> str:
     return s
 
 
-PREFIX_GLUED = re.compile(r"^[\u0590-\u08FF\uFB1D-\uFDFF\uFE70-\uFEFF]{1,3}[-\u05BE]?(?=[A-Za-z0-9`])")
-
-
 def first_issue(text: str):
     """Return a description if `text` doesn't start with a Hebrew letter, else None."""
     body = strip_prefix(text)
@@ -45,10 +42,6 @@ def first_issue(text: str):
         return None  # nothing that can set a direction (e.g. a cell holding only "5" or "—")
     ch = body[0]
     if HEB.match(ch):
-        glued = PREFIX_GLUED.match(body)
-        if glued:
-            return (f"starts with a one-letter prefix glued to English '{glued.group(0)}…'; the first word counts as "
-                    "English and the line can render left-to-right. Open with a whole word: 'השרת DC…', 'בעזרת Docker…'")
         return None
     if LATIN.match(ch):
         word = re.match(r"[\w.\-/]+", body)

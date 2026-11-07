@@ -37,12 +37,10 @@ reader sees, and is it Hebrew?**
      - "3 steps" → "שלושה שלבים", or "יש 3 שלבים"
      - "v2.1 adds…" → "גרסה 2.1 מוסיפה…"
      - "https://… has the docs" → "התיעוד נמצא ב-https://…"
-   - A one-letter prefix glued to English ("ה-DC", "ב-Docker", "ל-Python") is fine **inside** a line but not as
-     its first word: the first word then counts as English and the line can flip (seen in claude.ai:
-     "ה-DC משמש בתפקיד…" rendered left-to-right). Open with a whole Hebrew word: "השרת DC משמש…",
-     "בעזרת Docker…", "לשפה Python יש…".
-   - When no Hebrew word fits (a table cell that holds only a name), add a Hebrew noun: "הכלי Docker",
-     "השירות GitHub".
+   - Natural Hebrew prefixes also work: "ב-Docker", "ה-API", "ל-Python", "מ-GitHub". The line starts with a
+     Hebrew letter and still reads naturally.
+   - Fallback when no Hebrew word fits (for example a table cell that holds only a name): prefix the English
+     word with the Hebrew letter 'א' and no space, for example "אDocker".
 3. **Punctuation anchoring.** Keep periods, commas, colons and parentheses inside a Hebrew sentence structure,
    around the English terms, so they don't jump to the wrong side. Avoid ending a line with an English term
    followed directly by punctuation. Close the sentence with a Hebrew word instead: "…ומריצים את הפקודה
@@ -59,8 +57,8 @@ reader sees, and is it Hebrew?**
    - `- **Test (6), held-out:** …` → `- **סט ה-Test (6, held-out):** …`
    - `**Input:** …` → `**הקלט:** …`, `**Pros:**` → `**יתרונות:**`, `**Step 1:**` → `**שלב 1:**`
 5. **Tables.** Each cell is its own line for direction purposes. Start every cell, header included, with
-   Hebrew: "| הכלי | יתרון |", "| הכלי Docker | נפוץ מאוד |". A cell that holds only a name carries a
-   Hebrew noun ("הכלי Docker", "הפקודה `ls`").
+   Hebrew: "| הכלי | יתרון |", "| הכלי Docker | נפוץ מאוד |". A cell that holds only a name can use
+   "אDocker", or carry a Hebrew noun ("הכלי Docker", "הפקודה `ls`").
 6. **Code.** Comments and strings inside a code block are written in **English**: a code block is laid out
    left-to-right, so a Hebrew comment such as `/* מגיעים לכאן רק אם exec נכשל */` comes out scrambled. Put the
    Hebrew explanation in the prose right before or after the block. Code blocks are otherwise exempt (they render
@@ -73,7 +71,6 @@ reader sees, and is it Hebrew?**
 | Where it slips | Wrong | Right |
 |---|---|---|
 | Heading with a product name | `## Git Branching` | `## עבודה עם ענפים ב-Git` |
-| A prefix glued to English as the first word | `ה-DC משמש בתפקיד…` / `ב-Docker מריצים…` | `השרת DC משמש בתפקיד…` / `בעזרת Docker מריצים…` |
 | Bold term-of-art label in a list | `- **Train (10):** …` | `- **סט ה-Train (10 אתגרים):** …` |
 | Bold label | `**Note:** …` / `**Redis:** …` | `**הערה:** …` / `**השירות Redis:** …` |
 | List of tools/functions | `- pthread_create – …` | `- הפונקציה pthread_create – …` |

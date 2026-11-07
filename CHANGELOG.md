@@ -20,11 +20,6 @@ All notable changes to this plugin are recorded here. Format: [Keep a Changelog]
   or on request.
 - The Moodle server starts from a committed `uv.lock` (`uv run --frozen`), as the Claude directory requires.
 
-### Fixed
-- RTL: a line whose first word is a one-letter prefix glued to English (`ה-DC משמש…`, `ב-Docker…`) can render
-  left-to-right in claude.ai. The checker flags it, the skill and reference now open such lines with a whole
-  Hebrew word (`השרת DC משמש…`), and the `אDocker` fallback is replaced by a Hebrew noun (`הכלי Docker`).
-
 ### Added
 - README: a scanner demo (a white-on-white trap in a sample assignment) and "What it runs and sends".
 - The release workflow attaches its zips to a release published on github.com and can be re-run by hand.

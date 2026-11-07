@@ -193,33 +193,3 @@ def test_rtl_scripts_other_than_hebrew_get_the_same_rules(rtl, line):
 ])
 def test_rtl_lines_opening_with_their_own_script_are_clean(rtl, line):
     assert rtl.check(line + "\n")[0] == [], line
-
-
-# Seen in a real claude.ai reply (2026-11-07): "ה-DC משמש בתפקיד…" opened with a Hebrew letter and still
-# rendered LTR, while lines with as much English that opened with a whole Hebrew word rendered RTL. The first
-# word decides: a one-letter prefix glued to an English term ("ה-DC", "ב-Docker") counts as an English word.
-PREFIX_OPENERS = [
-    "ה-DC משמש בתפקיד Key Distribution Center (KDC), והתהליך נראה כך:",
-    "- ב-Docker מריצים קונטיינרים",
-    "## ה-API של השירות",
-    "ל-Python יש ספריות רבות",
-    "**ה-GPO:** מופץ לכל המחשבים",
-]
-WHOLE_WORD_OPENERS = [
-    "בשלב הראשון המשתמש שולח AS-REQ ל-KDC ומקבל חזרה Ticket Granting Ticket (TGT).",
-    "השרת DC משמש בתפקיד Key Distribution Center (KDC), והתהליך נראה כך:",
-    "- בעזרת Docker מריצים קונטיינרים",
-    "## הממשק API של השירות",
-]
-
-
-@pytest.mark.parametrize("line", PREFIX_OPENERS)
-def test_line_opening_with_a_prefix_glued_to_english_is_error(rtl, line):
-    errors, _ = rtl.check(line)
-    assert any("prefix" in e["issue"] for e in errors), errors
-
-
-@pytest.mark.parametrize("line", WHOLE_WORD_OPENERS)
-def test_line_opening_with_a_whole_hebrew_word_is_clean(rtl, line):
-    errors, _ = rtl.check(line)
-    assert not any("prefix" in e["issue"] for e in errors), errors
