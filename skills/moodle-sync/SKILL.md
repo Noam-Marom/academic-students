@@ -30,8 +30,7 @@ events. Read `references/connect.md` and the other references only when the tool
 
 Always, on every path: scan each outside file once per conversation (`--quick`; a file already scanned is not
 rescanned). No `COURSE.md` → assume sensible defaults, state them in one line, and ask only when a wrong guess
-would cost real work (one question at most). Read a reference only when the step names it. Policy `unknown` →
-proceed as `limited`; ask about the policy only when the request needs more than `limited` permits.
+would cost real work (one question at most). Read a reference only when the step names it.
 
 ## Workflow
 

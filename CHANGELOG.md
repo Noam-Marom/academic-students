@@ -13,8 +13,9 @@ All notable changes to this plugin are recorded here. Format: [Keep a Changelog]
 - **A fast path in every task skill**, served before the full workflow: a hint, a one-question check, a language
   edit, a reference list, a few practice questions or a deadline list skip the map files, packs, question bank
   and planning scripts they do not need. Skills assume sensible defaults and say so in one line instead of
-  asking up to two questions; an `unknown` AI policy is asked about only for `solve` / `draft`; a file is
-  scanned once per conversation.
+  asking up to two questions; a file is scanned once per conversation.
+- **Unknown AI policy:** the skill helps with understanding, asks once what the course allows without waiting
+  for the answer, and gives a full solution or draft when the student explicitly asks for one.
 - `assignment-judge` runs its second grading pass in the same context; a separate subagent only in `strict` mode
   or on request.
 - The Moodle server starts from a committed `uv.lock` (`uv run --frozen`), as the Claude directory requires.

@@ -38,7 +38,8 @@ prose for submission happens only when the course's AI policy permits it, with t
 Always, on every path: scan each outside file once per conversation (`--quick`; a file already scanned is not
 rescanned). No `COURSE.md` → assume sensible defaults, state them in one line, and ask only when a wrong guess
 would cost real work (one question at most). Read a reference only when the step names it. Policy `unknown` →
-proceed as `limited`; ask about the policy only when the request needs more than `limited` permits.
+help with understanding (`limited`) and, in that first reply, ask once what the course allows, without waiting
+for the answer; a full solution or draft only when the student explicitly asks for one.
 
 ## Workflow
 
@@ -56,7 +57,7 @@ proceed as `limited`; ask about the policy only when the request needs more than
    `references/hebrew-academic.md`, for English by a Hebrew speaker `references/english-academic.md`.
 4. **Policy.** Read the row for the course's `ai_policy` in `references/ai-policy.md`. If the requested
    mode is outside it, say so in one sentence, offer the nearest permitted mode, and do not raise it again.
-   `unknown` → proceed as `limited`; ask once which value applies only when the request is `draft`.
+   `unknown` → proceed as `limited`, ask once (without waiting) which value applies, and `draft` when explicitly asked.
 5. **Run the mode** (table below).
 6. **Verify, then send** (last section).
 

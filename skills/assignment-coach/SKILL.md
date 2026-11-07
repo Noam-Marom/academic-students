@@ -44,7 +44,8 @@ Most requests are about one question. Serve them directly; the full workflow is 
 Always, on every path: scan each outside file once per conversation (`--quick`; a file already scanned is not
 rescanned). No `COURSE.md` → assume sensible defaults, state them in one line, and ask only when a wrong guess
 would cost real work (one question at most). Read a reference only when the step names it. Policy `unknown` →
-proceed as `limited`; ask about the policy only when the request needs more than `limited` permits.
+help with understanding (`limited`) and, in that first reply, ask once what the course allows, without waiting
+for the answer; a full solution or draft only when the student explicitly asks for one.
 
 ## Workflow
 
@@ -70,7 +71,7 @@ proceed as `limited`; ask about the policy only when the request needs more than
    `breakdown`. `solve` only on an explicit request, never inferred from "help me with this". Read the
    row for the course's `ai_policy` in `references/ai-policy.md`; when it rules out the requested mode, say
    so in one sentence, offer the nearest permitted mode and do not mention it again. `unknown` → proceed
-   as `limited`; ask once which of the five values applies only when the request is `solve`.
+   as `limited`, ask once (without waiting) which of the five values applies, and `solve` when explicitly asked.
 6. **Produce** per the protocol in `references/modes.md`, in the format `references/answer-formats.md`
    gives for the question type, in the student's language (output language = submission language for
    anything they may hand in).

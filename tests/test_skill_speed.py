@@ -53,3 +53,17 @@ def test_coach_writes_the_map_only_for_the_whole_assignment():
 def test_exam_prep_builds_the_bank_only_from_past_exams():
     fast = _body("exam-prep").split("## Fast path")[1].split("\n## ")[0]
     assert "question_bank.py" in fast and "no past exams" in fast
+
+
+def test_unknown_policy_asks_once_without_blocking_and_honours_an_explicit_solve():
+    """Owner's rule: until the student says what the course allows, help with understanding, ask once in
+    the same reply (no waiting), and give a full solution or draft only when explicitly asked for one."""
+    policy = (ROOT / "shared/ai-policy.md").read_text(encoding="utf-8")
+    row = next(l for l in policy.splitlines() if l.startswith("| `unknown`"))
+    assert "without waiting" in row and "explicitly" in row
+    for name in ["assignment-coach", "academic-writing"]:
+        fast = _body(name).split("## Fast path")[1].split("\n## ")[0]
+        assert "without waiting" in fast and "explicitly asks" in fast, name
+    for name in ["exam-prep", "lecture-notes", "study-planner", "moodle-sync"]:
+        fast = _body(name).split("## Fast path")[1].split("\n## ")[0]
+        assert "Policy `unknown`" not in fast, f"{name} does not depend on the AI policy"

@@ -37,7 +37,7 @@ the grade, the range, the three biggest deductions and the caveat. `rubric` mode
 Always, on every path: scan each outside file once per conversation (`--quick`; a file already scanned is not
 rescanned). No `COURSE.md` → assume sensible defaults, state them in one line, and ask only when a wrong guess
 would cost real work (one question at most). Read a reference only when the step names it. Policy `unknown` →
-proceed as `limited`; ask about the policy only when the request needs more than `limited` permits.
+proceed without asking: a grade estimate produces nothing submittable.
 
 ## Workflow
 
