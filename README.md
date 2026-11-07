@@ -5,7 +5,7 @@
 [![agent skills](https://img.shields.io/badge/Agent_Skills-Claude_%C2%B7_Codex_%C2%B7_Gemini_%C2%B7_Cursor_%C2%B7_Copilot-6f42c1.svg)](#install)
 [![sponsor](https://img.shields.io/badge/sponsor-%E2%9D%A4-ea4aaa.svg)](https://github.com/sponsors/Noam-Marom)
 
-> **Plugin directory build.** This copy is built for Anthropic's plugin directory and leaves out the local Moodle MCP server; moodle-sync works through your browser or Moodle's exports. For the server, install from GitHub: [github.com/Noam-Marom/academic-students](https://github.com/Noam-Marom/academic-students).
+> **Plugin directory build.** This copy is built for Anthropic's plugin directory and leaves out the Python scripts and the local Moodle MCP server. For the full version, install from GitHub: [github.com/Noam-Marom/academic-students](https://github.com/Noam-Marom/academic-students).
 
 **A complete study toolkit for AI assistants: it coaches you through assignments, grades your work the way your
 professor would, and keeps you honest with your course's rules — instead of doing the studying for you.**
