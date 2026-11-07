@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Noam-Marom/academic-students/skills/assignment-coach/schemas/assignment-map.schema.json",
+  "title": "Assignment map",
+  "description": "The structured view of one assignment that every assignment-coach mode consumes (spec §4.3). Produced once after the scan and the course context, validated with scripts/validate_map.py, then reused by breakdown, guide, check and solve.",
+  "type": "object",
+  "required": ["title", "questions"],
+  "additionalProperties": true,
+  "properties": {
+    "course": {"type": "string", "description": "Course name as the university calls it"},
+    "family": {
+      "type": "string",
+      "description": "Discipline family; one of the 12 packs in references/disciplines/",
+      "enum": [
+        "math-stats", "physical-sciences", "life-sciences", "computing", "engineering",
+        "medicine-clinical", "social-sciences", "economics-business", "law", "humanities",
+        "architecture-design", "arts"
+      ]
+    },
+    "title": {"type": "string", "minLength": 1, "description": "Short name of the assignment (HW3, Seminar paper, Lab 2)"},
+    "deliverables": {
+      "type": "array",
+      "description": "What is actually handed in",
+      "items": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": {"type": "string"},
+          "format": {"type": "string", "enum": ["pdf", "handwritten-scan", "docx", "latex", "code", "slides", "other"]}
+        }
+      }
+    },
+    "questions": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Every discrete part of the assignment, in the order it appears",
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "text"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "type": {
+            "type": "string",
+            "enum": ["proof", "calculation", "code", "essay", "design", "analysis", "practical", "other"]
+          },
+          "weight": {"type": "number", "minimum": 0, "description": "Points or percent; 0 when unknown"},
+          "text": {"type": "string"},
+          "estimate_hours": {"type": "number", "exclusiveMinimum": 0, "description": "Expected effort in hours; used by scripts/split_work.py for group work"},
+          "depends_on_interface": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Ids of questions whose interface (signature, data format) this one is built against; the finished part is not needed"
+          },
+          "depends_on": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Ids of questions whose result this one needs; every id must exist in `questions`"
+          }
+        }
+      }
+    },
+    "constraints": {"type": "array", "items": {"type": "string"}},
+    "show_work": {"type": "boolean"},
+    "due": {
+      "type": ["string", "null"],
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+      "description": "ISO date (YYYY-MM-DD) or null when unknown"
+    },
+    "ai_policy": {
+      "type": "string",
+      "enum": ["allowed", "allowed-with-disclosure", "limited", "forbidden", "unknown"],
+      "description": "Only the student or a visible, quotable source sets this; see references/ai-policy.md"
+    }
+  }
+}
