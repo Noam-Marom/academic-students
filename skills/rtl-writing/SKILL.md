@@ -21,7 +21,8 @@ opening word **before** writing the rest of the line; that one habit prevents al
 
 1. **Hebrew opener on every line.** "Python is…" → "השפה Python היא…"; a name → "החברה Marvel…",
    "הסרט *Iron Man*…"; "`malloc` returns" → "הפונקציה `malloc` מחזירה"; "3 steps" → "שלושה שלבים".
-   Prefixes work too: "ב-Docker", "ה-API", "ל-Python".
+   The first **word** must be Hebrew, not a prefix glued to English: "ה-DC משמש…" flips the line, so write
+   "השרת DC משמש…"; "ב-Docker" and "ה-API" are fine later in the line.
 2. **Headings, bullets, bold labels, table cells** follow rule 1, header cells included: "## הגדרת Docker",
    "- הפונקציה fork יוצרת…", "**הכלי Podman:** …", "| הכלי Docker | נפוץ |". Labels that feel like fixed
    English terms are the usual slip: "**Pros:**" → "**יתרונות:**", "**Step 1:**" → "**שלב 1:**",
@@ -31,7 +32,7 @@ opening word **before** writing the rest of the line; that one habit prevents al
    ending fits, drop the final period.
 5. **Numbers next to English:** "*Iron Man* (2008)" → "הסרט *Iron Man* משנת 2008"; "-1" → "מינוס 1".
 6. **Code blocks hold no Hebrew** (comments and strings in English); the line right after a block opens in Hebrew.
-7. **Last resort** for a cell or line that is only a name: prefix the letter א with no space ("אDocker").
+7. **A cell or line that is only a name** gets a Hebrew noun: "הכלי Docker", "השירות GitHub".
 
 Before sending, glance down the left edge of the reply: every first word Hebrew? That is the whole check.
 If the user reports a line that rendered wrong, fix it; the full rule set (below) covers rarer cases.
