@@ -83,3 +83,15 @@ def test_a_workflow_publishes_the_build_to_the_directory_branch():
     assert "workflow_dispatch" in on and on["push"]["tags"] == ["v*"]
     steps = " ".join(str(s.get("run", "")) for job in wf["jobs"].values() for s in job["steps"])
     assert "tools/build_directory.py" in steps and "pytest" in steps and "directory" in steps
+
+
+def test_manifest_fills_the_directory_listing_links():
+    """The portal reads these from plugin.json; without them it guessed the demo GIF as 'Documentation'."""
+    import json
+    m = json.loads((ROOT / ".claude-plugin/plugin.json").read_text())
+    repo = "https://github.com/Noam-Marom/academic-students"
+    assert m["repository"] == repo and m["homepage"] == repo
+    assert m["documentationUrl"] == f"{repo}#readme"
+    assert m["supportUrl"] == f"{repo}/discussions"
+    assert m["privacyPolicyUrl"] == f"{repo}/blob/main/PRIVACY.md"
+    assert (ROOT / "PRIVACY.md").is_file()
