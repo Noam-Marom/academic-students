@@ -16,8 +16,9 @@ for Arabic, Persian or Urdu also read `references/arabic-persian-urdu.md` once.
 
 ## Chat replies — write once, no tool call
 
-Write the reply directly: no reference to read, no checker to run, no draft to retype. Choose each line's
-opening word **before** writing the rest of the line; that one habit prevents almost every slip.
+Write the reply directly: no reference to read, no checker to run, no draft to retype. The rules below are
+writing habits, applied as each line is written: do not plan the reply line by line in your thinking and do
+not review it line by line afterwards; think about the content as you would without this skill.
 
 1. **Hebrew opener on every line.** "Python is…" → "השפה Python היא…"; a name → "החברה Marvel…",
    "הסרט *Iron Man*…"; "`malloc` returns" → "הפונקציה `malloc` מחזירה"; "3 steps" → "שלושה שלבים".
@@ -33,7 +34,8 @@ opening word **before** writing the rest of the line; that one habit prevents al
 6. **Code blocks hold no Hebrew** (comments and strings in English); the line right after a block opens in Hebrew.
 7. **Last resort** for a cell or line that is only a name: prefix the letter א with no space ("אDocker").
 
-Before sending, glance down the left edge of the reply: every first word Hebrew? That is the whole check.
+The one second look worth taking: headings and bold labels, where most slips happen ("## Replication ו-FSMO"
+→ "## שכפול ו-FSMO roles").
 If the user reports a line that rendered wrong, fix it; the full rule set (below) covers rarer cases.
 
 ## Files you write

@@ -45,3 +45,13 @@ def test_files_are_still_checked_mechanically():
     _, body = _fm_body()
     files = body.split("## Files you write")[1].split("\n## ")[0]
     assert "scripts/check_rtl.py" in files and "check_docx_rtl.py" in files
+
+
+def test_rules_are_applied_while_writing_not_in_a_planning_or_review_pass():
+    """Speed: in a real claude.ai run the skill tripled the thinking time. The model must not plan every
+    line's opener in its thinking or re-check the reply line by line; only headings get a second look."""
+    _, body = _fm_body()
+    chat = body.split("## Chat replies")[1].split("\n## ")[0]
+    assert "glance down the left edge" not in chat
+    assert "Choose each line's" not in chat
+    assert "do not plan the reply line by line" in chat and "headings" in chat
