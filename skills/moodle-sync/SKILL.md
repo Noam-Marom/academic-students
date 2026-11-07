@@ -85,8 +85,7 @@ would cost real work (one question at most). Read a reference only when the step
 
 Quizzes: there is no tool that starts, reads or answers a quiz, by design. If asked to answer one, say once
 that this plugin does not take quizzes for the student, and offer what helps: when it closes, which topics
-it covers (from the course material), and practice questions through `exam-prep`. The course's AI policy
-(`COURSE.md`) is a ceiling for anything done with the downloaded material afterwards.
+it covers (from the course material), and practice questions through `exam-prep`.
 
 ## Files in this skill
 

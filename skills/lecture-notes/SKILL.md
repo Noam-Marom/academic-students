@@ -89,15 +89,13 @@ would cost real work (one question at most). Read a reference only when the step
 
 ## Modes
 
-| Mode | Output | Under a restrictive AI policy |
-|---|---|---|
-| `summary` (default) | the five-section summary + glossary rows | unchanged — summarising lectures for one's own study is not submitted work |
-| `definitions` | only concepts and definitions, as a table or flashcard-ready list | unchanged |
-| `transcript` | `transcript.json` + a readable timestamped transcript, no summary | unchanged |
-| `slide-by-slide` | one short block per slide with what was said over it (needs `aligned.json`) | unchanged |
+| Mode | Output |
+|---|---|
+| `summary` (default) | the five-section summary + glossary rows |
+| `definitions` | only concepts and definitions, as a table or flashcard-ready list |
+| `transcript` | `transcript.json` + a readable timestamped transcript, no summary |
+| `slide-by-slide` | one short block per slide with what was said over it (needs `aligned.json`) |
 
-If the student wants the summary handed in as coursework ("סיכום להגשה"), that is submitted work: follow
-`assignment-coach`'s policy handling instead of this table.
 
 ## Files in this skill
 

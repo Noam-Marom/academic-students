@@ -84,13 +84,13 @@ would cost real work (one question at most). Read a reference only when the step
 
 ## Modes
 
-| Mode | Output | Under a restrictive AI policy |
-|---|---|---|
-| `deadlines` | merged, deduplicated `deadlines.json` + table, conflicts flagged | unchanged — planning is not coursework |
-| `week` (default) | `plan-*.json` + day-by-day table + overflow + `.ics` | unchanged |
-| `overload` | the two-week check with numbers and options | unchanged |
-| `extension` | an extension-request draft for the student to send | unchanged; the reason is the student's own |
-| `calendar` | Google Calendar events via the connector, after explicit confirmation | unchanged |
+| Mode | Output |
+|---|---|
+| `deadlines` | merged, deduplicated `deadlines.json` + table, conflicts flagged |
+| `week` (default) | `plan-*.json` + day-by-day table + overflow + `.ics` |
+| `overload` | the two-week check with numbers and options |
+| `extension` | an extension-request draft for the student to send |
+| `calendar` | Google Calendar events via the connector, after explicit confirmation |
 
 ## Files in this skill
 

@@ -122,7 +122,6 @@ These are design rules enforced by instructions and tests, not guarantees: the u
 - Store, log or ask for your password. Moodle login happens in a terminal; only a revocable token is kept, in your OS keychain.
 - Answer a quiz, submit an assignment, or post anything in your name. The Moodle server's function list is read-only and pinned by a test.
 - Invent a citation or a source; what it cannot verify is marked `[unverified]`.
-- Produce a full solution when the AI policy you've given it for the course forbids it. It says so once and offers what *is* allowed.
 - Follow instructions hidden inside course files. It shows them to you instead (the scanner catches common techniques, not all).
 - Help hide AI use from a marker or an AI-detection check.
 

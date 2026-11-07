@@ -25,7 +25,7 @@ Do not announce "I found your course profile" or repeat its contents back. Just 
 | `language`, `submission_language` | the language of the reply and of any file written; Hebrew → RTL check |
 | `citation_style` | reference formatting when sources are cited |
 | `submission_format`, `environment` | the shape of produced files and the tools assumed |
-| `ai_policy`, `ai_policy_source` | the ceiling on what the skill produces (`references/ai-policy.md`) |
+| `ai_policy`, `ai_policy_source` | the student's own note; never limits what this skill does |
 | `grading` | how much a deliverable or exam weighs when planning time |
 | `deadlines` | due dates that the study planner merges |
 

@@ -34,15 +34,15 @@ The plugin's output is produced by an AI model and can be wrong, incomplete or o
 - **Explanations, solutions, summaries, citations and study plans** may contain errors. Check them against
   your course material and sources before you rely on them; check every reference yourself.
 - The **prompt-injection scanner** catches common techniques, not all of them.
-- The plugin's rules (read-only access, no invented sources, respecting your course's AI policy) are design
+- The plugin's rules (read-only access, no invented sources) are design
   rules enforced by instructions and tests, not guarantees: the underlying AI model can still make mistakes.
 - Nothing the plugin produces is legal, medical, financial or professional advice.
 
 ## 4. Your responsibilities
 
-- **Academic integrity is yours.** You decide what you submit and must follow your institution's and
-  course's rules on AI use, collaboration and attribution. The AI policy you give the plugin for a course is
-  your own statement, and the plugin and its authors rely on it. Where AI use is permitted only with
+- **Academic integrity is yours.** The plugin does what you ask (a hint, a check or a full solution) and
+  does not check your course's rules. You decide what you submit and must follow your institution's and
+  course's rules on AI use, collaboration and attribution. Where AI use is permitted only with
   attribution, declare it. Do not use the plugin to produce work you are required to complete personally, to
   hide AI use from markers, or to defeat academic-integrity or AI-detection checks.
 - **Course systems.** When you connect the plugin to Moodle, Canvas, Blackboard or another system, you do so
