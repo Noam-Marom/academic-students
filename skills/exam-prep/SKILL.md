@@ -123,6 +123,6 @@ the two weakest topics" is one request.
 - Formula sheet: the page rule is quoted and the estimated length is under it; unverifiable formulas are marked
   **[unverified]**.
 - `review-dates.json` parses, every entry has `course`, `topic` and ISO dates, no date is before today.
-- Any Hebrew text, in the reply or in a written file, passes
-  `python3 <rtl-writing>/scripts/check_rtl.py <file>` with 0 errors before it leaves.
+- Hebrew files you write pass `python3 <rtl-writing>/scripts/check_rtl.py <file>` with 0 errors.
+- Hebrew chat text follows the rtl-writing rules (every line opens with a Hebrew word); no checker run.
 - No sentence predicts the exam. Search the draft for "will be on", "יהיה במבחן", "בטוח ש" and rewrite as frequency.

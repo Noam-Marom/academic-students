@@ -28,3 +28,20 @@ def test_other_rtl_languages_have_their_reference():
     ref = (SKILL_DIR / "references/arabic-persian-urdu.md").read_text(encoding="utf-8")
     for key in ["openers", "ZWNJ", "Noto Naskh Arabic", "polyglossia", "w:bidi", "check_rtl.py"]:
         assert key in ref, key
+
+
+def test_a_chat_reply_needs_no_file_read_and_no_tool_call():
+    """Speed: the rules for chat live in SKILL.md itself, and a chat reply is written once, opener first,
+    without a reference read or a checker run (the checker is for files and for reported slips)."""
+    _, body = _fm_body()
+    assert len(body.splitlines()) <= 75, "keep the skill short: it is loaded on every RTL reply"
+    for example in ["השפה Python היא", "החברה Marvel", "**הכלי Podman:**", "מינוס 1", "משנת 2008"]:
+        assert example in body, example
+    assert "no tool call" in body
+    assert "references/chat-markdown.md" not in body.split("## Chat replies")[1].split("\n## ")[0]
+
+
+def test_files_are_still_checked_mechanically():
+    _, body = _fm_body()
+    files = body.split("## Files you write")[1].split("\n## ")[0]
+    assert "scripts/check_rtl.py" in files and "check_docx_rtl.py" in files

@@ -91,5 +91,5 @@ Near-misses that belong elsewhere:
 - The `.ics` was produced by `export_ics.py`; spot-check one event's UTC time against the local time (Israel is
   UTC+3 in summer time, UTC+2 in winter time).
 - No calendar write happened without an explicit yes to the listed events; no message was sent.
-- Hebrew text (reply, tables, extension draft) passes `python3 <rtl-writing>/scripts/check_rtl.py <file>`
-  with 0 errors before it is sent or written.
+- Hebrew files you write pass `python3 <rtl-writing>/scripts/check_rtl.py <file>` with 0 errors.
+- Hebrew chat text follows the rtl-writing rules (every line opens with a Hebrew word); no checker run.

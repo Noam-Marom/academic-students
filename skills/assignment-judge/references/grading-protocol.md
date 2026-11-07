@@ -33,9 +33,10 @@ How the judge turns instructions and a piece of work into a grade it can defend 
 Grade what is on the page. Do not give credit for what the student "probably meant", and do not deduct for a
 method that differs from the lecturer's when the instructions allow any valid method.
 
-**Pass B** is blind to Pass A's numbers. Best: a separate subagent that receives only the contract and the
-work, never Pass A. Otherwise: grade the criteria in reverse order, from a fresh read of the work, without
-scrolling back to Pass A's scores. Pass B records its own evidence.
+**Pass B** is blind to Pass A's numbers. By default it runs in the same context: grade the criteria in reverse
+order, from a fresh read of the work, without scrolling back to Pass A's scores. Pass B records its own
+evidence. In `strict` mode, or when the student asks for it, use a separate subagent that receives only the
+contract and the work, never Pass A (slower, more independent).
 
 **Reconcile.** `scripts/score_rubric.py` flags a criterion when the passes differ by more than 15% of its
 maximum (exit 1). For each flag: put the two pieces of evidence side by side, decide which reading of the

@@ -99,5 +99,5 @@ If the student wants the summary handed in as coursework ("סיכום להגשה
   disagreement between slide and speech is noted, not silently resolved.
 - "Sounds like exam material" items each cite a slide number or timestamp.
 - No audio or transcript was sent to any network service.
-- Hebrew text (summary file, glossary rows, reply) passes
-  `python3 <rtl-writing>/scripts/check_rtl.py <file>` with 0 errors before it is written or sent.
+- Hebrew files you write pass `python3 <rtl-writing>/scripts/check_rtl.py <file>` with 0 errors.
+- Hebrew chat text follows the rtl-writing rules (every line opens with a Hebrew word); no checker run.

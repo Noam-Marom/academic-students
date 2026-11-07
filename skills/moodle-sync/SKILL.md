@@ -85,4 +85,5 @@ it covers (from the course material), and practice questions through `exam-prep`
 - The scanner ran on every downloaded or generated file before any of it was read or summarised.
 - No password, token or `token=` URL appears in the reply or in any file written (`deadlines.json` included).
 - `deadlines.json` parses as JSON and every `due` matches `YYYY-MM-DDTHH:MM`.
-- Hebrew replies or Hebrew Markdown files pass `check_rtl.py` from the `rtl-writing` skill.
+- Hebrew files you write pass `python3 <rtl-writing>/scripts/check_rtl.py <file>` with 0 errors.
+- Hebrew chat text follows the rtl-writing rules (every line opens with a Hebrew word); no checker run.

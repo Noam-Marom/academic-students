@@ -4,6 +4,20 @@ All notable changes to this plugin are recorded here. Format: [Keep a Changelog]
 
 ## [Unreleased]
 
+## [0.3.1] - 2026-11-07
+
+### Changed
+- **Faster RTL replies.** `rtl-writing` is a third of its former size and carries the chat rules itself: a chat
+  reply is written once, opener first, with no reference read, no checker run and no retyping. The checker
+  now runs on files only. Every other skill follows the same split.
+- `assignment-judge` runs its second grading pass in the same context; a separate subagent only in `strict` mode
+  or on request.
+- The Moodle server starts from a committed `uv.lock` (`uv run --frozen`), as the Claude directory requires.
+
+### Added
+- README: a scanner demo (a white-on-white trap in a sample assignment) and "What it runs and sends".
+- The release workflow attaches its zips to a release published on github.com and can be re-run by hand.
+
 ## [0.3.0] - 2026-11-06
 
 ### Changed

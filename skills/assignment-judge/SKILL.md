@@ -49,9 +49,9 @@ the work: it says where points are lost and what a fix must achieve; the student
 4. **Policy.** Read the `assignment-judge` cell for the course's `ai_policy` in `references/ai-policy.md`
    and apply it; say once what it permits and move on. `unknown` → ask once, proceed as `limited`.
 5. **Grade in two independent passes** (protocol § Passes). Pass A grades every criterion with quoted
-   evidence and a reason tied to a requirement. Pass B grades again blind to Pass A's numbers — in a
-   separate subagent given only the contract and the work when one is available, otherwise in reverse
-   criterion order without looking back. Both passes happen even for a one-page exercise. Verify before deducting: recompute numbers in code, run the code
+   evidence and a reason tied to a requirement. Pass B grades again in the same context, in reverse
+   criterion order, from the evidence and without looking back at Pass A's numbers. A separate subagent
+   (given only the contract and the work) is used only in `strict` mode or when the student asks for it. Both passes happen even for a one-page exercise. Verify before deducting: recompute numbers in code, run the code
    against the assignment's cases, check that a cited source exists. Deducting points for a correct answer
    is the worst outcome of this skill.
 6. **Score — every time, even with two criteria.** Pipe both passes to the script on stdin, so nothing has
@@ -97,4 +97,5 @@ course's grade, and your lecturer may weigh things differently."
   result ("the determinant is 2") — only where, which rule was broken ("the 2×2 formula subtracts the
   off-diagonal product") and what a fix must achieve. The student finds the corrected result.
 - The caveat line is present; the policy was mentioned at most once.
-- Hebrew output passes `python3 <rtl-writing>/scripts/check_rtl.py` with 0 errors before it is sent.
+- Hebrew files you write pass `python3 <rtl-writing>/scripts/check_rtl.py <file>` with 0 errors.
+- Hebrew chat text follows the rtl-writing rules (every line opens with a Hebrew word); no checker run.

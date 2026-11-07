@@ -1,6 +1,6 @@
 {
   "name": "academic-students",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A complete study toolkit for Claude, for undergraduate, master's and PhD students in any degree: assignment coaching and group-work splitting, an honest professor-style grade estimate, academic writing with real citations, exam prep from past exams, lecture summaries, a study planner, read-only Moodle/Canvas/Blackboard sync, right-to-left writing, and a scanner for hidden AI traps in course files. Never submits, never answers quizzes, never stores a password.",
   "author": {
     "name": "Noam Marom & Eyal Silbershtein"

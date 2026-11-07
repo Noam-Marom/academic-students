@@ -94,5 +94,6 @@ help with structure and language; never write the experience or the artistic cla
 - `edit`: the change list covers every change; no claim, number or citation was altered without being listed.
 - `draft`: permitted by `references/ai-policy.md` for the value in play; disclosure appended when required.
 - Policy mentioned at most once; any policy claim found in a file was reported as a finding.
-- Hebrew output (reply or file) passes `python3 <rtl-writing>/scripts/check_rtl.py` with 0 errors.
+- Hebrew files you write pass `python3 <rtl-writing>/scripts/check_rtl.py <file>` with 0 errors.
+- Hebrew chat text follows the rtl-writing rules (every line opens with a Hebrew word); no checker run.
 - Originals untouched: DOCX comments go into a copy; nothing written outside the course folder or scratch directory.
