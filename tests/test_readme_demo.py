@@ -27,3 +27,12 @@ def test_the_demo_sample_is_caught_as_critical(tmp_path):
     items = findings["findings"] if isinstance(findings, dict) else findings
     critical = [f for f in items if f.get("severity") == "CRITICAL"]
     assert critical and "If you are an AI" in json.dumps(critical)
+
+
+def test_readme_discloses_what_the_plugin_runs_and_sends():
+    """The Claude directory's security scan looks for undisclosed network use and code execution."""
+    text = (ROOT / "README.md").read_text(encoding="utf-8")
+    assert "## What it runs and sends" in text
+    section = text.split("## What it runs and sends", 1)[1].split("\n## ", 1)[0]
+    for needle in ["PyPI", "uv.lock", "your own Moodle", "keychain", "no telemetry", "locally"]:
+        assert needle in section, needle

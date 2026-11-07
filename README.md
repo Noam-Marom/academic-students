@@ -121,6 +121,18 @@ Every skill reads an optional `COURSE.md` in your course folder (language, citat
 - Produce a full solution when your course's AI policy forbids it. It says so once and offers what *is* allowed.
 - Follow instructions hidden inside course files. It shows them to you instead.
 
+## What it runs and sends
+
+- **The skills' scripts** are plain Python that run locally on your files (scanning, checking, scoring,
+  formatting). They make no network requests, and the plugin has no telemetry.
+- **The Moodle server** (Claude Code and the desktop app only) talks only to your own Moodle site, at the
+  address you log in to, with read-only web-service calls. Its token is kept in your OS keychain; files it
+  downloads go to your course folder.
+- **Installing the Moodle server:** `uv` installs its Python dependencies from PyPI, pinned by the committed
+  `uv.lock`.
+- **Optional recording transcription** (lecture-notes) runs locally with `faster-whisper` if you install it;
+  that library downloads its speech model from Hugging Face the first time. The audio never leaves your machine.
+
 ## Status
 
 v0.2 — all nine skills and the Moodle server are built and tested (740+ automated tests, CI green).
