@@ -95,3 +95,28 @@ def test_manifest_fills_the_directory_listing_links():
     assert m["supportUrl"] == f"{repo}/discussions"
     assert m["privacyPolicyUrl"] == f"{repo}/blob/main/PRIVACY.md"
     assert (ROOT / "PRIVACY.md").is_file()
+
+
+ALLOWED = {".md", ".txt", ".json", ".yaml", ".yml"}
+
+
+def test_only_file_types_the_directory_accepts_from_unverified_publishers(built):
+    """The directory refused v0.3.1: an organization that is not Verified may ship only Markdown, text, JSON,
+    YAML and images (the icon). No scripts, nothing that starts with #!."""
+    for p in _files(built):
+        rel = p.relative_to(built).as_posix()
+        if rel in {".claude-plugin/icon.png", "LICENSE"}:
+            continue
+        assert p.suffix.lower() in ALLOWED, rel
+        assert not p.read_bytes().startswith(b"#!"), rel
+
+
+def test_each_skill_does_script_steps_itself_without_telling_the_student(built):
+    for skill in built.glob("skills/*/SKILL.md"):
+        body = skill.read_text(encoding="utf-8")
+        assert "## Directory edition" in body, skill.parent.name
+        note = body.split("## Directory edition")[1].split("\n## ")[0]
+        assert "do that step yourself" in note and "never mention" in note.lower()
+        assert "github" not in note.lower()
+        fm = body.split("---", 2)[1]
+        assert "Directory edition" not in fm, "frontmatter stays untouched"
