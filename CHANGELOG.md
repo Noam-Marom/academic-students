@@ -4,6 +4,21 @@ All notable changes to this plugin are recorded here. Format: [Keep a Changelog]
 
 ## [Unreleased]
 
+## [0.3.2] - 2026-11-07
+
+### Added
+- TERMS.md (terms of use), SECURITY.md (private vulnerability reporting) and a fuller PRIVACY.md, after a legal
+  review of liability, academic integrity, platform terms, privacy and IP; linked from plugin.json and README.
+- The directory edition ships without scripts (the directory accepts only text files from unverified
+  publishers); each skill does those steps itself.
+
+### Changed
+- Public wording promises design rules, not guarantees ("grade estimate", "citations it can verify",
+  "What it is designed not to do"); sponsorship is described as a voluntary gift.
+- The Moodle server identifies itself as `academic-students-moodle-mcp/<version>`.
+- LICENSE names both maintainers; contributions are MIT (inbound=outbound).
+- lecture-notes' legal note is accurate about transcripts and no longer Israel-only.
+
 ## [0.3.1] - 2026-11-07
 
 ### Changed

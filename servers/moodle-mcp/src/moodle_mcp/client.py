@@ -14,7 +14,15 @@ from typing import Any
 
 import httpx
 
+from . import __version__
 from .errors import AuthError, MoodleError, TransportError
+
+USER_AGENT = f"academic-students-moodle-mcp/{__version__}"
+
+
+def default_http() -> httpx.Client:
+    """Every request says who is calling (not the official app, not a generic library)."""
+    return httpx.Client(timeout=60.0, follow_redirects=True, headers={"User-Agent": USER_AGENT})
 
 SERVICE = "moodle_mobile_app"
 REST_PATH = "/webservice/rest/server.php"
@@ -76,7 +84,7 @@ class MoodleClient:
         self.site = site.rstrip("/")
         self.token = token
         self.userid = userid
-        self.http = http or httpx.Client(timeout=60.0, follow_redirects=True)
+        self.http = http or default_http()
 
     # -- helpers ---------------------------------------------------------------------------------------
 

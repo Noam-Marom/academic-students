@@ -248,3 +248,14 @@ def test_interrupted_download_leaves_no_partial_file_and_keeps_the_old_one(tmp_p
         make_client().download(url, dest)
     assert dest.read_bytes() == b"previous complete version"
     assert [p.name for p in tmp_path.iterdir()] == ["slides.pdf"]
+
+
+def test_default_http_clients_identify_the_plugin_honestly():
+    """Legal review: say who is calling instead of posing as the official app or a generic library."""
+    from moodle_mcp import cli
+    from moodle_mcp import __version__
+    ua = f"academic-students-moodle-mcp/{__version__}"
+    assert mc.USER_AGENT == ua
+    client = mc.MoodleClient("https://moodle.example.edu", "t")
+    assert client.http.headers["User-Agent"] == ua
+    assert cli.default_http().headers["User-Agent"] == ua

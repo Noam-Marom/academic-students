@@ -50,6 +50,11 @@ classmates make, what the grader in your department rewards. Hebrew terms inside
 Open an issue with a **synthetic** file that reproduces it (never a real assignment), the technique you used
 to hide the text, and the scanner's output. If you can, add it to `skills/prompt-injection-scanner/tests/fixtures/make_fixtures.py`.
 
+## Licensing of contributions
+
+Contributions are licensed under the MIT License, the same as the project (inbound=outbound). Contribute only
+material you wrote or have the right to license: no real course material, exams or personal data.
+
 ## Code of conduct
 
 Be kind, assume good faith, and remember the users are students under deadline pressure.

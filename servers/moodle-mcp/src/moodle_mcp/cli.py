@@ -20,7 +20,7 @@ from typing import Any, Callable
 import httpx
 
 from . import auth
-from .client import MoodleClient, strip_token
+from .client import MoodleClient, default_http, strip_token
 from .errors import AuthError, MoodleError, TransportError
 from .store import Credentials, Store, site_host
 
@@ -152,7 +152,7 @@ def main(argv: list[str] | None = None, *, store: Store | None = None, http: htt
             from .server import serve as serve_fn  # lazy: `login` must work even if the MCP stack is broken
         return serve_fn()
     store = store if store is not None else Store()
-    http = http or httpx.Client(timeout=60.0, follow_redirects=True)
+    http = http or default_http()
     if command == "login":
         return cmd_login(args, store, http, getpass_fn, input_fn, opener)
     if command == "logout":

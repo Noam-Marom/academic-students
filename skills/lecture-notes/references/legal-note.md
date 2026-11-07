@@ -14,9 +14,9 @@ on the plugin's side. It does not decide whether the student may have the record
 ## Recordings to stop on
 
 - A recording made secretly in class, or a recording someone else made and passed on without the lecturer's
-  consent. Israeli law (חוק האזנת סתר) allows a participant to record a conversation they take part in, but
-  universities usually restrict recording lectures and redistributing them, and the lecture's content belongs
-  to the lecturer. When the student says the recording was made without permission, say once, in one sentence,
+  consent. Recording laws differ: some countries let a participant record, others need everyone's
+  consent, and most universities restrict recording lectures regardless. Rights in the lecture usually belong
+  to the lecturer or the university. When the student says the recording was made without permission, say once, in one sentence,
   that the course's rules may not allow it and that a published recording or the slides are the safe source;
   then offer to work from the slides or the student's own notes. Do not lecture and do not repeat it.
 - Anything with other students' voices that the student intends to share: the summary is for the student.
@@ -25,6 +25,6 @@ on the plugin's side. It does not decide whether the student may have the record
 
 - Runs `faster-whisper` on the student's machine only (`scripts/transcribe.py`); if it is not installed, the
   student exports a transcript (Zoom, YouTube, Panopto, Teams) and the skill converts the `.vtt`/`.srt` locally.
-- Never sends audio or the transcript to a web service, a transcription API, or another tool.
+- Never sends audio to any service. The transcript, like any file the assistant reads, is processed by your AI provider.
 - Keeps transcripts and summaries in the course folder or the scratch directory; never deletes the recording.
 - Does not put names of students who spoke in the recording into the summary ("a student asked…").

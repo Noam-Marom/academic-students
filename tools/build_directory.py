@@ -28,7 +28,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 REPO = "https://github.com/Noam-Marom/academic-students"
 RAW = "https://raw.githubusercontent.com/Noam-Marom/academic-students/main"
-KEEP_TOP = {"README.md", "LICENSE", "CHANGELOG.md"}
+KEEP_TOP = {"README.md", "LICENSE", "CHANGELOG.md", "TERMS.md", "PRIVACY.md", "SECURITY.md"}
 KEEP_MANIFEST = {".claude-plugin/plugin.json", ".claude-plugin/icon.png"}
 SKIP_PARTS = {"tests", "evals", "benchmark", "__pycache__", ".pytest_cache"}
 # Only these types are accepted from a publisher that is not a Verified organization (v0.3.1 was refused for
