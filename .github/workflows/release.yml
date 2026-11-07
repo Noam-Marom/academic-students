@@ -1,10 +1,11 @@
 name: release
 
-# Push a tag vX.Y.Z (matching .claude-plugin/plugin.json "version") to publish a GitHub Release with
+# Push a tag vX.Y.Z (or publish a release for it on github.com) (matching .claude-plugin/plugin.json "version") to publish a GitHub Release with
 # the plugin zip and one zip per skill. INSTALL.md links to these files.
 on:
   push:
     tags: ["v*"]
+  workflow_dispatch:   # re-run for an existing tag: Actions → release → Run workflow → pick the tag
 
 permissions:
   contents: write
@@ -34,5 +35,10 @@ jobs:
         run: |
           cp dist/academic-students-*.zip dist/academic-students.zip
           for f in dist/skills/*.zip; do cp "$f" "dist/skill-$(basename "$f")"; done
-          gh release create "$GITHUB_REF_NAME" --title "$GITHUB_REF_NAME" --generate-notes \
-            dist/academic-students-*.zip dist/academic-students.zip dist/skill-*.zip
+          files="dist/academic-students-*.zip dist/academic-students.zip dist/skill-*.zip"
+          # A release published on github.com already exists when its tag push reaches us: upload into it.
+          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            gh release upload "$GITHUB_REF_NAME" $files --clobber
+          else
+            gh release create "$GITHUB_REF_NAME" --title "$GITHUB_REF_NAME" --generate-notes $files
+          fi

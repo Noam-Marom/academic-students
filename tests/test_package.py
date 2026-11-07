@@ -87,6 +87,17 @@ def test_release_workflow_builds_and_uploads_on_version_tags():
     assert "plugin.json" in steps, "the tag must be checked against the manifest version"
 
 
+def test_release_workflow_attaches_zips_to_a_release_made_in_the_ui():
+    """Publishing a release on github.com creates the tag first: the release already exists, so the
+    workflow must upload into it (not fail on `gh release create`) and be re-runnable by hand."""
+    import yaml
+    wf = yaml.safe_load((ROOT / ".github/workflows/release.yml").read_text())
+    on = wf.get("on", wf.get(True))
+    assert "workflow_dispatch" in on, "a failed or skipped release must be re-runnable for a given tag"
+    steps = " ".join(str(s.get("run", "")) for job in wf["jobs"].values() for s in job["steps"])
+    assert "gh release view" in steps and "gh release upload" in steps and "--clobber" in steps
+
+
 def test_install_guide_covers_every_surface():
     text = (ROOT / "INSTALL.md").read_text(encoding="utf-8")
     for key in ["claude plugin marketplace add Noam-Marom/academic-students",
