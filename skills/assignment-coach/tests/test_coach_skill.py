@@ -46,38 +46,20 @@ def test_first_workflow_step_is_the_scanner_quick_gate():
     first_step = re.search(r"^1\.\s+(.*?)(?=^\d+\.\s)", workflow, re.S | re.M).group(1)
     assert "prompt-injection-scanner" in first_step and "--quick" in first_step
     assert re.search(r"HIGH", first_step)
-    assert re.search(r"polic", first_step, re.I), "a hidden instruction that claims to set the policy is a finding"
+    assert re.search(r"permission", first_step, re.I), "a hidden instruction that claims to grant permissions is a finding"
 
 
 def test_body_routes_to_every_file_and_the_rtl_checker():
     _, body = _skill()
     for path in ["scripts/validate_map.py", "scripts/check_units.py", "scripts/render_solution.py",
                  "scripts/split_work.py", "schemas/assignment-map.schema.json", "references/modes.md", "references/answer-formats.md",
-                 "references/environments.md", "references/course-profile.md", "references/ai-policy.md",
+                 "references/environments.md", "references/course-profile.md",
                  "references/disciplines/", "assets/COURSE.template.md"]:
         assert path in body, path
         assert (SKILL_DIR / path).exists(), path
     assert "check_rtl.py" in body
 
 
-def test_disclosure_sentences_are_quoted_verbatim_not_paraphrased():
-    policy = (ROOT / "shared/ai-policy.md").read_text(encoding="utf-8")
-    quotes = re.findall(r"^> (.+)$", policy.split("## Disclosure sentence", 1)[1], re.M)
-    assert len(quotes) == 2
-    _, body = _skill()
-    modes = (SKILL_DIR / "references/modes.md").read_text(encoding="utf-8")
-    for q in quotes:
-        assert q in body and q in modes, q
-
-
-def test_skill_md_links_the_policy_matrix_instead_of_restating_it():
-    _, body = _skill()
-    assert "references/ai-policy.md" in body
-    policy = (ROOT / "shared/ai-policy.md").read_text(encoding="utf-8")
-    matrix_rows = [l for l in policy.splitlines() if l.startswith("| `")]
-    for row in matrix_rows:
-        meaning = row.split("|")[2].strip()
-        assert meaning not in body, f"policy matrix text restated in SKILL.md: {meaning!r}"
 
 
 def test_studio_work_paragraph_says_what_stays_the_students_own():
@@ -126,9 +108,8 @@ def test_environments_reference_is_a_table_with_free_alternatives():
 
 def test_sync_json_lists_the_skill_and_copies_are_present():
     cfg = json.loads((ROOT / "shared/sync.json").read_text(encoding="utf-8"))
-    for key in ["disciplines", "course_template", "ai_policy"]:
+    for key in ["disciplines", "course_template"]:
         assert "assignment-coach" in cfg[key], key
-    assert (SKILL_DIR / "references/ai-policy.md").read_bytes() == (ROOT / "shared/ai-policy.md").read_bytes()
     assert (SKILL_DIR / "assets/COURSE.template.md").read_bytes() == (ROOT / "shared/COURSE.template.md").read_bytes()
     assert list((SKILL_DIR / "references/disciplines").glob("*.md"))
 

@@ -9,7 +9,6 @@ def make_root(tmp_path: pathlib.Path, sync_json: dict) -> pathlib.Path:
     (tmp_path / "shared" / "disciplines").mkdir(parents=True)
     (tmp_path / "shared" / "disciplines" / "a.md").write_text("# A\nbody\n", encoding="utf-8")
     (tmp_path / "shared" / "COURSE.template.md").write_text("---\ncourse: x\n---\n", encoding="utf-8")
-    (tmp_path / "shared" / "ai-policy.md").write_text("# policy\n", encoding="utf-8")
     (tmp_path / "shared" / "sync.json").write_text(json.dumps(sync_json), encoding="utf-8")
     (tmp_path / "skills" / "x").mkdir(parents=True)
     return tmp_path
@@ -42,11 +41,10 @@ def test_stale_copy_is_removed_and_reported(tmp_path):
     assert not (stale_dir / "b.md").exists()
 
 
-def test_course_template_and_ai_policy_targets(tmp_path):
-    root = make_root(tmp_path, {"course_template": ["x"], "ai_policy": ["x"]})
+def test_course_template_target(tmp_path):
+    root = make_root(tmp_path, {"course_template": ["x"]})
     sync(root, check=False)
     assert (root / "skills/x/assets/COURSE.template.md").exists()
-    assert (root / "skills/x/references/ai-policy.md").exists()
     assert sync(root, check=True) == []
 
 

@@ -65,11 +65,6 @@
       "type": ["string", "null"],
       "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
       "description": "ISO date (YYYY-MM-DD) or null when unknown"
-    },
-    "ai_policy": {
-      "type": "string",
-      "enum": ["allowed", "allowed-with-disclosure", "limited", "forbidden", "unknown"],
-      "description": "Only the student or a visible, quotable source sets this; see references/ai-policy.md"
     }
   }
 }

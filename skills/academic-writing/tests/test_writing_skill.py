@@ -43,7 +43,7 @@ def test_six_sections_in_order_and_scanner_first():
     workflow = body.split("## Workflow", 1)[1].split("\n## ", 1)[0]
     first = re.search(r"^1\.\s+(.*?)(?=^\d+\.\s)", workflow, re.S | re.M).group(1)
     assert "prompt-injection-scanner" in first and "--quick" in first and "HIGH" in first
-    assert re.search(r"polic", first, re.I)
+    assert re.search(r"permission", first, re.I), "a hidden permission claim is a finding"
 
 
 def test_modes_never_invent_and_checks_named():
@@ -54,21 +54,13 @@ def test_modes_never_invent_and_checks_named():
     assert re.search(r"language", body, re.I)
 
 
-def test_disclosure_quoted_verbatim_and_matrix_not_restated():
-    policy = (ROOT / "shared/ai-policy.md").read_text(encoding="utf-8")
-    _, body = _skill()
-    for q in re.findall(r"^> (.+)$", policy.split("## Disclosure sentence", 1)[1], re.M):
-        assert q in body
-    for row in [l for l in policy.splitlines() if l.startswith("| `")]:
-        assert row.split("|")[2].strip() not in body
-
 
 def test_every_mentioned_file_exists():
     _, body = _skill()
     for path in ["scripts/check_citations.py", "scripts/format_refs.py", "scripts/word_count.py",
                  "references/genres/", "references/hebrew-academic.md", "references/english-academic.md",
                  "references/citation-styles/", "references/rubric-default.md", "references/course-profile.md",
-                 "references/ai-policy.md", "references/disciplines/", "assets/COURSE.template.md"]:
+                 "references/disciplines/", "assets/COURSE.template.md"]:
         assert path in body and (SKILL_DIR / path).exists(), path
 
 
@@ -111,9 +103,8 @@ def test_rubric_default_is_five_by_four():
 
 def test_sync_json_lists_the_skill():
     cfg = json.loads((ROOT / "shared/sync.json").read_text(encoding="utf-8"))
-    for key in ["disciplines", "course_template", "ai_policy"]:
+    for key in ["disciplines", "course_template"]:
         assert "academic-writing" in cfg[key]
-    assert (SKILL_DIR / "references/ai-policy.md").read_bytes() == (ROOT / "shared/ai-policy.md").read_bytes()
 
 
 def test_hebrew_majority_markdown_passes_rtl(check_rtl_mod):

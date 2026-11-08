@@ -11,9 +11,5 @@
     "exam-prep",
     "study-planner",
     "assignment-judge"
-  ],
-  "ai_policy": [
-    "assignment-coach",
-    "academic-writing"
   ]
 }

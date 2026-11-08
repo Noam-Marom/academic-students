@@ -5,7 +5,6 @@ institution: "Example University"
 family: math-stats
 language: he
 submission_language: he
-ai_policy: unknown
 grading: {assignments: 20, final: 80}
 exam_date: "2026-02-10"
 deadlines: [{title: "Final exam, moed A", due: "2026-02-10T09:00", kind: exam}]

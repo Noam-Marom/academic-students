@@ -161,8 +161,6 @@ def _schema_errors_builtin(obj, schema: dict) -> list[str]:
             errors.append(f"due: {due!r} is not of type 'string', 'null'")
         elif not DATE_RE.match(due):
             errors.append(f"due: {due!r} does not match {props['due']['pattern']!r}")
-    if "ai_policy" in obj and obj["ai_policy"] not in props["ai_policy"]["enum"]:
-        errors.append(f"ai_policy: {_enum_msg(obj['ai_policy'], props['ai_policy']['enum'])}")
     return errors
 
 
