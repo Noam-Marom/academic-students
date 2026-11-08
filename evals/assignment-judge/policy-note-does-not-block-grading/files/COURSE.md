@@ -3,4 +3,4 @@
 - course: Introduction to Microeconomics
 - year: 1
 - degree: BA Economics
-- ai_policy: forbidden
+- my note: AI use is forbidden in this course

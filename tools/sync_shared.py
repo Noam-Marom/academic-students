@@ -5,8 +5,7 @@ A skill folder must be self-contained (it may be uploaded to claude.ai on its ow
 copied, not linked. `shared/sync.json` says which skill gets what:
 
     {"disciplines": ["assignment-coach", ...],      # shared/disciplines/*.md -> skills/<s>/references/disciplines/
-     "course_template": ["assignment-coach", ...],  # shared/COURSE.template.md -> skills/<s>/assets/COURSE.template.md
-     "ai_policy": ["assignment-coach", ...]}        # shared/ai-policy.md -> skills/<s>/references/ai-policy.md
+     "course_template": ["assignment-coach", ...]}  # shared/COURSE.template.md -> skills/<s>/assets/COURSE.template.md
 
 Usage:
     python3 tools/sync_shared.py            # write copies, delete stale ones
@@ -24,7 +23,6 @@ TARGETS = {
     # key in sync.json -> (source relative to shared/, destination relative to the skill dir, is_directory)
     "disciplines": ("disciplines", "references/disciplines", True),
     "course_template": ("COURSE.template.md", "assets/COURSE.template.md", False),
-    "ai_policy": ("ai-policy.md", "references/ai-policy.md", False),
 }
 
 

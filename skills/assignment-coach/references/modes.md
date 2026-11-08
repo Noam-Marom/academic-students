@@ -1,7 +1,7 @@
 # Mode protocols
 
 The pipeline (scan → context → map → plan) is the same for every mode; this file is what happens after
-it. The student's request decides the mode (`references/ai-policy.md`); there is no course-policy check.
+it. The student's request decides the mode.
 
 Mode selection, from the student's words:
 
@@ -133,7 +133,7 @@ question (correct / correct but under-justified / partially correct / wrong appr
 When the student asks for a solution: the full solution of the actual question, never a similar exercise
 instead.
 
-Protocol: **verify → format → "what you need to understand" → disclosure**.
+Protocol: **verify → format → "what you need to understand"**.
 
 1. **Verify before anything leaves.** Numbers recomputed in code (not in prose); code executed with
    tests, including the edge cases the assignment names; units on every final answer
@@ -147,12 +147,6 @@ Protocol: **verify → format → "what you need to understand" → disclosure**
    five ideas the solution rests on, each in one sentence, and the one question a lecturer would ask to
    check the student understands it. This is what makes the output a worked example rather than a
    submission.
-4. **Disclosure** when the student's `COURSE.md` says `allowed-with-disclosure`, or when the student asks:
-   appended verbatim, in the submission language, blank proposed from what was actually done:
-
-   > הצהרה: בהכנת עבודה זו נעשה שימוש בכלי בינה מלאכותית (שם הכלי) לצורך ___. התוכן נבדק ונערך על ידי.
-
-   > Disclosure: an AI tool (name the tool) was used in preparing this work for ___. The content was reviewed and edited by me.
 
 What `solve` never does: invent a source, a measurement or a dataset; skip a step the course grades;
 produce the studio/performance/artist's own work (see SKILL.md, "what stays the student's own"); answer a

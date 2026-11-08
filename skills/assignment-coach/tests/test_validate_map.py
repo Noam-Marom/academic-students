@@ -46,7 +46,6 @@ def full_map() -> dict:
         "constraints": ["max 5 pages", "only course material"],
         "show_work": True,
         "due": "2026-11-20",
-        "ai_policy": "unknown",
     }
 
 
@@ -136,13 +135,6 @@ def test_due_may_be_null(vm):
     m["due"] = None
     assert vm.validate_map(m) == []
 
-
-def test_ai_policy_enum(vm):
-    m = minimal_map()
-    m["ai_policy"] = "whatever"
-    errors = vm.validate_map(m)
-    assert len(errors) == 1
-    assert "ai_policy" in errors[0]
 
 
 def test_not_an_object(vm):

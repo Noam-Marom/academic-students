@@ -81,7 +81,6 @@ def test_sync_json_lists_the_skill_and_copies_are_present():
     cfg = json.loads((ROOT / "shared/sync.json").read_text(encoding="utf-8"))
     for key in ["disciplines", "course_template"]:
         assert "assignment-judge" in cfg[key], key
-    assert "assignment-judge" not in cfg["ai_policy"], "a grade estimate has no AI-use rule to load"
 
 
 @pytest.mark.parametrize("case", EVALS)

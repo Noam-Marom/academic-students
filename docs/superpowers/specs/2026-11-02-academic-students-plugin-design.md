@@ -3,6 +3,7 @@
 - Status: accepted (v0.1 scope)
 - Date: 2026-11-02
 - Owner: Noam Marom
+- Amended 2026-11-08: everything below about a course AI policy (the `ai_policy` field, the policy matrix, gating modes on it, the disclosure sentence) is removed. The student's request decides; see CHANGELOG 0.3.4 and `tests/test_student_decides.py`.
 - Source of the design conversation: Claude Doc "תוכנית: academic-students plugin" (https://claude.ai/artifact/EuFWcKUsjjExEbjHgjR9HK)
 
 ## 1. What this is

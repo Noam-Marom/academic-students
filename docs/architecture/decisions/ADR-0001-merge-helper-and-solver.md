@@ -1,6 +1,6 @@
 # ADR-0001. Merge `assignment-helper` and `assignment-solver` into one `assignment-coach` skill with modes
 
-- Status: accepted
+- Status: accepted; the part that gated modes on the course's AI policy is superseded (2026-11-08: the plugin has no course AI policy, the student's request sets the mode)
 - Date: 2026-11-02
 - Deciders: Noam Marom
 - Tags: skills, triggering, academic-integrity

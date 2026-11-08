@@ -1,4 +1,4 @@
-"""shared/ is the single source of truth for discipline packs, the course-profile template and the AI-policy matrix."""
+"""shared/ is the single source of truth for discipline packs, and the course-profile template."""
 import pathlib
 import re
 
@@ -27,7 +27,7 @@ PACK_HEADINGS = [
 
 PROFILE_KEYS = [
     "course", "code", "institution", "degree", "family", "language", "submission_language",
-    "citation_style", "submission_format", "environment", "ai_policy", "ai_policy_source", "grading",
+    "citation_style", "submission_format", "environment", "grading",
 ]
 
 
@@ -55,16 +55,8 @@ def test_course_template_has_every_profile_key():
     fm = _frontmatter(text)
     for key in PROFILE_KEYS:
         assert key in fm, f"COURSE.template.md frontmatter lacks {key}"
-    assert fm["ai_policy"] == "unknown", "the template must default ai_policy to unknown, never to allowed"
     assert fm["family"] in FAMILIES
 
-
-def test_ai_policy_matrix_covers_all_values_and_both_disclosures():
-    text = (SHARED / "ai-policy.md").read_text(encoding="utf-8")
-    for value in ["allowed", "allowed-with-disclosure", "limited", "forbidden", "unknown"]:
-        assert f"`{value}`" in text, f"ai-policy.md does not define `{value}`"
-    assert "## Disclosure sentence" in text
-    assert re.search(r"[֐-׿]", text), "Hebrew disclosure sentence missing"
 
 
 def test_shared_copies_in_sync():
