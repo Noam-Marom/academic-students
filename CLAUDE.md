@@ -116,7 +116,7 @@ Optional libraries used by some scripts/tests (`pip install -e ".[extras]"` or i
 2. Create `skills/<name>/SKILL.md` with the six-section body and a pushy bilingual description.
 3. For every script: `tests/test_<script>.py` first, then the script, `--json`, exit codes 0/1/2.
 4. Add `evals/<name>/<case>/` folders (top level, never inside `skills/`) (prompt.md, case.yaml, graders/) and `tools/trigger_evals/<name>.json`.
-5. If it needs discipline packs or the policy matrix, add it to `shared/sync.json` and run the sync.
+5. If it needs discipline packs or the course template, add it to `shared/sync.json` and run the sync.
 6. `python3 -m pytest -q` and `claude plugin validate .` green; update the Status table above.
 
 ## Language
