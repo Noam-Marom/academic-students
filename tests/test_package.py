@@ -82,7 +82,7 @@ def test_release_workflow_builds_and_uploads_on_version_tags():
     wf = yaml.safe_load((ROOT / ".github/workflows/release.yml").read_text())
     on = wf.get("on", wf.get(True))
     assert on["push"]["tags"] == ["v*"]
-    steps = " ".join(str(s.get("run", "")) for job in wf["jobs"].values() for s in job["steps"])
+    steps = " ".join(str(s.get("run", "")) for job in wf["jobs"].values() for s in job.get("steps", []))
     assert "tools/package.py" in steps and "pytest" in steps and "gh release" in steps
     assert "plugin.json" in steps, "the tag must be checked against the manifest version"
 
@@ -94,7 +94,7 @@ def test_release_workflow_attaches_zips_to_a_release_made_in_the_ui():
     wf = yaml.safe_load((ROOT / ".github/workflows/release.yml").read_text())
     on = wf.get("on", wf.get(True))
     assert "workflow_dispatch" in on, "a failed or skipped release must be re-runnable for a given tag"
-    steps = " ".join(str(s.get("run", "")) for job in wf["jobs"].values() for s in job["steps"])
+    steps = " ".join(str(s.get("run", "")) for job in wf["jobs"].values() for s in job.get("steps", []))
     assert "gh release view" in steps and "gh release upload" in steps and "--clobber" in steps
 
 
@@ -104,3 +104,35 @@ def test_install_guide_covers_every_surface():
                 "claude plugin install academic-students@noam-academic",
                 "Add marketplace", "releases/latest", "skills/", "moodle-mcp login"]:
         assert key in text, key
+
+
+def test_a_version_bump_on_main_publishes_the_release_and_the_directory_build():
+    """Owner's rule (2026-11-11): every plugin version gets a GitHub Release, automatically. A push to main
+    that changes plugin.json's version creates tag v<version>, the release with its zips, and refreshes the
+    directory branch; a version that already has a release is skipped."""
+    import yaml
+    wf = yaml.safe_load((ROOT / ".github/workflows/release.yml").read_text())
+    on = wf.get("on", wf.get(True))
+    assert on["push"]["branches"] == ["main"]
+    assert ".claude-plugin/plugin.json" in on["push"]["paths"]
+    steps = " ".join(str(s.get("run", "")) for s in wf["jobs"]["release"]["steps"])
+    assert "--target" in steps and "already released" in steps
+    assert wf["jobs"]["directory"]["uses"] == "./.github/workflows/directory.yml"
+    assert wf["jobs"]["directory"]["needs"] == "release"
+    d = yaml.safe_load((ROOT / ".github/workflows/directory.yml").read_text())
+    assert "workflow_call" in d.get("on", d.get(True))
+
+
+def test_a_new_plugin_version_on_main_releases_itself_and_rebuilds_the_directory():
+    """Owner's rule (2026-11-11): every version bump in plugin.json gets its GitHub Release automatically,
+    and the directory branch is rebuilt from it; an existing release is never recreated."""
+    import yaml
+    wf = yaml.safe_load((ROOT / ".github/workflows/release.yml").read_text())
+    on = wf.get("on", wf.get(True))
+    assert on["push"]["branches"] == ["main"] and on["push"]["paths"] == [".claude-plugin/plugin.json"]
+    steps = " ".join(str(s.get("run", "")) for job in wf["jobs"].values() for s in job.get("steps", []))
+    assert "already released" in steps, "a push that does not change the version must not re-release"
+    calls = [j for j in wf["jobs"].values() if j.get("uses") == "./.github/workflows/directory.yml"]
+    assert calls and "release" in str(calls[0].get("needs"))
+    d = yaml.safe_load((ROOT / ".github/workflows/directory.yml").read_text())
+    assert "workflow_call" in d.get("on", d.get(True))

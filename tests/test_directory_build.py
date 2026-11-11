@@ -80,8 +80,8 @@ def test_manifest_matches_main(built):
 def test_a_workflow_publishes_the_build_to_the_directory_branch():
     wf = yaml.safe_load((ROOT / ".github/workflows/directory.yml").read_text())
     on = wf.get("on", wf.get(True))
-    assert "workflow_dispatch" in on and on["push"]["tags"] == ["v*"]
-    steps = " ".join(str(s.get("run", "")) for job in wf["jobs"].values() for s in job["steps"])
+    assert "workflow_dispatch" in on and "workflow_call" in on, "called by the release workflow"
+    steps = " ".join(str(s.get("run", "")) for job in wf["jobs"].values() for s in job.get("steps", []))
     assert "tools/build_directory.py" in steps and "pytest" in steps and "directory" in steps
 
 

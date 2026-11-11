@@ -1,11 +1,11 @@
 name: directory
 
 # Publish the clean plugin build (tools/build_directory.py) to the `directory` branch, which Anthropic's plugin
-# directory tracks. Runs on every release tag, or by hand: Actions → directory → Run workflow.
+# directory tracks. Called by the release workflow for every new version, or by hand: Actions → directory → Run
+# workflow. (A tag created by the release workflow does not start other workflows, hence the call.)
 
 on:
-  push:
-    tags: ["v*"]
+  workflow_call:
   workflow_dispatch:
 
 permissions:

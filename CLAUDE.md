@@ -47,7 +47,10 @@ Update this table in the same commit that finishes a plan.
 2. **TDD is not optional.** No production code without a failing test first, including for scripts and the MCP server.
 3. **Commits** use conventional prefixes (`feat:`, `fix:`, `test:`, `docs:`, `chore:`, `ci:`) with a scope in
    parentheses when it is one skill (`feat(coach): …`). Small commits, one task each.
-4. **Before pushing:** `python3 tools/sync_shared.py --check && python3 -m pytest -q && claude plugin validate .`.
+4. **Releases are automatic.** Raising `version` in `.claude-plugin/plugin.json` on main (with a CHANGELOG entry) makes
+   `.github/workflows/release.yml` publish the GitHub Release vX.Y.Z with its zips and rebuild the `directory` branch.
+   Never edit `directory` by hand.
+5. **Before pushing:** `python3 tools/sync_shared.py --check && python3 -m pytest -q && claude plugin validate .`.
 
 ## Repo map
 

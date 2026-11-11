@@ -1,42 +1,67 @@
 name: release
 
-# Push a tag vX.Y.Z (or publish a release for it on github.com) (matching .claude-plugin/plugin.json "version") to publish a GitHub Release with
-# the plugin zip and one zip per skill. INSTALL.md links to these files.
+# Every new plugin version gets a GitHub Release with the plugin zip and one zip per skill (INSTALL.md links to
+# these files), and the `directory` branch is rebuilt from it:
+#   - automatically, when a push to main changes .claude-plugin/plugin.json to a version not yet released;
+#   - when a tag vX.Y.Z is pushed or a release is published on github.com (it must match plugin.json);
+#   - by hand: Actions → release → Run workflow (optionally with an existing tag to re-attach the zips).
 on:
   push:
+    branches: [main]
+    paths: [.claude-plugin/plugin.json]
     tags: ["v*"]
-  workflow_dispatch:   # re-run from main for an existing release: Actions → release → Run workflow
+  workflow_dispatch:
     inputs:
       tag:
-        description: "release tag to attach the zips to (e.g. v0.3.0)"
-        required: true
-
-env:
-  TAG: ${{ inputs.tag || github.ref_name }}
+        description: "release tag to (re)attach the zips to, e.g. v0.3.0; empty = the plugin.json version"
+        required: false
 
 permissions:
   contents: write
 
+concurrency:
+  group: release
+  cancel-in-progress: false
+
 jobs:
   release:
     runs-on: ubuntu-latest
+    outputs:
+      published: ${{ steps.which.outputs.publish }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Tag matches the manifest version
+      - name: Which version
+        id: which
+        env:
+          GH_TOKEN: ${{ github.token }}
+          INPUT_TAG: ${{ inputs.tag }}
         run: |
           v=$(python -c "import json;print(json.load(open('.claude-plugin/plugin.json'))['version'])")
-          test "v$v" = "$TAG" || { echo "tag $TAG != plugin.json version v$v"; exit 1; }
+          if [ -n "$INPUT_TAG" ]; then tag="$INPUT_TAG"
+          elif [ "$GITHUB_REF_TYPE" = "tag" ]; then tag="$GITHUB_REF_NAME"
+          else tag="v$v"; fi
+          test "$tag" = "v$v" || { echo "tag $tag != plugin.json version v$v"; exit 1; }
+          echo "TAG=$tag" >> "$GITHUB_ENV"
+          if [ "$GITHUB_EVENT_NAME" = "push" ] && [ "$GITHUB_REF_TYPE" = "branch" ] && gh release view "$tag" >/dev/null 2>&1; then
+            echo "$tag already released; nothing to do"
+            echo "publish=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "publish=true" >> "$GITHUB_OUTPUT"
+          fi
       - name: Tests
+        if: steps.which.outputs.publish == 'true'
         run: |
           python -m pip install --upgrade pip pytest pyyaml pymupdf python-docx jsonschema pint mcp httpx keyring respx
           python tools/sync_shared.py --check
           python -m pytest -q
       - name: Build zips
+        if: steps.which.outputs.publish == 'true'
         run: python tools/package.py --out dist
       - name: Publish the release
+        if: steps.which.outputs.publish == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -47,5 +72,10 @@ jobs:
           if gh release view "$TAG" >/dev/null 2>&1; then
             gh release upload "$TAG" $files --clobber
           else
-            gh release create "$TAG" --title "$TAG" --generate-notes $files
+            gh release create "$TAG" --target "$GITHUB_SHA" --title "$TAG" --generate-notes $files
           fi
+
+  directory:
+    needs: release
+    if: needs.release.outputs.published == 'true'
+    uses: ./.github/workflows/directory.yml
