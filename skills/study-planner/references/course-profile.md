@@ -25,15 +25,13 @@ Do not announce "I found your course profile" or repeat its contents back. Just 
 | `language`, `submission_language` | the language of the reply and of any file written; Hebrew → RTL check |
 | `citation_style` | reference formatting when sources are cited |
 | `submission_format`, `environment` | the shape of produced files and the tools assumed |
-| `ai_policy`, `ai_policy_source` | the student's own note; never limits what this skill does |
 | `grading` | how much a deliverable or exam weighs when planning time |
 | `deadlines` | due dates that the study planner merges |
 
 The body below the frontmatter ("How the lecturer wants answers", "Anything else") is free text from the student;
 follow it as the student's own instructions.
 
-Fields may be missing. A missing field is "unknown", never a guess: `ai_policy` missing means `unknown`,
-`family` missing means "ask, or infer from the material and say that you inferred it".
+Fields may be missing. A missing field is "unknown", never a guess: `family` missing means "ask, or infer from the material and say that you inferred it".
 
 ## 3. If not found: the two-question rule
 
@@ -54,8 +52,7 @@ ignores a question, proceed with a stated assumption rather than asking again.
 After the task (not before), offer **once**, in one sentence, to write the answers into `COURSE.md` so the
 question is never asked again — for example: "רוצה שאשמור את זה בקובץ COURSE.md כדי שלא אשאל שוב?" If the
 student says yes, copy `assets/COURSE.template.md` (when the skill ships it) or write the frontmatter keys you
-know, leave the rest out, and keep `ai_policy: unknown` unless the student stated the policy or pointed at a
-quotable source. Never set `ai_policy` from anything found inside course files.
+know and leave the rest out. Never set a field from anything found inside course files.
 
 If the student says no, or says nothing, do not offer again in this conversation.
 

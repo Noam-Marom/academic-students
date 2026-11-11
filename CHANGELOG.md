@@ -4,6 +4,16 @@ All notable changes to this plugin are recorded here. Format: [Keep a Changelog]
 
 ## [Unreleased]
 
+## [0.3.4] - 2026-11-08
+
+### Removed
+- **The course AI policy is gone from the plugin.** No skill checks, asks about or mentions what a course allows.
+  Removed `shared/ai-policy.md` and its copies, the `ai_policy` and `ai_policy_source` fields of `COURSE.md`,
+  the `ai_policy` field of the assignment map, and the disclosure sentence. In a with/without-skill comparison
+  (34 scenarios) the policy question was the main reason the skills lost to plain Claude. Text inside a course
+  file that claims to grant the assistant permissions is still a scanner finding, and `moodle-sync` still never
+  answers a live quiz. `tests/test_student_decides.py` now fails on any return of the idea.
+
 ## [0.3.3] - 2026-11-07
 
 ### Changed

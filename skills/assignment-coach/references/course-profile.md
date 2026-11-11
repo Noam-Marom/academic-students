@@ -43,9 +43,6 @@ Ask both questions in one message, each with the likely answer offered as a defa
 ("family: computing, right?"). A guess the student can confirm with "yes" costs one word; a blank
 question costs a paragraph. If the student says "just go", go with the defaults and say which ones you used.
 
-`ai_policy` is the student's own note and never limits a mode; the skill never asks about it. Its only
-effect is the disclosure sentence under `allowed-with-disclosure` (`references/ai-policy.md`).
-
 ## 4. Offer once to save the answers
 
 After the task, or as soon as the answers are in, offer **one time**:
@@ -54,7 +51,7 @@ After the task, or as soon as the answers are in, offer **one time**:
 > `assets/COURSE.template.md`)
 
 Yes → write `COURSE.md` with only the fields the student gave (leave the rest out; every field is
-optional), the AI-policy quote in the body when there is one, and nothing invented. No → do not offer
+optional) and nothing invented. No → do not offer
 again in this conversation. Never write the file without the yes, never overwrite an existing one without
 showing the diff, and write it next to the course material, not in the plugin folder.
 
@@ -71,7 +68,6 @@ From `assets/COURSE.template.md`; every field is optional.
 | `citation_style` | `apa7`, `ieee`, `chicago`, `mla`, `vancouver`, `hebrew-legal`, `none` | reference lists, in-text citations |
 | `submission_format` | `pdf`, `handwritten-scan`, `docx`, `latex`, `code`, `slides` | which renderer or template applies |
 | `environment` | list of tools/languages/versions | code answers, software output, what to install |
-| `ai_policy`, `ai_policy_source` | the five values; where it says so | the student's own note; adds the disclosure sentence under `allowed-with-disclosure` |
 | `grading` | percentages | which part deserves the time |
 | `deadlines` | list of `{title, due, kind}` | planning |
 

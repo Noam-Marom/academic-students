@@ -102,7 +102,7 @@ uv run --frozen --directory <plugin>/servers/moodle-mcp moodle-mcp login https:/
 
 | Skill | What it does | Try saying |
 |---|---|---|
-| `assignment-coach` | Scans the files, maps the assignment, plans the work; then **breaks down**, **guides** with hints one rung at a time, **checks** your solution, or — when the course allows it — **solves** with full verification. Group work: splits the parts among N people, in parallel or as a relay, with the critical path and hand-overs. Any discipline: proofs, lab reports, legal problems, clinical cases, design briefs, code. | "I have a graph theory assignment and no idea where to start" |
+| `assignment-coach` | Scans the files, maps the assignment, plans the work; then **breaks down**, **guides** with hints one rung at a time, **checks** your solution, or **solves** with full verification when you ask. Group work: splits the parts among N people, in parallel or as a relay, with the critical path and hand-overs. Any discipline: proofs, lab reports, legal problems, clinical cases, design briefs, code. | "I have a graph theory assignment and no idea where to start" |
 | `assignment-judge` | "If the professor who teaches this course to year-x students of degree y graded this against the instructions, what would it get?" Per-criterion scores with quoted evidence, two blind grading passes, a grade range, the penalties the instructions state, and what would raise the grade most. An estimate, never a rewrite. | "What grade would this get from my professor?" |
 | `academic-writing` | Plan, feedback, edit, cite — in the language of your course, seminar papers to lab reports; APA, IEEE, Chicago, MLA, Vancouver. Marks what it cannot verify `[unverified]`. | "Give me feedback on the first chapter of my seminar paper" |
 | `exam-prep` | Past exams → topic frequency map → new practice questions with full solutions → mock exam under course conditions → formula sheet → spaced-repetition dates. | "My exam is in two weeks, here are past exams" |
@@ -113,7 +113,7 @@ uv run --frozen --directory <plugin>/servers/moodle-mcp moodle-mcp login https:/
 | `prompt-injection-scanner` | Finds hidden instructions in PDFs, Office files, notebooks, repos and images (white text, 1-pt fonts, hidden sheets, invisible Unicode, HTML comments, canary words). Reports them verbatim; never obeys them. Runs automatically before any other skill reads a course file. | "Check this file for hidden instructions" |
 
 Every skill reads an optional `COURSE.md` in your course folder (language, citation style, submission format,
-**the course's AI policy**). No profile? It asks at most two questions and offers to save them.
+grading). No profile? It asks at most two questions and offers to save them.
 
 ## What it is designed not to do
 
